@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&50$nmwa(973t7^@er$-&e5@2%rc3rb2n*np)-k5&**s018as+"
 
 # SECURITY WARNING: don't run with debug turned on in production!
+ng_cdf_db_name = os.environ.get('DB_NAME') if os.environ.get('DB_NAME') else 'ng_cdf_db'
+ng_cdf_db_user = os.environ.get('DB_USER') if os.environ.get('DB_USER') else 'ng_cdf_admin'
+ng_cdf_db_password = os.environ.get('DB_PASS') if os.environ.get('DB_PASS') else 'ng_cdf_admin_123'
+ng_cdf_db_host = os.environ.get('DB_HOST') if os.environ.get('DB_HOST') else 'localhost'
+ng_cdf_db_port = os.environ.get('DB_PORT') if os.environ.get('DB_PORT') else '5432'
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -74,12 +82,15 @@ WSGI_APPLICATION = "ng_cdf_citizen.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': ng_cdf_db_name,
+        'USER': ng_cdf_db_user,
+        'PASSWORD': ng_cdf_db_password,
+        'HOST': ng_cdf_db_host,
+        'PORT': ng_cdf_db_port,
+        }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -105,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"
 
 USE_I18N = True
 
