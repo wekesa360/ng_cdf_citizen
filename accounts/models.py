@@ -2,11 +2,24 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from accounts.utils import UserManager
 
-class Location(models.Model):
-    county = models.CharField(max_length=80)
-    sub_county = models.CharField(max_length=80)
-    constituency = models.CharField(max_length=80)
+class County(models.Model):
+    county_name = models.CharField(max_length=80)
+    county_code = models.PositiveBigIntegerField()
+    logo = models.ImageField(upload_to='/accounts/counties/logos/')
 
+    def __str__(self) -> str:
+        return self.county
+    
+    def logo_url(self) -> str:
+        return self.logo.url
+
+class Location(models.Model):
+    county = models.ForeignKey(County, on_delete=models.CASCADE)
+    constituency = models.CharField(max_length=80)
+    constituency_code = models.PositiveBigIntegerField()
+
+    def __str__(self) -> str:
+        return self.constituency
 
 class UserProfile(AbstractUser):
     username = None
