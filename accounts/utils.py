@@ -1,5 +1,19 @@
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import BaseUserManager
+from rest_framework import serializers
+
+def get_authenticate_user(email, password):
+    user = authenticate(user=email, password=password)
+    if user is None:
+        raise serializers.ValidationError('Invalid username/password. Please try again!')
+    return user
+
+def create_user_account(email, password, fisrt_name='', last_name='', **extra_fields):
+    user = get_user_model().objects.create_user(
+        email=email, password=password, first_name=first_name, last_name=last_name, **extra_fields 
+    )
+    return user
+
 
 # Path: back-end/accounts/models.py
 class UserManager(BaseUserManager):
