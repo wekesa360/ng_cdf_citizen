@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from accounts.models import Location, County
+from django.core.validators import FileExtensionValidator
 from accounts.models import UserProfile
 
 class NGCDF(models.Model):
@@ -47,7 +48,8 @@ class NGCDFProjects(models.Model):
     description = models.TextField()
     status = models.CharField(max_length=30, choices=CHOICES_STATUS)
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
-    writeup_document = models.FileField(upload_to='projects/documents/', null=True)
+    writeup_document = models.FileField(upload_to='projects/documents/', null=True,
+                                        validators=[FileExtensionValidator(['pdf'])])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -76,12 +78,18 @@ class Bursary(models.Model):
 
 class ApplicationDocument(models.Model):
     record_id = models.CharField(default=uuid.uuid4(), max_length=256)
-    national_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False)
-    fathers_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True)
-    mothers_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True)
-    institution_transcript = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True)
-    calling_letter = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True)
-    fee_structure  = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False)
+    national_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False,
+                                   validators=[FileExtensionValidator(['pdf','jpg','png','jpeg'])])
+    fathers_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True,
+                                   validators=[FileExtensionValidator(['pdf','jpg','png','jpeg'])])
+    mothers_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True,
+                                   validators=[FileExtensionValidator(['pdf','jpg','png','jpeg'])])
+    institution_transcript = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True,
+                                   validators=[FileExtensionValidator(['pdf',])])
+    calling_letter = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True,
+                                   validators=[FileExtensionValidator(['pdf'])])
+    fee_structure  = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False,
+                                   validators=[FileExtensionValidator(['pdf',])])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -92,7 +100,7 @@ class ApplicationDocument(models.Model):
         db_table = 'bursary_application_documents'
 
 
-class BursaryApplication (models.Model):
+class BursaryApplication(models.Model):
     CHOICES_STATUS = (
         ('', 'Select'),
         ('shortlisted', 'Shortlisted'),
@@ -143,7 +151,8 @@ class CitizenReport(models.Model):
 
 class ReportImage(models.Model):
     project = models.ForeignKey(CitizenReport, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/citizen/report/images/')
+    image = models.ImageField(upload_to='uploads/citizen/report/images/',
+                              validators=[FileExtensionValidator(['jpg','png','jpeg'])])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -155,7 +164,8 @@ class ReportImage(models.Model):
     
 class ProjectImage(models.Model):
     project = models.ForeignKey(NGCDFProjects, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/Ng_cdf_projects/images/')
+    image = models.ImageField(upload_to='uploads/Ng_cdf_projects/images/',
+                              validators=[FileExtensionValidator(['jpg','png','jpeg'])])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
