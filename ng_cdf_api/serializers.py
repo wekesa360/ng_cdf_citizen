@@ -41,7 +41,13 @@ class EmptySerializer(serializers.Serializer):
 class UserProfileSerializer(serializers.Serializer):
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'avator', 'password', 'phone_number']
+        fields = ['email', 'first_name', 'last_name', 'avatar', 'password', 'phone_number']
+    
+
+class UserRegisterSerializer(serializers.Serializer):
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'avatar', 'password', 'phone_number']
     
     def validate_email(self, value):
         user = User.objects.filter(email=value)
