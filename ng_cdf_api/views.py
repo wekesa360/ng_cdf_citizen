@@ -81,7 +81,7 @@ class AuthViewset(viewsets.GenericViewSet):
         request.user.save()
         return Response(status.HTTP_204_NO_CONTENT)
     
-    @action(methods=['GET', ], detail=False)
+    @action(methods=['GET', ], detail=False, permission_classes=[IsAuthenticated])
     def profile(self, request):
         query_Set = User.objects.get(email=request.user.email)
         serializer = self.get_serializer(data=query_Set, many=False)
@@ -104,6 +104,7 @@ class NGCDFViewset(viewsets.GenericViewSet):
     serializer_classes = {
         'ng_cdf': NGCDFSerializer,
         'ng_cdf_admin': NGCDFAdminSerializer,
+        'project_images': ProjectImageSerializer,
         'ng_cdf_projects': NGCDFProjectsSerializer,
     }
 
@@ -133,8 +134,29 @@ class NGCDFViewset(viewsets.GenericViewSet):
         serializer = self.get_serializer(ng_cdf)
         serializer.is_valid(raise_exception=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class BursaryViewset(viewsets.GenericViewSet):
+    permission_classes = [AllowAny, ]
+    serializer_class = EmptySerializer
+    serializer_classes = {
+        'bursary': BursarySerializer,
+        'bursary_application': BursarySerializer,
+        'application_documents': ApplicationDocumentSerializer,
+    }
+
+    @action(methods=['GET',], detail=False, permission_classes=permission_classes)
+    def bursary(self, request):
+        bursaries = Bursary.objects.all()
+        serializer = self.get_serializer_class(bursaries, many=True)
+        serializer.is_valid(raise_exception=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
     
-    
+    @action(methods=['POST', 'PUT'], detail=False, permission_classes=[IsAuthenticated, ])
+    def bursary(self, request):
+        if request.method == 'POST':
+            pass
+
 
     
 

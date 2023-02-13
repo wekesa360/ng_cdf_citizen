@@ -19,7 +19,7 @@ from ng_cdf.models import (
 User = get_user_model()
 
 class AuthUserLoginSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=300, require=True)
+    email = serializers.CharField(max_length=300, required=True)
     password = serializers.CharField(required=True, write_only=True)
 
 
