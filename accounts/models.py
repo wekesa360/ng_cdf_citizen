@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from accounts.utils import UserManager
 
 class County(models.Model):
-    county_name = models.CharField(max_length=80)
+    county = models.CharField(max_length=80)
     county_code = models.PositiveBigIntegerField()
     logo = models.ImageField(upload_to='accounts/counties/logos/')
 
