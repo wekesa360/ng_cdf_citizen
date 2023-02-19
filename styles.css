@@ -1,0 +1,144 @@
+/* Style for the form */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+/* Style for the headings */
+h2 {
+  margin-top: 0;
+}
+
+/* Style for the form fields */
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.save-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  background-color: #e46870;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #e46890;;
+}
+
+/* Style for the page container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.avatar{
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0px;
+}
+.search-filter {
+	margin: 20px;
+	border: 1px solid :white;
+	padding: 10px;
+}
+
+.search-bar {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.search-bar input {
+	flex: 1;
+	padding: 5px;
+	margin-right: 10px;
+	border: 1px solid white;
+	border-radius: 3px;
+}
+
+.search-bar button {
+	border: 1px solid white;
+	border-radius: 3px;
+	background-color:#e46870;
+	cursor: pointer;
+	color: white;
+}
+
+.filter-options {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.filter-options button {
+	flex: 1 0 auto;
+	border: 1px solid white;
+	border-radius: 3px;
+	background-color:white;
+	cursor: pointer;
+}
+
+.filter-options button.active {
+	background-color:white ;
+}
+
+.search-results {
+	border: 1px solid :white;
+	padding: 10px;
+}
+
+@media screen and (max-width: 100px) {
+	.search-bar {
+		flex-direction: row;
+	}
+
+	.filter-options {
+		flex-direction: row;
+	}
+
+	.filter-options button {
+		margin-right: 0;
+	}
+}
+.all:hover,.cnty:hover,.ngo:hover,.sub:hover,#county-dropdown:hover{
+	color:#e46890;
+}
+#bursary-heading {
+	text-align: center;
+  }
+  #county-dropdown {
+	position:absolute;
+
+  }
+  #bursary-paragraph {
+	border: 1px solid black;
+	padding: 10px;
+		border: 1px solid black;
+		background-color: white;
+		padding: 10px;
+		text-align: center;
+
+  }
