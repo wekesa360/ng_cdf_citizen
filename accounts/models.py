@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .counties import COUNTIES_CHOICES
 from accounts.utils import UserManager
 
 class County(models.Model):
-    county_name = models.CharField(max_length=80)
+    county_name = models.CharField(max_length=80, choices=COUNTIES_CHOICES)
     county_code = models.PositiveBigIntegerField()
     logo = models.ImageField(upload_to='accounts/counties/logos/')
 
@@ -28,7 +29,6 @@ class UserProfile(AbstractUser):
     last_name = models.CharField(max_length=80)
     bio = models.TextField()
     phone_number = models.CharField(max_length=10, default='07XXXXXXX')
-    # national_id = models.PositiveBigIntegerField()
     # location = models.ForeignKey(Location, on_delete=models.CASCADE)
     avatar = models.FileField(upload_to='accounts/user/avatar/')
     created_at = models.DateTimeField(auto_now_add=True)
