@@ -1,4 +1,5 @@
 venv/
+user/
 .env
 */migrations/
 migrations/
