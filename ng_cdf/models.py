@@ -77,6 +77,7 @@ class Bursary(models.Model):
 
 
 class ApplicationDocument(models.Model):
+    bursary = models.ForeignKey(Bursary, on_delete=models.CASCADE)
     record_id = models.CharField(default=uuid.uuid4(), max_length=256)
     national_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False,
                                    validators=[FileExtensionValidator(['pdf','jpg','png','jpeg'])])
@@ -135,6 +136,7 @@ class CitizenReport(models.Model):
         ('project-suggestions', 'Project suggestions'),
     )
     citizen = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    ng_cdf = models.ForeignKey(NGCDF, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=256)
     report_uid = models.CharField(default=uuid.uuid4(), max_length=256)
     project_location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
