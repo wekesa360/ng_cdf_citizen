@@ -150,7 +150,7 @@ class CitizenReport(models.Model):
         db_table = 'citizen_reports'
 
 class ReportImage(models.Model):
-    project = models.ForeignKey(CitizenReport, on_delete=models.CASCADE)
+    report = models.ForeignKey(CitizenReport, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='uploads/citizen/report/images/',
                               validators=[FileExtensionValidator(['jpg','png','jpeg'])])
     created_at = models.DateTimeField(auto_now_add=True)
