@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="bg-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{%url 'minnesota:home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'minnesota:report-incident' %}">Report An Incident</a></li>
+    </ol>
+    <h1 class="fw-bolder">Report An Incident</h1>
+</nav>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-8" id="incident-form">
+                    <form method="get|post">
+                        {% csrf_token %}
+                        <div class="form-input"><label for="todays_date">Today's Date</label>{{form.todays_date}}</div>
+                        <div class="form-input">
+                            <label for="name">Name</label> 
+                            <div class="row" >
+                                <div class="col-lg-6" id="name">{{form.first_name}}</div>
+                                <div class="col-lg-6">{{form.last_name}}</div>
+                            </div>
+                        </div>
+                        <div class="form-input"><label for="email_address">Email Address</label>{{form.email_address}}</div>
+                        <div class="form-input"><label for="phone_number">Phone Number</label>{{form.phone_number}}</div>
+                        <div class="form-input"><label for="preferred_contact_times">Preferred Contact Times</label>{{form.preferred_contact_times}}</div>
+                        <div class="form-input"><label for="preferred_contact_method">Preferred Contact Method</label>{{form.preferred_contact_method}}</div>
+                        <div class="form-input"><label for="street_address">Street Address</label>{{form.street_address}}</div>
+                        <div class="form-input"><label for="city">City</label>{{form.city}}</div>
+                        <div class="form-input"><label for="county">County</label>{{form.county}}</div>
+                        <div class="form-input"><label for="state_or_province_or_region">State/Province/Region</label>{{form.state_or_province_or_region}}</div>
+                        <div class="form-input"><label for="zip_or_postal_code">Zip / Postal Code</label>{{form.zip_or_postal_code}}</div>
+                        <div class="form-input"><label for="complaint_regarding">What is your question/complaint regarding?</label>{{form.complaint_regarding}}</div>
+                        <div class="form-input"><label for="complaint_description">Please describe your question/complaint</label>{{form.complaint_description}}</div>
+                        <div class="form-input"><label for="incident_date">What date did the incident you are reporting occur? </label>{{form.incident_date}}</div>
+                        <div class="form-input"><label for="contact_attorney_or_organization">Have you contacted an attorney or other organization regarding your problem? If so, who, and when? </label>{{form.contact_attorney_or_organization}}</div>
+                        <div class="form-input"><label for="contact_CAIR_before">Have you contacted CAIR before? If so, why, and when?</label>{{form.contact_CAIR_before}}</div>
+                        <div class="form-input"><label for="CAIR_service">How do you hope CAIR can serve you? </label>{{form.CAIR_service}}</div>
+                        <div class="form-input"><label for="heard_us_from">How did you hear about CAIR's services? </label>{{form.heard_us_from}}</div>
+                        <div class="form-input"><label for="gender">Gender</label>{{form.gender}}</div>
+                        <div class="form-input"><label for="ethnicity">Ethnicity</label>{{form.ethnicity}}</div>
+                        <div class="form-input"><label for="education_level">Education Level</label>{{form.education_level}}</div>
+                        <div class="form-input"><label for="annual_income">Annual Income</label>{{form.annual_income}}</div>
+                        <div class="form-input"><p class="text-muted">Disclaimer: This form is for general information purposes only. The submission and delivery of this form does not, in and of itself, constitute the formation of an attorney-client relationship nor any other contract between CAIR or any legal person, entity, or group.<br><br>
+                            Please be advised that the submission and delivery of this form does not thereby give rise to any of the legal or ethical protections of the attorney-client relationship with respect to any legal privilege or ethical duty running between client and attorney, including without limitation, the attorney client privilege.<br><br>
+                            Please be mindful of any deadlines you have approaching that relate to your legal situation and seek advice of legal counsel because potential claims may become barred if not filed within the time provided by law. </P></div>
+                        <div class="form-input">{{form.captcha}}</div>
+                        <div class="form-input"><input class="form-input btn-submit contact-submit" type="submit" formmethod="POST" value="submit"></div>
+                    </form>
+                </div>
+                <!-- side navigation-->
+                <div class="col-lg-3">
+                    <div class="side-navigation">
+                        <ul>
+                            <li><h5>WHAT WE DO</h5></li>
+                            <li class="side-dropdown"><a class="side-dropbtn" >Advocacy</a>
+                            <ul class="side-dropdown-content">
+                                <li><a class="a-active" href="">Legislative Advocacy</a></li>
+                            </ul>
+                            </li>
+                            <li class="side-dropdown"><a class="side-dropbtn">Legal Services</a>
+                            <ul class="side-dropdown-content">
+                                <li><a class="" href="">Our Legal Team</a></li>
+                                <li><a class="" href="">Types Of Cases We Handle</a></li>
+                                <li><a class="" href="">Know Your Rights</a></li>
+                                <li><a class="" href="">Community Resources</a></li>
+                                <li><a class="" href="">Report An Incident</a></li>
+                            </ul></li>
+                            <li><a href="{% url 'minnesota:media' %}">Media</a></li>
+                            <li class="side-dropdown"><a class="side-dropbtn">Outreach & Education</a>
+                                <ul class="side-dropdown-content">
+                                    <li><a class="" href="">Workshops</a></li>
+                                    <li><a class="" href="">Partnerships</a></li>
+                                </ul>
+                            </li>
+                            <li class="side-dropdown"><a class="side-dropbtn">Youth Empowerment</a>
+                            <ul class="side-dropdown-content">
+                                <li><a class="" href="">Muslim Youth Leadership Intensive</a></li>
+                                <li><a class="" href="">Muslim Youth Live</a></li>
+                                <li><a class="" href="">Muslim Gamechangers Network</a></li>
+                                <li><a class="" href="">Muslim Youth Leadership Program</a></li>
+                                <li><a class="" href="">Brigding Comunities</a></li>
+
+                            </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

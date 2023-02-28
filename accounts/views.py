@@ -120,3 +120,4 @@ def change_password_view(request):
                 messages.error(request, 'Old password is incorrect')
     return render(request, 'accounts/change_password.html')
 
+
