@@ -35,20 +35,18 @@ class PrettyUserCreationForm(UserCreationForm):
         UserCreationForm (_type_): _description_
     """
 
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}), max_length=32, help_text='First name')
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), max_length=32, help_text='Last name')
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}), max_length=64, help_text='Enter a valid email address')
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'multiple': False, 'class': 'form-control'})) 
-    phone_number = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
-    bio = forms.Textarea()
-    location = forms.ModelChoiceField(queryset=Location.objects.all())
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password Again'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',}), max_length=32, help_text='First name')
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', }), max_length=32, help_text='Last name')
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', }), max_length=64, help_text='Enter a valid email address')
+    phone_number = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', }))
+    location = forms.ModelChoiceField(queryset=Location.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', }))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', }))
 
     class Meta(UserCreationForm.Meta):
         model = User
         # fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
-        fields = ('first_name', 'last_name', 'email', 'bio', 'location', 'avatar')
+        fields = ('first_name', 'last_name', 'email', 'location', 'phone_number',  )
 
 
 class ChangePasswordForm(forms.Form):
