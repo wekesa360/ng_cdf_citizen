@@ -94,6 +94,7 @@ def change_image_view(request):
     form = ChangeImageForm()
     return render(request, 'accounts/change_image.html', {'form': form})
 
+@login_required
 def change_password_view(request):
     """_summary_
 
