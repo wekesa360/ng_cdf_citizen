@@ -75,6 +75,40 @@ def profile_view(request, username):
     return render(request, 'accounts/profile.html', {'user': user})
 
 @login_required
+def edit_profile_view(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    if request.method == 'POST':
+        form = PrettyUserCreationForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully')
+            return redirect('accounts:profile', request.user.username)
+        else:
+            messages.error(request, 'Unsuccessful. Invalid information.')
+    form = PrettyUserCreationForm(instance=request.user)
+    return render(request, 'accounts/edit_profile.html', {'form': form})
+
+@login_required
+def delete_profile_view(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        messages.success(request, 'Profile deleted successfully')
+        return redirect('nd_cdf:home')
+    return render(request, 'accounts/delete_profile.html')
+
+
+
+@login_required
 def change_image_view(request):
     """_summary_
 
