@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from .models import (
     NGCDFAdmin,
     Bursary,
@@ -21,8 +23,7 @@ from .forms import (
     NGCDFProjectsForm,
     CreateNGCDFForm,
 ) 
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
@@ -41,15 +42,24 @@ def admin_view(request):
         report_images = ReportImage.objects.all()
         project_images = ProjectImage.objects.all()
         context = {
-            bursaries,
-            application_documents,
-            ng_cdf_projects,
-            citizen_report,
-            report_images,
-            project_images
+            'bursaries':bursaries,
+            'application_documents':application_documents,
+            'ng_cdf_projects':ng_cdf_projects,
+            'citizen_report':citizen_report,
+            'report_images':report_images,
+            'project_images':project_images
         }
         messages.info(f'You are logged in as admin to {ng_cdf.ng_cdf_name}')
         render('dashboard/dashboard.html', context=context)
     except ObjectDoesNotExist:
         messages.error(request, f'You are not an admin')
         redirect('ng_cdf_citizen:admin_login')
+
+def projects_view(request):
+    projects = NGCDFProjects.objects.all()
+    project_images = ProjectImage.objects.all()
+    context = {
+        'projects':projects,
+        'project_images': project_images
+        }
+    return render('ng_cdf/projects.html', context=context)
