@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import (
-    UserProfile,
     Location
 )
 
@@ -51,3 +50,14 @@ class PrettyUserCreationForm(UserCreationForm):
         model = User
         # fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'bio', 'location', 'avatar')
+
+
+class ChangePasswordForm(forms.Form):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Old Password'}))
+    new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'New Password'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}))

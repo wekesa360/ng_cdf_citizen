@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from .forms import PrettyAuthenticationForm, PrettyUserCreationForm, ChangeImageForm
+from .forms import PrettyAuthenticationForm, PrettyUserCreationForm, ChangeImageForm, ChangePasswordForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -28,4 +28,95 @@ def signin_view(request):
                 messages.error(request, 'invalid email or password.')
         else:
             messages.error(request, 'Invalid email or password.')
-    form = n
+    form = PrettyAuthenticationForm()
+    return render(request, 'accounts/signin.html', {'form': form})
+
+def signup_view(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    if request.method == 'POST':
+        form = PrettyUserCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Account created successfully')
+            return redirect('nd_cdf:home')
+        else:
+            messages.error(request, 'Unsuccessful registration. Invalid information.')
+    form = PrettyUserCreationForm()
+    return render(request, 'accounts/signup.html', {'form': form})
+
+def signout_view(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    logout(request)
+    messages.info(request, 'Logged out successfully!')
+    return redirect('nd_cdf:home')
+
+@login_required
+def profile_view(request, username):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+        username (_type_): _description_
+    """
+    try:
+        user = get_user_model().objects.get(username=username)
+    except ObjectDoesNotExist:
+        messages.error(request, 'User not found')
+        return redirect('nd_cdf:home')
+    return render(request, 'accounts/profile.html', {'user': user})
+
+@login_required
+def change_image_view(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    if request.method == 'POST':
+        form = ChangeImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+            user.avatar = form.cleaned_data.get('avatar_image')
+            user.save()
+            messages.success(request, 'Image changed successfully')
+            return redirect('accounts:profile', user.username)
+        else:
+            messages.error(request, 'Unsuccessful. Invalid information.')
+    form = ChangeImageForm()
+    return render(request, 'accounts/change_image.html', {'form': form})
+
+def change_password_view(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+    """
+    form = ChangePasswordForm()
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            old_password = form.cleaned_data.get('old_password')
+            current_password = form.cleaned_data.get('current_password')
+            new_password = form.cleaned_data.get('new_password')
+            if user.check_password(old_password) == user.check_password(new_password):
+                messages.error(request, 'New password must be different from old password')
+                redirect('accounts:change_password')
+            if user.check_password(current_password) and user.check_password(old_password):
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'Password changed successfully')
+                return redirect('accounts:profile', user.username)
+            else:
+                messages.error(request, 'Old password is incorrect')
+    return render(request, 'accounts/change_password.html')
+
