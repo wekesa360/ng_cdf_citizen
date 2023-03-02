@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ng_cdf_api import urls as ng_cdf_api_urls
+from ng_cdf import urls as ng_cdf_urls
+from accounts import urls as accounts_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include('rest_framework.urls')),
-    path("ng_cdf/", include(ng_cdf_api_urls))
+    path("ng_cdf/", include(ng_cdf_api_urls)),
+    # path("ng_cdf/", include(ng_cdf_urls)),
+    path("accounts/", include(accounts_urls))
 ]

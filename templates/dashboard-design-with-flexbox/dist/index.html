@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>CodePen - Dashboard Design with Flexbox</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 
 </head>
@@ -10,6 +11,15 @@
 <!-- partial:index.partial.html -->
 <div class="dashboard">
   <div class="left">
+    <div class="navigation">
+      <div class="wrapper2">
+        <div class="abilan">
+          <img src="" alt="logo" />
+        </div> 
+        <button class="compose">Dashboard
+         <span class="plus">
+            </span></button>
+        <div class="folders">Projects</div>
     <div class="sidebar">
       <div class="wrapper">
         <div class="menu">
@@ -41,7 +51,7 @@
           <div class="icon1">
             <img src="https://i.ibb.co/qdgf3TJ/envelope.png" />
           </div>
-          <div class="icon-name1">Inbox
+          <div class="icon-name1">Bursaries
             <button class="buton-span"> 20
           </button></div>
         </div>
@@ -49,62 +59,36 @@
           <div class="icon1">
             <img src="https://i.ibb.co/2yLfX9W/sent-mail.png" />
           </div>
-          <div class="icon-name">Send Mail</div>
+          <div class="icon-name">Ongoing Projects</div>
         </div>
         <div class="folder-icons">
           <div class="icon1">
             <img src="https://i.ibb.co/6ZH9kK3/star.png" />
           </div>
-          <div class="icon-name">Important</div>
+          <div class="icon-name">Complain Reports</div>
         </div>
         <div class="folder-icons">
           <div class="icon1">
             <img src="https://i.ibb.co/z4QhcbD/email.png" />
           </div>
-          <div class="icon-name">Draft</div>
+          <div class="icon-name">Bursary Applications</div>
         </div>
         <div class="folder-icons">
           <div class="icon1">
             <img src="https://i.ibb.co/3MzfGDF/bug.png" />
           </div>
-          <div class="icon-name">Spam</div>
+          <div class="icon-name">Suggested projects</div>
         </div>
         <div class="folder-icons">
           <div class="icon1">
             <img src="https://i.ibb.co/xfcFLCN/waste-bin.png" />
           </div>
-          <div class="icon-name">Trash</div>
+          <div class="icon-name"></div>
         </div>
         <div class="folders">
-          Online Friends
+          <!--heading-->
         </div>
         <div class="folder-icons">
-          <div class="avatar">
-            <div class="online">
-            </div>
-            <img src="https://randomuser.me/api/portraits/women/65.jpg" />
-          </div>
-          <div class="names">Don Allen
-          </div>
-
-        </div>
-        <div class="folder-icons">
-          <div class="avatar">
-            <div class="online">
-            </div>
-            <img src="https://randomuser.me/api/portraits/women/71.jpg" />
-          </div>
-          <div class="names">Aaron Tim</div>
-        </div>
-        <div class="folder-icons">
-          <div class="avatar">
-            <div class="online red">
-            </div>
-            <img src="https://randomuser.me/api/portraits/men/54.jpg" />
-          </div>
-          <div class="names">Jack Joe</div>
-        </div>
-        <div class="folders">
           Labels
         </div>
         <div class="section1">
@@ -140,13 +124,6 @@
           </div>
 
           <div class="top-bar-items">
-            <div class="notif">
-              <div class="online pink">
-              </div>
-              <img src="https://i.ibb.co/VJm73Hz/notifications-button.png" />
-            </div>
-            <img src="https://i.ibb.co/vz4HYJb/envelope.png" />
-            <img src="https://i.ibb.co/52Vkq4M/earth-globe.png" />
             <div class="icon-name5"> English </div>
           </div>
         </div>
@@ -156,7 +133,7 @@
         </div>
       </div>
       <hr class="new-hr">
-      <div class="right-bottom">
+      <!-- <div class="right-bottom">
         <div class="check">
           <label class="checkbox">
         <input type="checkbox"/>
@@ -189,185 +166,49 @@
         </div>
       </div>
     </div>
-    <div class="right-body">
-      <div class="scroll-cards">
-        <div class="card">
-          <div class="mails">
-            <img src="https://randomuser.me/api/portraits/men/20.jpg" />
-            <div class="mail-names">
-              Louis Adkins
-            </div>
-
+         -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Projects</h6>
+                            <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Completed Projects<span class="f-right">351</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Bursary Applications</h6>
+                            <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Applications Received<span class="f-right">351</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Citizen Reports</h6>
+                            <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Complains posted<span class="f-right">351</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-yellow  order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Bursaries</h6>
+                            <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Bursaries Available<span class="f-right">351</span></p>
+                        </div>
+                    </div>
+                </div>
           </div>
-          <div class="mail-info">
-            How To Write Better Advertising Copy Heading
-          </div>
-          <div>
-          </div>
-          <div class="bottom-info">
-            <div class="check1">
-              <label class="checkbox">
-        <input type="checkbox"/>
-        </label>
-              <div class="star">
-                <img src="https://i.ibb.co/SN5SJ8x/star.png" />
-              </div>
-              <div class="star">
-                <img src="https://i.ibb.co/FW9tsHK/attachment.png" />
-              </div>
-
-            </div>
-            <div class="date">8:30 AM</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="mails">
-            <span class="person border1"> C</span>
-            <div class="mail-names">
-              Clarence Hogan
-            </div>
-
-          </div>
-          <div class="mail-info">
-            How To Write Better Advertising
-
-          </div>
-          <div>
-          </div>
-          <div class="bottom-info">
-            <div class="check1">
-              <label class="checkbox">
-        <input type="checkbox"/>
-        </label>
-              <div class="star">
-                <img src="https://i.ibb.co/SN5SJ8x/star.png" />
-              </div>
-              <div class="star">
-                <img src="https://i.ibb.co/FW9tsHK/attachment.png" />
-              </div>
-
-            </div>
-            <div class="date">8:30 AM</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="mails">
-            <span class="person border2">O</span>
-            <div class="mail-names">
-              Olga Boone
-            </div>
-
-          </div>
-          <div class="mail-info">
-            Old Fashioned Recipe
-          </div>
-          <div>
-          </div>
-          <div class="bottom-info">
-            <div class="check1">
-              <label class="checkbox">
-        <input type="checkbox"/>
-        </label>
-              <div class="star">
-                <img src="https://i.ibb.co/SN5SJ8x/star.png" />
-              </div>
-              <div class="star">
-                <img src="https://i.ibb.co/FW9tsHK/attachment.png" />
-              </div>
-
-            </div>
-            <div class="date">8:30 AM</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="mails">
-            <span class="person border3">H</span>
-            <div class="mail-names">
-              Harry Burton
-            </div>
-
-          </div>
-          <div class="mail-info">
-            How To Write Better Advertising Copy Heading
-          </div>
-          <div>
-          </div>
-          <div class="bottom-info">
-            <div class="check1">
-              <label class="checkbox">
-        <input type="checkbox"/>
-        </label>
-              <div class="star">
-                <img src="https://i.ibb.co/SN5SJ8x/star.png" />
-              </div>
-              <div class="star">
-                <img src="https://i.ibb.co/FW9tsHK/attachment.png" />
-              </div>
-
-            </div>
-            <div class="date">8:30 AM</div>
-          </div>
-
-        </div>
-
-      </div>
-      <div class="message">
-        <div class="mes-date">
-          Dec 1, 2018
-        </div>
-        <div class="title">
-          Old Fashioned Recipe For Preventing Allergies And Chemical
-          <div class="title-icons">
-
-          </div>
-        </div>
-        <div class="from">
-          <span class="who">From: </span>ashraf@glaze.com
-        </div>
-        <div class="message-from">
-          Hello Malikan!
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, voluptas pariatur repellat veritatis atque, tempora quasi quas facere impedit aliquam libero qui iure cumque incidunt facilis soluta necessitatibus laboriosam nemo. Delectus architecto
-            sed, excepturi natus iste vel quidem officia corrupti repudiandae!</p>
-          <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore, deleniti eaque eligendi minus maxime tempora eiusi.</p>
-          <p>Have a nice day</p>
-          <p>Ashraf</p>
-        </div>
-        <div class="attachment-last">
-          <img src="https://i.ibb.co/FW9tsHK/attachment.png" />
-          <div class="att-write">
-            Attachment (80MB)
-          </div>
-          <button class="btn1 buton0"> View All
-          <span class="tag">
-          </button>
-
-          <button class="btn1 buton9"> Download All
-          </button>
-
-        </div>
-        <div class="son-images">
-          <div class="inside-img">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" />
-            <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" />
-            <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" />
-            <img src="https://images.unsplash.com/photo-1450609283058-0ec52fa7eac4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" />
-
-          </div>
-          <button class="son-buton"> 20+
-          </button>
-        </div>
-        <button class="btn2 butona"> Reply
-             <span class="tag"> 
-             <img src="https://i.ibb.co/GQf8frw/reply.png"/>
-             </span>
-          </button>
-
-        <button class="btn2 butonb"> Forward
-            <span class="tag"> 
-             <img src="https://i.ibb.co/6W40kTg/forward-arrow.png"/>
-             </span>
-          </button>
-      </div>
     </div>
   </div>
 <!-- partial -->

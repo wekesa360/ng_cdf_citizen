@@ -9,7 +9,7 @@ class County(models.Model):
     logo = models.ImageField(upload_to='accounts/counties/logos/')
 
     def __str__(self) -> str:
-        return self.county
+        return self.county_name
     
     def logo_url(self) -> str:
         return self.logo.url
@@ -27,10 +27,10 @@ class UserProfile(AbstractUser):
     email = models.EmailField(('email address'), unique=True)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
     phone_number = models.CharField(max_length=10, default='07XXXXXXX')
-    # location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    avatar = models.FileField(upload_to='accounts/user/avatar/')
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    avatar = models.FileField(upload_to='accounts/user/avatar/', blank=True, default='accounts/user/avatar/default.png')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

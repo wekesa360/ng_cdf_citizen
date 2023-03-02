@@ -1,0 +1,93 @@
+{%extends 'accounts/base.html'%}
+{% load static %}
+{% block title %}
+Create account
+{% endblock title %}
+{%block content%}
+            <section class="h-100 gradient-form" style="background-color: #eee;">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                      <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                          <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+              
+                              <div class="text-center py-2">
+                                <img src="{% static 'img/user-icon.png' %}"
+                                  style="width: 100px;" alt="logo">
+                              </div>
+              
+                              <form role="form" method="post">
+                                {% csrf_token %}
+                                <p class="fw-bolder">Create an account</p>
+
+              
+                                <div class="row">
+                                  <div class="col-lg-6">
+                                    <div class="form-outline mb-4">
+                                      {{form.first_name}}
+                                      <label class="form-label" for="form2Example11">First name</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-outline mb-4">
+                                      {{form.last_name}}
+                                      <label class="form-label" for="form2Example11">Last name</label>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                  {{form.email}}
+                                  <label class="form-label" for="form2Example22">Email</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                  {{form.phone_number}}
+                                  <label class="form-label" for="form2Example22">Phone number</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                  {{form.location}}
+                                  <label class="form-label" for="form2Example22">Constituency</label>
+                                </div>
+              
+                                <div class="form-outline mb-4">
+                                  {{form.password1}}
+                                  <label class="form-label" for="form2Example22">Password</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                  {{form.password2}}
+                                  <label class="form-label" for="form2Example22">Confirm password</label>
+                                </div>
+
+                                <div class="text-center pt-1 mb-2 pb-1 d-grid gap-2">
+                                  <button class="btn btn-primary btn- fa-lg gradient-custom-2 mb-3" value="submit" type="submit">Create
+                                    account</button>
+                                  <a class="text-muted" href="#!"></a>
+                                </div>
+              
+                                <div class="d-flex align-items-center justify-content-center pb-0">
+                                  <p class="mb-0 me-2">Have an account?</p>
+                                  <a href="login.html">Log in</a>
+                                </div>
+              
+                              </form>
+              
+                            </div>
+                          </div>
+                          <div class="col-lg-6 d-flex align-items-center">
+                            <div class="text-white px-0 py-4 p-md-5 mx-md-4">
+                              <img src="{% static 'img/banner2.jpg' %}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+{%endblock content%}
