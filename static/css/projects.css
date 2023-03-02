@@ -1,0 +1,29 @@
+
+  /* styling navlist */
+  #navlist {
+    float:center !important;
+    position: relative;
+    width: 100%;
+    text-align: center !important;
+    padding-left: 1%;
+}
+     
+/* styling navlist anchor element */
+#navlist a {
+    left: 0;
+    right: 0;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+
+/* hover effect of navlist anchor element */
+#navlist a:hover {
+    background-color: rgb(253, 141, 101);
+    border-radius: 50px;
+    color: white;
+}
