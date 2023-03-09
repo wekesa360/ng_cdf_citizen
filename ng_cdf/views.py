@@ -80,6 +80,7 @@ def add_project_view(request):
             redirect('ng_cdf:add_project')
     else:
         form = NGCDFProjectsForm()
+        image_form = ProjectImageForm()
         context = {
             'form':form
         }
@@ -131,6 +132,9 @@ def apply_bursary_view(request):
         document_form = ApplicationDocumentForm(request.POST, request.FILES)
         if form.is_valid() and document_form.is_valid():
             form.save()
+            bursary_id = form.request.clean_data.get('bursary_id')
+            bursary = Bursary.objects.get(bursary_id=bursary_id)
+            document_form.bursary = bursary.id
             document_form.save()
             messages.success(request, f'Bursary application submitted successfully')
             redirect('ng_cdf:bursaries')
@@ -184,6 +188,28 @@ def citizen_report_view(request):
         }
         return render('ng_cdf/citizen_report.html', context=context)
     return redirect('ng_cdf:citizen_report')
+
+def add_citizen_report_view(request):
+    if request.method == 'POST':
+        form = CitizenReportForm(request.POST)
+        report_image = ReportImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            project_name = form.clean_data.get('project_name')
+            report = CitizenReport.objects.get(project_name=project_name)
+            report_image.project = report.id
+        else:
+            messages.error(request, f'Error in submitting form')
+            return redirect('ng_cdf:add_citizen_report')
+    else:
+        form = CitizenReportForm()
+        report_image = ProjectImageForm()
+        context = {
+            'form': form,
+            'report_image': report_image
+        }
+        return render('ng_cdf/add-citizen.html', context=context)
+    return redirect('ng_cdf:add_citizen_report')
 
 def delete_project_view(request, id):
     project = NGCDFProjects.objects.get(id=id)
