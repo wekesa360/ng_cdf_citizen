@@ -106,8 +106,6 @@ def delete_profile_view(request):
         return redirect('nd_cdf:home')
     return render(request, 'accounts/delete_profile.html')
 
-
-
 @login_required
 def change_image_view(request):
     """_summary_
