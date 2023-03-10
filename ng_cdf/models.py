@@ -59,6 +59,19 @@ class NGCDFProjects(models.Model):
     class Meta:
         db_table = 'ng_cdf_projects'
 
+class ProjectImage(models.Model):
+    project = models.ForeignKey(NGCDFProjects, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='uploads/Ng_cdf_projects/images/',
+                              validators=[FileExtensionValidator(['jpg','png','jpeg'])])
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.image.url
+    
+    class Meta:
+        db_table = 'project_images'
+
 class Bursary(models.Model):
     ng_cdf = models.ForeignKey(NGCDF, on_delete=models.CASCADE)
     bursary_id = models.CharField(max_length=256)
@@ -142,6 +155,7 @@ class CitizenReport(models.Model):
     project_location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     report_type = models.CharField(max_length=256, choices=CHOICES_TYPE)
     description = models.TextField()
+    report_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -164,17 +178,6 @@ class ReportImage(models.Model):
     class Meta:
         db_table = 'report_images'
     
-class ProjectImage(models.Model):
-    project = models.ForeignKey(NGCDFProjects, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/Ng_cdf_projects/images/',
-                              validators=[FileExtensionValidator(['jpg','png','jpeg'])])
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self) -> str:
-        return self.image.url
-    
-    class Meta:
-        db_table = 'project_images'
 
 
