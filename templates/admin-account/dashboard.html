@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Dashboard Design with Flexbox</title>
+  <title>NG-CDF - dashboard</title>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 
@@ -19,56 +19,75 @@
         <button class="compose">Dashboard
          <span class="plus">
             </span></button>
-        <div class="folders">Projects</div>
+
+        <div class="navigation">
+          <div class="wrapper2">
+        <div class="folders">Projects
+        <div class="folder-icons">
+          <div class="icon1">
+            <span><i class="fa fa-calendar-alt"></i></span>
+          </div>
+          <div class="icon-name">Planned</div>
+        </div>
+        <div class="folder-icons">
+          <div class="icon1">
+            <span><i class="fa fa-clock"></i></span>
+          </div>
+          <div class="icon-name">Postponed</div>
+        </div>
+        <div class="folder-icons">
+          <div class="icon1">
+            <span><i class="fa fa-check-circle-o"></i></span>
+          </div>
+          <div class="icon-name">Completed</div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <div class="navigation">
+        <div class="wrapper2">
+      <div class="folders">Bursaries
+      <div class="folder-icons">
+        <div class="icon1">
+          <span><i class="fa fa-clipboard-list"></i></span>
+        </div>
+        <div class="icon-name">Available</div>
+      </div>
+      <div class="folder-icons">
+        <div class="icon1">
+          <span><i class="fa fa-file-contract"></i></span>
+        </div>
+        <div class="icon-name">Applications</div>
+      </div>
+      <div class="folder-icons">
+        <div class="icon1">
+          <span><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="icon-name">Closed</div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
     <div class="navigation">
       <div class="wrapper2">
-        <div class="abilan">
-          <img src="https://i.ibb.co/HgJrt1p/abilan.png" />
-        </div>
-        <button class="compose">Compose Mail 
-         <span class="plus">
-            <img src="https://i.ibb.co/v1HxGWj/add-1.png"/></span></button>
         <div class="folders">Folders</div>
         <div class="folder-icons">
           <div class="icon1">
-            <img src="https://i.ibb.co/qdgf3TJ/envelope.png" />
+            <span><i class="fa fa-lightbulb"></i></span>
           </div>
-          <div class="icon-name1">Bursaries
+          <div class="icon-name1">Project suggestions
             <button class="buton-span"> 20
           </button></div>
         </div>
+        
         <div class="folder-icons">
           <div class="icon1">
-            <img src="https://i.ibb.co/2yLfX9W/sent-mail.png" />
-          </div>
-          <div class="icon-name">Ongoing Projects</div>
-        </div>
-        <div class="folder-icons">
-          <div class="icon1">
-            <img src="https://i.ibb.co/6ZH9kK3/star.png" />
+            <span><i class="fa fa-exclamation-circle"></i></span>
           </div>
           <div class="icon-name">Complain Reports</div>
-        </div>
-        <div class="folder-icons">
-          <div class="icon1">
-            <img src="https://i.ibb.co/z4QhcbD/email.png" />
-          </div>
-          <div class="icon-name">Bursary Applications</div>
-        </div>
-        <div class="folder-icons">
-          <div class="icon1">
-            <img src="https://i.ibb.co/3MzfGDF/bug.png" />
-          </div>
-          <div class="icon-name">Suggested projects</div>
-        </div>
-        <div class="folder-icons">
-          <div class="icon1">
-            <img src="https://i.ibb.co/xfcFLCN/waste-bin.png" />
-          </div>
-          <div class="icon-name"></div>
-        </div>
-        <div class="folders">
-          <!--heading-->
         </div>
         <div class="folder-icons">
           Labels
@@ -104,7 +123,7 @@
           <div class="big-inbox">
             Inbox
           </div>
-
+            
           <div class="top-bar-items">
             <div class="icon-name5"> English </div>
           </div>
@@ -115,40 +134,6 @@
         </div>
       </div>
       <hr class="new-hr">
-      <!-- <div class="right-bottom">
-        <div class="check">
-          <label class="checkbox">
-        <input type="checkbox"/>
-        </label>
-          <div class="down-arrow">
-            <img src="https://i.ibb.co/WDqrXj6/drop-down-arrow.png" />
-          </div>
-        </div>
-        <div class="middle-buttons">
-          <div class="buttons">
-            <button class="new button"> 
-      <img src="https://i.ibb.co/X4j3TZR/reload.png" />
-           </button>
-            <button class="new button"> 
-      <img src="https://i.ibb.co/L60Yr87/eye.png" />
-           </button>
-            <button class="new button"> 
-      <img src="https://i.ibb.co/Lv6TqBG/waste-bin.png" />
-           </button>
-          </div>
-          <div class="form has-search">
-            <input class="text" type="search" placeholder="Search here..." name="search" />
-            <span class="searchIcon">
-         <img src="https://i.ibb.co/sqFgRq8/search.png" />
-       </span>
-          </div>
-        </div>
-        <div class="search-arrow">
-          <img src="https://i.ibb.co/cx2t05H/scroll-arrows.png" />
-        </div>
-      </div>
-    </div>
-         -->
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-xl-3">
@@ -193,7 +178,19 @@
           </div>
     </div>
   </div>
+  <div>
+    {%block content%}
+    {%endblock content%}
+  </div>
 <!-- partial -->
-  
+
+<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1"></script>
+<script src="https://kit.fontawesome.com/415119f36a.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 </body>
 </html>
