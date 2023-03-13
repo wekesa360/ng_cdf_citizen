@@ -1,0 +1,32 @@
+{% include 'include.html' %}
+{% block content %}
+<nav class="bg-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{%url 'ng-cdf:home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'ng-cdf:projects' %}">Projects</a></li>
+    </ol>
+    <h1 class="fw-bolder">Projects</h1>
+</nav>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-8" id="sub-form">
+                    <form method="get|post">
+                        {% csrf_token %}
+                        <div class="form-input"><label for="todays_date">Project Name</label>{{form.project_name}}</div>
+                        <div class="form-input"><label for="email_address">Project ID</label>{{from.project_id}}</div>
+                        <div class="form-input"><label for="description">Status</label>{{form.status}}</div>
+                        <div class="form-input"><label for="preferred_contact_times">Description</label>{{form.description}}</div>
+                        <div class="form-input"><label for="description">Write Up</label>{{form.writeup_document}}</div>
+                        <div class="form-input"><label for="description">Location</label>{{form.location}}</div>
+                        <div>Project images </div> 
+                        {% comment %} <div class="form-input">{{form.captcha}}</div> {% endcomment %}
+                        <div class="form-input"><input class="form-input btn-submit contact-submit" type="submit" formmethod="POST" value="submit"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

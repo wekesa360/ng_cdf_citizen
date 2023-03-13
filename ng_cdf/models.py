@@ -34,9 +34,6 @@ class NGCDFAdmin(models.Model):
 class NGCDFProjects(models.Model):
     CHOICES_STATUS = (
         ('', 'Select'),
-        ('on-track', 'On Track'),
-        ('warned', 'Warned'),
-        ('issue', 'Issue'),
         ('planned', 'Planned'),
         ('postponed', 'Postponed'),
         ('completed', 'Completed')
@@ -58,6 +55,19 @@ class NGCDFProjects(models.Model):
     
     class Meta:
         db_table = 'ng_cdf_projects'
+
+class ProjectImage(models.Model):
+    project = models.ForeignKey(NGCDFProjects, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='uploads/Ng_cdf_projects/images/',
+                              validators=[FileExtensionValidator(['jpg','png','jpeg'])])
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.image.url
+    
+    class Meta:
+        db_table = 'project_images'
 
 class Bursary(models.Model):
     ng_cdf = models.ForeignKey(NGCDF, on_delete=models.CASCADE)
@@ -115,7 +125,7 @@ class BursaryApplication(models.Model):
     application_documents = models.ForeignKey(ApplicationDocument, on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=256)
     application_date = models.DateField()
-    status = models.CharField(max_length=80, choices=CHOICES_STATUS)
+    status = models.CharField(max_length=80, choices=CHOICES_STATUS, default='pending')
     institution_location = models.ForeignKey(County, on_delete=models.DO_NOTHING)
     application_uid = models.CharField(max_length=256, default=uuid.uuid4())
     created_at = models.DateTimeField(auto_now_add=True)
@@ -142,6 +152,7 @@ class CitizenReport(models.Model):
     project_location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     report_type = models.CharField(max_length=256, choices=CHOICES_TYPE)
     description = models.TextField()
+    report_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -164,17 +175,6 @@ class ReportImage(models.Model):
     class Meta:
         db_table = 'report_images'
     
-class ProjectImage(models.Model):
-    project = models.ForeignKey(NGCDFProjects, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/Ng_cdf_projects/images/',
-                              validators=[FileExtensionValidator(['jpg','png','jpeg'])])
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self) -> str:
-        return self.image.url
-    
-    class Meta:
-        db_table = 'project_images'
 
 

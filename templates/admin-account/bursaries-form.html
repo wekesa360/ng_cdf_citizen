@@ -1,0 +1,35 @@
+{% include 'dashboard.html' %}
+{% block content %}
+<nav class="bg-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{%url 'ng-cdf:home' %}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'ng-cdf:bursary' %}">Bursary</a></li>
+    </ol>
+    <h1 class="fw-bolder">Bursary</h1>
+</nav>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-8" id="sub-form">
+                    <form method="get|post">
+                        {% csrf_token %}
+                        <div class="form-input">
+                            <label for="name">Bursary</label> 
+                            <div class="row">
+                                <div class="for-input col-lg-6"><label for="bursary_id">ID</label> {{form.bursary_id}}</div>
+                                <div class="form-input col-lg-6"><label for="bursary_name">Title</label> {{form.bursary_name}}</div>
+                            </div>
+                        </div>
+                        <div class="form-input"><label for="bursary_type">Bursary Type</label>{{from.bursary_type}}</div>
+                        <div class="form-input"><label for="deadline_of_application">Deadline of Application</label>{{form.deadline_of_application}}</div>
+                        <div class="form-input"><label for="descritpion">Description</label>{{form.description}}</div>
+                        {% comment %} <div class="form-input">{{form.captcha}}</div> {% endcomment %}
+                        <div class="form-input"><input class="form-input btn-submit contact-submit" type="submit" formmethod="POST" value="submit"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

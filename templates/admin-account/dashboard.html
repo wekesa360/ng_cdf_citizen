@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>NG-CDF - dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<!-- partial:index.partial.html -->
+		<div class="dashboard">
+			<div class="left">
+				<div class="navigation">
+					<div class="wrapper2">
+						{% comment %}
+						<div class="abilan">
+							<img src="" alt="logo" />
+						</div>
+						{% endcomment %}
+						<button class="compose">Dashboard <span class="plus"> </span></button>
+
+					<div class="navigation">
+						<div class="wrapper2">
+							<div class="folders">
+								Projects
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-calendar-alt"></i></span>
+									</div>
+									<div class="icon-name">Planned</div>
+								</div>
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-clock"></i></span>
+									</div>
+									<div class="icon-name">Postponed</div>
+								</div>
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-check-circle-o"></i></span>
+									</div>
+									<div class="icon-name">Completed</div>
+								</div>
+
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-pencil"></i></span>
+									</div>
+									<div class="icon-name">Add projects</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="navigation">
+						<div class="wrapper2">
+							<div class="folders">
+								Bursaries
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-clipboard-list"></i></span>
+									</div>
+									<div class="icon-name">Available</div>
+								</div>
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-file-contract"></i></span>
+									</div>
+									<div class="icon-name">Applications</div>
+								</div>
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-times-circle"></i></span>
+									</div>
+									<div class="icon-name">Closed</div>
+								</div>
+
+								<div class="folder-icons">
+									<div class="icon1">
+										<span><i class="fa fa-pencil"></i></span>
+									</div>
+									<div class="icon-name">Add bursaries</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="navigation">
+						<div class="wrapper2">
+							<div class="folders">Folders</div>
+							<div class="folder-icons">
+								<div class="icon1">
+									<span><i class="fa fa-lightbulb"></i></span>
+								</div>
+								<div class="icon-name1">Project suggestions</div>
+							</div>
+
+							<div class="folder-icons">
+								<div class="icon1">
+									<span><i class="fa fa-exclamation-circle"></i></span>
+								</div>
+								<div class="icon-name">Complain Reports</div>
+							</div>
+							<div class="folder-icons">
+								Labels
+							</div>
+							<div class="section1">
+								<button class="btn buton1">
+									Important
+									<span class="tag"> <img src="https://i.ibb.co/Zdx3jGx/tag.png" /></span>
+								</button>
+
+								<button class="btn buton2">
+									New
+									<span class="tag"> <img src="https://i.ibb.co/N1SMfgQ/tag.png" /></span>
+								</button>
+							</div>
+							<div class="section2">
+								<button class="btn buton3">
+									Old
+									<span class="tag"> <img src="https://i.ibb.co/C5q0MDM/tag.png" /></span>
+								</button>
+								<button class="btn buton4">
+									Priority
+									<span class="tag"> <img src="https://i.ibb.co/DMmSZW0/tag.png" /></span>
+								</button>
+							</div>
+						</div>
+					</div>
+          <ul>
+            <h5><a href="login.html"><button class="btn btn-primary fa-lg gradient-custom-2 mb-3" style="color: white; text-align: center; background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%); width: 100%;" type="button">Log out</button>
+            </a></h5>
+        </ul>
+				</div>
+      </div>
+			</div>
+			<div class="right-side">
+				<div class="right-header">
+					<div class="top-bar">
+						<div class="top-bar-justify">
+							<div class="big-inbox">
+								Statistics
+							</div>
+
+							<div class="top-bar-items">
+								<div class="icon-name5">English</div>
+							</div>
+						</div>
+						<div class="profile2">
+							<img src="" />
+							<div class="icon-name5">Juma Soni</div>
+						</div>
+					</div>
+					<hr class="new-hr" />
+          <div class="container" style="width: 100%;">
+            <div class="row">
+              <a href="../templates/projects.html">
+                <div class="col-md-4 col-xl-3">
+                    <button class="card bg-c-blue order-card" style="width: 100%;">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Projects</h6>
+                            <h2 class="text-right"><i class="fa f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Completed Projects<span class="f-right">351</span></p>
+                        </div>
+                      </button>
+                </div>
+            </a>
+
+                <a href="">
+                <div class="col-md-4 col-xl-3">
+                    <button class="card bg-c-green order-card" style="width: 100%;">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Bursary Applications</h6>
+                            <h2 class="text-right"><i class="fa f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Applications Received<span class="f-right">351</span></p>
+                        </div>
+                      </button>
+                </div>
+              </a>
+                
+              <a href="">
+                <div class="col-md-4 col-xl-3">
+                    <button class="card bg-c-pink order-card" style="width: 100%;">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Citizen Reports</h6>
+                            <h2 class="text-right"><i class="fa f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Complains posted<span class="f-right">351</span></p>
+                        </div>
+                      </button>
+                </div>
+              </a>
+
+              <a href="">
+                <div class="col-md-4 col-xl-3">
+                    <button class="card bg-c-yellow  order-card" style="width: 100%;">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Bursaries</h6>
+                            <h2 class="text-right"><i class="fa f-left"></i><span>486</span></h2>
+                            <p class="m-b-0">Bursaries Available<span class="f-right">351</span></p>
+                        </div>
+                      </button>
+                </div>
+              </a>
+          </div>
+    </div>
+				</div>
+				<div>
+					{%block content%} {%endblock content%}
+				</div>
+			</div>
+		</div>
+		<!-- partial -->
+
+		<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1"></script>
+		<script src="https://kit.fontawesome.com/415119f36a.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	</body>
+</html>

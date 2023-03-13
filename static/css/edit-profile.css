@@ -1,0 +1,47 @@
+body {
+    background: #eff7fd;;
+    margin: 0;
+    font-family: Sans-serif;
+    overflow: hidden;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #d8363a
+}
+
+.profile-button {
+    background:  #b44593;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #dd3675
+}
+
+.profile-button:focus {
+    background: #dd3675;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #dd3675;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #dd3675;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-cdf:hover {
+    background: #d8363a;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #d8363a
+}
