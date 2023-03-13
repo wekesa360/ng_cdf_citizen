@@ -25,7 +25,7 @@ class CreateNGCDFForm(forms.ModelForm):
     forms.ModelChoiceField(queryset=Location.objects.all())
     class Meta:
             model = NGCDF
-            fields = ('ng_cdf_id', 'ng_cdf_name', 'location', '',)
+            fields = ('ng_cdf_id', 'ng_cdf_name', 'location',)
 
 class NGCDFProjectsForm(forms.ModelForm):
     """_summary_
@@ -46,7 +46,7 @@ class BursaryForm(forms.ModelForm):
     """
     class Meta:
         model = Bursary
-        fields = ('ng_cdf', 'bursary_id', 'type', 'bursary_name', 'deadline_of_application', 'description',)
+        fields = ('ng_cdf', 'bursary_id', 'bursary_type', 'bursary_name', 'deadline_of_application', 'description',)
     
 class ApplicationDocumentForm(forms.ModelForm):
     """_summary_
@@ -56,7 +56,7 @@ class ApplicationDocumentForm(forms.ModelForm):
     """
     class Meta:
         model = ApplicationDocument
-        fields = ('record_id', 'national_id', 'fathers_id', 'mothers_id', 'institution_transcript','calling_letter', 'fee_structure',)
+        fields = ('record_id', 'national_id', 'fathers_id', 'mothers_id', 'institution_transcript', 'calling_letter', 'fee_structure',)
     
 class BursaryApplicationForm(forms.ModelForm):
     """_summary_
@@ -66,9 +66,9 @@ class BursaryApplicationForm(forms.ModelForm):
     """
     class Meta:
         model = BursaryApplication
-        fields = ('applicant', 'bursary', 'date_of_birth', 'application_documents', 'institution_name','application_date', 'fee_structure','application_id', 'status',)
+        fields = ('applicant', 'bursary', 'date_of_birth', 'application_documents', 'institution_name','application_date', 'status',)
 
-class CitizenReportForm(forms.Model):
+class CitizenReportForm(forms.ModelForm):
     """_summary_
 
     Args:
@@ -76,7 +76,7 @@ class CitizenReportForm(forms.Model):
     """
     class Meta:
         model = CitizenReport
-        fields = ('citizen', 'report', 'report_type', 'status', 'project_name','report_uid','project_location','description',)
+        fields = ('citizen', 'report_type', 'project_name','report_uid','project_location','description',)
     
 class ReportImageForm(forms.ModelForm):
     """_summary_
