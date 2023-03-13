@@ -5,6 +5,7 @@ from .forms import PrettyAuthenticationForm, PrettyUserCreationForm, ChangeImage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from ng_cdf.views import check_if_admin
 
 
 def signin_view(request):
@@ -22,8 +23,14 @@ def signin_view(request):
             if user is not None:
                 login(request, user)
                 #send email
-                messages.info(request, f'You are logged in!')
-                return redirect('nd_cdf:home')
+                user = get_user_model().objects.get(email=email)
+                ng_cdf = check_if_admin(user)
+                if ng_cdf is None:
+                    messages.info(request, f'You are logged in!')
+                    return redirect('ng_cdf:home')
+                else:
+                    messages.info(request, f'You are logged in!')
+                    return redirect('admin:dashboard')
             else:
                 messages.error(request, 'invalid email or password.')
         else:
