@@ -34,9 +34,6 @@ class NGCDFAdmin(models.Model):
 class NGCDFProjects(models.Model):
     CHOICES_STATUS = (
         ('', 'Select'),
-        ('on-track', 'On Track'),
-        ('warned', 'Warned'),
-        ('issue', 'Issue'),
         ('planned', 'Planned'),
         ('postponed', 'Postponed'),
         ('completed', 'Completed')
@@ -128,7 +125,7 @@ class BursaryApplication(models.Model):
     application_documents = models.ForeignKey(ApplicationDocument, on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=256)
     application_date = models.DateField()
-    status = models.CharField(max_length=80, choices=CHOICES_STATUS)
+    status = models.CharField(max_length=80, choices=CHOICES_STATUS, default='pending')
     institution_location = models.ForeignKey(County, on_delete=models.DO_NOTHING)
     application_uid = models.CharField(max_length=256, default=uuid.uuid4())
     created_at = models.DateTimeField(auto_now_add=True)
