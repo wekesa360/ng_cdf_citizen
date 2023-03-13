@@ -5,4 +5,5 @@ user/
 migrations/
 */__pycache__/
 __pycache__/
+*/counties/
 Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
