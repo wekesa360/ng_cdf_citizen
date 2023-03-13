@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from ng_cdf.views import check_if_admin
 
-
 def signin_view(request):
     """_summary_
 
