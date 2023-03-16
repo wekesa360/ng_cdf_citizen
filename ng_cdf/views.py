@@ -37,27 +37,50 @@ def check_if_admin(user):
     except ObjectDoesNotExist:
         ng_cdf = None
     return ng_cdf
+
+def home_view(request):
+    return render('index.html')
     
 @login_required
 def admin_view(request):
-    user = request.user.username
+    user_email = request.user.email
+    print(user_email)
     try:
-        ng_cdf = check_if_admin(user)
-        bursaries = Bursary.objects.all(ng_cdf=ng_cdf)
-        bursary_application = BursaryApplication.objects.all()
-        ng_cdf_projects = NGCDFProjects.objects.all(ng_cdf=ng_cdf)
-        citizen_report = CitizenReport.objects.all(ng_cdf=ng_cdf)
+        ng_cdf = check_if_admin(user_email)
+        user = User.objects.get(email=user_email)
+        try:
+            bursaries = Bursary.objects.get(ng_cdf=ng_cdf)
+        except ObjectDoesNotExist:
+            bursaries = None
+            bursary_applications = []
+        if bursaries != None:
+            for bursary in bursaries:
+                try:
+                    bursary_applications.append(BursaryApplication.objects.get(bursary=bursary))
+                except ObjectDoesNotExist:
+                    pass
+        else:
+            bursary_applications = None
+        try:
+            ng_cdf_projects = NGCDFProjects.objects.get(ng_cdf=ng_cdf)
+        except ObjectDoesNotExist:
+            ng_cdf_projects = None
+        try:
+            citizen_report = CitizenReport.objects.get(ng_cdf=ng_cdf)
+        except ObjectDoesNotExist:
+            citizen_report = None
         context = {
+            'admin': user,
             'bursaries':bursaries,
-             'bursary_application': bursary_application,
+            'bursary_applications': bursary_applications,
             'ng_cdf_projects':ng_cdf_projects,
             'citizen_report':citizen_report,
         }
-        messages.info(f'You are logged in as admin to {ng_cdf.ng_cdf_name}')
-        render('admin/dashboard.html', context=context)
+        messages.info(request, f'You are logged in as admin to {ng_cdf.ng_cdf_name}')
+        return render(request, 'admin-account/admin-stats.html', context=context)
     except ObjectDoesNotExist:
         messages.error(request, f'You are not an admin')
-        redirect('ng_cdf:login')
+        return redirect('ng_cdf:home')
 
 @login_required
 def admin_reports_view(request):
@@ -139,18 +162,18 @@ def delete_project_view(request, id):
 
 @login_required
 def admin_bursary_view(request):
-    user = request.user.username
-    ng_cdf = check_if_admin(user)
+    user_email = request.user.email
+    ng_cdf = check_if_admin(user_email)
     if request.method == 'POST':
         form = BursaryForm(request.POST)
         if form.is_valid():
             form.ng_cdf = ng_cdf
             form.save()
             messages.success(request, f'Bursary added successfully')
-            redirect('ng_cdf:bursaries')
+            redirect('ng_cdf:bursary')
         else:
             messages.error(request, f'Error adding bursary')
-            redirect('ng_cdf:add_bursary')
+            redirect('ng_cdf:bursary')
     if request.method == 'GET':
         form = BursaryForm()
         bursaries = Bursary.objects.filter(ng_cdf=ng_cdf)
@@ -158,8 +181,8 @@ def admin_bursary_view(request):
             'form':form,
             'bursaries':bursaries
         }
-        return render('ng_cdf/add_bursary.html', context=context)
-    return redirect('ng_cdf:add_bursary')
+        return render(request, 'admin-account/bursaries-form.html', context=context)
+    return redirect('ng_cdf:bursary')
 
 @login_required
 def edit_bursary_view(request, id):
