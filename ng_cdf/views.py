@@ -77,14 +77,14 @@ def admin_view(request):
             'citizen_report':citizen_report,
         }
         messages.info(request, f'You are logged in as admin to {ng_cdf.ng_cdf_name}')
-        return render(request, 'admin-account/admin-stats.html', context=context)
+        return render(request, 'admin-account/dashboard.html', context=context)
     except ObjectDoesNotExist:
         messages.error(request, f'You are not an admin')
         return redirect('ng_cdf:home')
 
 @login_required
 def admin_reports_view(request):
-    user_email = request.user.username
+    user_email = request.user.email
     ng_cdf = check_if_admin(user_email)
     if ng_cdf != None:
         citizen_reports = CitizenReport.objects.filter(ng_cdf=ng_cdf)
@@ -93,7 +93,7 @@ def admin_reports_view(request):
     context = {
             'reports': citizen_reports
         }
-    return render(request, 'admin/citizen-reports.html', context=context)
+    return render(request, 'admin-account/citizen-reports.html', context=context)
     
 @login_required
 def admin_project_view(request):
@@ -133,6 +133,19 @@ def admin_project_view(request):
         }
         return render(request, 'admin-account/projects-form.html', context=context)
     return redirect('ng_cdf:projects')
+
+@login_required
+def admin_projects_view(request):
+    user_email = request.user.email
+    ng_cdf = check_if_admin(user_email)
+    if ng_cdf != None:
+        projects = NGCDFProjects.objects.filter(ng_cdf=ng_cdf)
+    else:
+        projects = None
+    context = {
+        'projects':projects
+    }
+    return render(request, 'admin-account/projects.html', context=context)
 
 @login_required
 def edit_project_view(request, id):
@@ -219,7 +232,6 @@ def delete_bursary_view(request, id):
         bursary = Bursary.objects.get(id=id, ng_cdf=ng_cdf)
         bursary.delete()
         return redirect('ng_cdf:dashboard')
-
 
 def projects_view(request):
     if request.method == 'GET':
