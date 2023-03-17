@@ -5,6 +5,7 @@ from .views import (
     # add_project_view,
     bursaries_view,
     admin_bursary_view,
+    admin_project_view,
     # add_citizen_report_view,
     apply_bursary_view,
     citizen_report_view,
@@ -20,7 +21,8 @@ from .views import (
 
 
 urlpatterns = [
-    path('admin/dashboard', admin_view, name='dashboard'),
     path('', home_view, name='home'),
-    path('admin/bursary', admin_bursary_view, name='bursary'),
+    path('ng_cdf/admin/dashboard', admin_view, name='dashboard'),
+    path('ng_cdf/admin/projects', admin_project_view, name='projects'),
+    path('ng_cdf/admin/bursary', admin_bursary_view, name='bursary'),
 ]

@@ -64,7 +64,7 @@ class BursaryForm(forms.ModelForm):
         widgets = {
             'ng_cdf': forms.Select(attrs={'class': 'form-control'}),
             'bursary_id': forms.TextInput(attrs={'class': 'form-control'}),
-            'bursary_type': forms.Select(attrs={'class': 'form-control'}),
+            'bursary_type': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_name': forms.TextInput(attrs={'class': 'form-control'}),
             'deadline_of_application': forms.DateInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
