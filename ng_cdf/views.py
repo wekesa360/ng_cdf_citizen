@@ -39,7 +39,7 @@ def check_if_admin(user):
     return ng_cdf
 
 def home_view(request):
-    return render('index.html')
+    return render(request,'landing-page.html')
     
 @login_required
 def admin_view(request):
@@ -97,10 +97,10 @@ def admin_reports_view(request):
     
 @login_required
 def admin_project_view(request):
-    user = request.user.username
+    user_email = request.user.email
     if request.method == 'POST':
         try:
-            admin = User.objects.get(email=user)
+            admin = User.objects.get(email=user_email)
             try:
                 NGCDFAdmin.objects.get(administrator=admin)
             except ObjectDoesNotExist:
@@ -117,13 +117,13 @@ def admin_project_view(request):
                 redirect('ng_cdf:projects')
             else:
                 messages.error(request, f'Error adding project')
-                redirect('ng_cdf:add_project')
+                redirect('ng_cdf:projects')
         except ObjectDoesNotExist:
             messages.error(request, 'Not an admin')
             return redirect('ng_cdf:projects')
     if request.method == 'GET':
         form = NGCDFProjectsForm()
-        ng_cdf = check_if_admin(user)
+        ng_cdf = check_if_admin(user_email)
         projects = NGCDFProjects.objects.filter(ng_cdf=ng_cdf)
         project_images = ProjectImage.objects.all()
         context = {
@@ -131,8 +131,8 @@ def admin_project_view(request):
             'project_images': project_images,
             'form':form
         }
-        return render('ng_cdf/add_project.html', context=context)
-    return redirect('ng_cdf:add_project')
+        return render(request, 'admin-account/projects-form.html', context=context)
+    return redirect('ng_cdf:projects')
 
 @login_required
 def edit_project_view(request, id):
@@ -151,7 +151,7 @@ def edit_project_view(request, id):
         context = {
             'form':form
         }
-        return render('ng_cdf/edit-project.html', context=context)
+        return render('admin-account/projects-form-edit.html', context=context)
     return redirect('ng_cdf:edit-project')
 
 @login_required
@@ -184,25 +184,6 @@ def admin_bursary_view(request):
         return render(request, 'admin-account/bursaries-form.html', context=context)
     return redirect('ng_cdf:bursary')
 
-@login_required
-def edit_bursary_view(request, id):
-    bursary = Bursary.objects.get(id=id)
-    if request.method == 'POST':
-        form = BursaryForm(request.POST, instance=bursary)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Bursary updated successfully')
-            redirect('ng_cdf:bursaries')
-        else:
-            messages.error(request, f'Error updating bursary')
-            redirect('ng_cdf:edit-bursary')
-    if request.method == 'GET':
-        form = BursaryForm(instance=bursary)
-        context = {
-            'form':form
-        }
-        return render('ng_cdf/edit-bursary.html', context=context)
-    return redirect('ng_cdf:edit-bursary')
 
 @login_required
 def edit_bursary_view(request, id):
@@ -227,7 +208,7 @@ def edit_bursary_view(request, id):
             context = {
                 'form':form
             }
-            return render('ng_cdf/edit-bursary.html', context=context)
+            return render('admin-account/bursaries-form-edit.html', context=context)
         return redirect('ng_cdf:edit-bursary')
 
 @login_required
