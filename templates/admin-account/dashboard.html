@@ -1,11 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<title>NG-CDF - dashboard</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/dashboard.css">
-		<link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 	</head>
 	<body>
 		<!-- partial:index.partial.html -->
@@ -58,22 +58,27 @@
 							<div class="folders">
 								Bursaries
 								<div class="folder-icons">
-									<div class="icon1">
-										<span><i class="fa fa-clipboard-list"></i></span>
-									</div>
-									<div class="icon-name">Available</div>
+									<a href="{%url 'ng_cdf:bursaries' 'available'%}">
+										<div class="icon1">
+											<span><i class="fa fa-clipboard-list"></i></span>
+										</div>
+										<div class="icon-name">Available</div>
+									</a>
 								</div>
 								<div class="folder-icons">
 									<div class="icon1">
 										<span><i class="fa fa-file-contract"></i></span>
 									</div>
+									
 									<div class="icon-name">Applications</div>
 								</div>
 								<div class="folder-icons">
+									<a href="{%url 'ng_cdf:bursaries' 'available'%}">
 									<div class="icon1">
 										<span><i class="fa fa-times-circle"></i></span>
 									</div>
 									<div class="icon-name">Closed</div>
+									</a>
 								</div>
 
 								<div class="folder-icons">

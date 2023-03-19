@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<title>NG-CDF - dashboard</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
-		<link rel="stylesheet" href="../../static/css/dashboard.css">
+		<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 	</head>
 	<body>
 		<!-- partial:index.partial.html -->
@@ -136,7 +137,7 @@
                 <nav class="bg-breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{%url 'ng_cdf:home' %}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'ng_cdf:bursary' %}">Bursary</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'ng_cdf:add-bursary' %}">Bursary</a></li>
                     </ol>
                 </nav>
                     <main>
@@ -149,10 +150,12 @@
                                         {% csrf_token %}
                                         <div class="form-input mb-4">
                                             <label for="name">Bursary</label> 
+											<div class="form-input mb-4"><label for="bursary_type">CDF</label> {{form.ng_cdf}}</div>
                                             <div class="row">
                                                 <div class="for-input col-lg-6"><label for="bursary_id">ID</label> {{form.bursary_id}}</div>
                                                 <div class="form-input mb-4 col-lg-6"><label for="bursary_name">Title</label> {{form.bursary_name}}</div>
                                             </div>
+											<input type="hidden" name="ng_cdf_id" value="{{ng_cdf.id}}">
                                         </div>
                                         <div class="form-input mb-4"><label for="bursary_type">Bursary Type</label> {{form.bursary_type}}</div>
                                         <div class="form-input mb-4"><label for="deadline_of_application">Deadline of Application</label>{{form.deadline_of_application}}</div>
