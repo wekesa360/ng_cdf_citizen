@@ -42,7 +42,7 @@ class NGCDFProjectsForm(forms.ModelForm):
         model = NGCDFProjects
         fields = ('ng_cdf', 'project_name', 'project_id', 'description', 'status', 'location', 'writeup_document')
         widgets = {
-            'ng_cdf': forms.Select(attrs={'class': 'form-control'}),
+            'ng_cdf': forms.TextInput(attrs={'class': 'form-control', 'value': '{{ng_cdf.id}}', 'disabled': 'true'}),
             'project_name': forms.TextInput(attrs={'class': 'form-control'}),
             'project_id': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
@@ -62,7 +62,6 @@ class BursaryForm(forms.ModelForm):
         model = Bursary
         fields = ('ng_cdf', 'bursary_id', 'bursary_type', 'bursary_name', 'deadline_of_application', 'description',)
         widgets = {
-            'ng_cdf': forms.Select(attrs={'class': 'form-control'}),
             'bursary_id': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_type': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_name': forms.TextInput(attrs={'class': 'form-control'}),
