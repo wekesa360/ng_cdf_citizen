@@ -29,7 +29,7 @@ class UserProfile(AbstractUser):
     last_name = models.CharField(max_length=80)
     bio = models.TextField(blank=True)
     phone_number = models.CharField(max_length=10, default='07XXXXXXX')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
     avatar = models.FileField(upload_to='accounts/user/avatar/', blank=True, default='accounts/user/avatar/default.png')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
