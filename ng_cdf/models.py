@@ -6,7 +6,7 @@ from accounts.models import UserProfile
 
 class NGCDF(models.Model):
     ng_cdf_id = models.CharField(max_length=100)
-    ng_cdf_name = models.TextField()
+    ng_cdf_name = models.CharField(max_length=256)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -72,6 +72,7 @@ class ProjectImage(models.Model):
 class Bursary(models.Model):
     ng_cdf = models.ForeignKey(NGCDF, on_delete=models.CASCADE)
     bursary_id = models.CharField(max_length=256)
+    available = models.BooleanField(default=True)
     bursary_type = models.CharField(max_length=256) # high school, university, form 1 intake
     bursary_name = models.CharField(max_length=256)
     deadline_of_application = models.DateField()
@@ -174,7 +175,3 @@ class ReportImage(models.Model):
     
     class Meta:
         db_table = 'report_images'
-    
-
-
-
