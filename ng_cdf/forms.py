@@ -77,9 +77,9 @@ class ApplicationDocumentForm(forms.ModelForm):
     """
     class Meta:
         model = ApplicationDocument
-        fields = ('record_id', 'national_id', 'fathers_id', 'mothers_id', 'institution_transcript', 'calling_letter', 'fee_structure',)
+        fields = ('other', 'applicant', 'bursary', 'record_id', 'national_id', 'fathers_id', 'mothers_id', 'institution_transcript', 'calling_letter', 'fee_structure',)
         widgets = {
-            'record_id': forms.TextInput(attrs={'class': 'form-control'}),
+            'other': forms.FileInput(attrs={'class': 'form-control'}),
             'national_id': forms.FileInput(attrs={'class': 'form-control'}),
             'fathers_id': forms.FileInput(attrs={'class': 'form-control'}),
             'mothers_id': forms.FileInput(attrs={'class': 'form-control'}),
@@ -96,14 +96,13 @@ class BursaryApplicationForm(forms.ModelForm):
     """
     class Meta:
         model = BursaryApplication
-        fields = ('applicant', 'bursary', 'date_of_birth', 'application_documents', 'institution_name','application_date', 'status',)
+        fields = ('applicant', 'bursary', 'date_of_birth', 'application_documents', 'institution_name','application_date', 'institution_location')
         widgets = {
-            'applicant': forms.Select(attrs={'class': 'form-control'}),
-            'bursary': forms.Select(attrs={'class': 'form-control'}),
-            'date_of_birth': forms.DateInput(attrs={'class': 'form-control'}),
+            'date_of_birth': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'application_documents': forms.Select(attrs={'class': 'form-control'}),
             'institution_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'application_date': forms.DateInput(attrs={'class': 'form-control'}),
+            'institution_location': forms.Select(attrs={'class': 'form-control'}),
+            'application_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
 
