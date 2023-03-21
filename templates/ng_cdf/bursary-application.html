@@ -1,9 +1,18 @@
-{% include 'base.html' %}
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>NG-CDF - dashboard</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+		<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+	</head>
+	<body class="overflow-scroll">
 <nav class="bg-breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{%url 'ng-cdf:home' %}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'ng-cdf:bursary-application' %}">Bursary Application</a></li>
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Bursary</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Bursary Application</li>
     </ol>
     <h1 class="fw-bolder">Bursary Application</h1>
 </nav>
@@ -15,26 +24,84 @@
                 <div class="col-lg-8" id="sub-form">
                     <form method="get|post">
                         {% csrf_token %}
-                        <div class="form-input"><label for="todays_date">applicant</label>{{form.applicant}}</div>
+                            <div class="form-input">
+                                <label for="name">Personal Information</label>
+                                <!-- Pass the bursary inforamation here-->
+                                <div class="row" >
+                                    
+                                    <div class="col-lg-6"><label for="name">First name</label> <input class="form-control" name="name" value="{{user.first_name}}" disabled="true"></div>
+                                    
+                                    <div class="col-lg-6"><label for="name">Last name</label> <input class="form-control" name="name" value="{{user.last_name}}" disabled="true"></div>
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="name">Contact Information</label>
+                                <!-- Pass the bursary inforamation here-->
+                                <div class="row" >
+                                    
+                                    <div class="col-lg-6"><label for="name">Phone number</label> <input class="form-control" name="name" value="{{user.phone_number}}" disabled="true"></div>
+                                    
+                                    <div class="col-lg-6"><label for="name">Email</label> <input class="form-control" name="name" value="{{user.email}}" disabled="true"></div>
+                                </div>
+                            </div>
+                            <input class="form-control" hidden = "true" name="applicant" value="{{user.id}}" disabled="true">
+                        
+                        
                         <div class="form-input">
-                            <label for="name">Bursary</label>
+                            <label for="name">Bursary Information</label>
                             <!-- Pass the bursary inforamation here-->
                             <div class="row" >
-                                <label for="name">Date of birth</label> 
-                                <div class="col-lg-6" id="name">{{form.date_of_birth}}</div>
-                                <label for="name">Application date</label> 
-                                <div class="col-lg-6">{{form.application_document}}</div>
+                                <div class="col-lg-6"><label for="name">Name</label> <input class="form-control" name="b" value="{{bursary.bursary_name}}" disabled="true"></div>
+                                <div class="col-lg-6"><label for="name">Type</label> <input class="form-control" name="name" value="{{bursary.bursary_type}}" disabled="true"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6"><label for="name">Bursary ID</label> <input class="form-control" name="b" value="{{bursary.bursary_id}}" disabled="true"></div>
+                            <div class="col-lg-6"><label for="name">Organization/ CDF</label> <input class="form-control" name="b" value="{{bursary.ng_cdf.ng_cdf_name}}" disabled="true"></div>
+                            </div>
+                            <input class="form-control" hidden = "true" name="bursary" value="{{bursary.id}}" disabled="true">
+                        </div>
+                        <div class="form-input">
+                            <label for="name">Application</label>
+                            <!-- Pass the bursary inforamation here-->
+                            <div class="row" >
+                                <div class="col-lg-6" id="name"><label for="name">Date of birth</label>{{form.date_of_birth}}</div>
+                                <div class="col-lg-6"><label for="application_date">Date of Application</label>{{form.application_date}}</div>
                             </div>
                         </div>
-                        <div class="form-input"><label for="email_address">Insititution Name</label>{{from.institution_name}}</div>
-                        <div class="form-input"><label for="phone_number">Deadline of Application</label>{{form.deadline_of_application}}</div>
-                        <div class="form-input"><label for="preferred_contact_times">Status</label>{{form.status}}</div>
-                        <div class="form-input"><label for="preferred_contact_times">Insititution Location</label>{{from.institution_location}}</div>
+                        <div class="form-input"><label for="email_address">Insititution Name</label>{{form.institution_name}}</div>
+                        <div class="form-input"><label for="preferred_contact_times">Insititution Location</label>{{form.institution_location}}</div>
                         {% comment %} <div class="form-input">{{form.captcha}}</div> {% endcomment %}
+                        <div class="form-input">
+                            <label for="name">Application Documents</label><br>
+                            <label class="text-muted">Upload {{bursary.application_documents}}</label><br>
+                            <!-- Pass the bursary inforamation here-->
+                            <label for="national_id">National ID</label>
+                            <div class="col-lg-6">{{document_form.national_id}}</div>
+                            <label for="name">Mothers ID or female guardian</label>
+                            <div class="col-lg-6">{{document_form.mothers_id}}</div>
+                            <label for="fathers_id">Fathers ID or male guardian</label>
+                            <div class="col-lg-6">{{document_form.fathers_id}}</div>
+                            <label for="institution_transcript">Results transcript</label>
+                            <div class="col-lg-6">{{document_form.institution_transcript}}</div>
+                            <label for="calling_letter">Calling letter</label>
+                            <div class="col-lg-6">{{document_form.calling_letter}}</div>
+                            <label for="fee_structure">Fee structure</label>
+                            <div class="col-lg-6">{{document_form.fee_structure}}</div>
+                            <label for="other">Other</label>
+                            <div class="col-lg-6">{{document_form.other}}</div>
+                        </div>
                         <div class="form-input"><input class="form-input btn-submit contact-submit" type="submit" formmethod="POST" value="submit"></div>
                     </form>
                 </div>    
             </div>
         </div>
     </main>
-{% endblock content %}
+	<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1"></script>
+		<script src="https://kit.fontawesome.com/415119f36a.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	</body>
+</html>

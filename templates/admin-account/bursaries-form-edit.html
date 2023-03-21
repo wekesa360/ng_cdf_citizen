@@ -137,7 +137,7 @@
                 <nav class="bg-breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{%url 'ng_cdf:home' %}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'ng_cdf:bursary' %}">Bursary</a></li>
+                        {% comment %} <li class="breadcrumb-item"><a href="{% url 'ng_cdf:edit-bursary' %}">Bursary</a></li> {% endcomment %}
                     </ol>
                 </nav>
                     <main>
@@ -154,6 +154,8 @@
                                                 <div class="for-input col-lg-6"><label for="bursary_id">ID</label> {{form.bursary_id}}</div>
                                                 <div class="form-input mb-4 col-lg-6"><label for="bursary_name">Title</label> {{form.bursary_name}}</div>
                                             </div>
+											<input type="hidden" name="ng_cdf" value="{{ng_cdf.id}}">
+
                                         </div>
                                         <div class="form-input mb-4"><label for="bursary_type">Bursary Type</label> {{form.bursary_type}}</div>
                                         <div class="form-input mb-4"><label for="deadline_of_application">Deadline of Application</label>{{form.deadline_of_application}}</div>
