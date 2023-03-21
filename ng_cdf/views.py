@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -34,7 +35,6 @@ def check_if_admin(user):
     try:
         check_admin = NGCDFAdmin.objects.get(administrator=admin)
         ng_cdf = check_admin.ng_cdf
-        print('**************************************************************************')
         print(ng_cdf.id)
     except ObjectDoesNotExist:
         ng_cdf = None
@@ -208,17 +208,18 @@ def edit_bursary_view(request, bursary_id):
             if form.is_valid():
                 form.save()
                 messages.success(request, f'Bursary updated successfully')
-                redirect('ng_cdf:dashboard')
+                redirect(reverse('ng_cdf:edit-bursary', args=[bursary_id]))
             else:
                 messages.error(request, f'Error updating bursary')
-                redirect('ng_cdf:edit-bursary')
+                redirect(reverse('ng_cdf:edit-bursary', args=[bursary_id]))
         if request.method == 'GET':
-            form = BursaryForm(instance=bursary)
+            form = BursaryForm(instance=bursary, initial={'ng_cdf': ng_cdf})
             context = {
-                'form':form
+                'form':form,
+                'ng_cdf': ng_cdf
             }
             return render(request, 'admin-account/bursaries-form-edit.html', context=context)
-        return redirect('ng_cdf:edit-bursary')
+    return redirect(reverse('ng_cdf:edit-bursary', args=[bursary_id]))
 
 @login_required
 def delete_bursary_view(request, id):
@@ -270,14 +271,15 @@ def bursaries_view(request, status):
 
 @login_required
 def apply_bursary_view(request, bursary_id):
-    user = request.user.username
+    user = request.user.email
     user = User.objects.get(email=user)
     if request.method == 'POST':
-        bursary = Bursary.objects.get(bursary_id=bursary_id)
+        bursary = Bursary.objects.get(id=bursary_id)
         form = BursaryApplicationForm(request.POST)
         form.bursary = bursary.id
         document_form = ApplicationDocumentForm(request.POST, request.FILES)
-        document_form.bursary = bursary.id
+        import pdb; pdb.set_trace()
+
         if form.is_valid() and document_form.is_valid():
             form.save()
             document_form.save()
@@ -285,18 +287,19 @@ def apply_bursary_view(request, bursary_id):
             redirect('ng_cdf:bursaries')
         else:
             messages.error(request, f'Error submitting bursary application')
-            redirect('ng_cdf:apply_bursary')
+            redirect(reverse('ng_cdf:apply-bursary', args=[bursary_id]))
     if request.method == 'GET':
         form = BursaryApplicationForm()
         document_form = ApplicationDocumentForm()
-        bursary = Bursary.objects.get(bursary_id=bursary_id)
+        bursary = Bursary.objects.get(id=bursary_id)
         context = {
             'form':form,
+            'user': user,
             'bursary':bursary,
             'document_form':document_form
         }
-        return render('ng_cdf/apply-bursary.html', context=context)
-    return redirect('ng_cdf:apply-bursary')
+        return render(request, 'ng_cdf/bursary-application.html', context=context)
+    return redirect(reverse('ng_cdf:apply-bursary', args=[bursary_id]))
 
 @login_required
 def citizen_report_view(request):
