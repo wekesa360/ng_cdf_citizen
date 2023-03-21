@@ -72,6 +72,7 @@ class ProjectImage(models.Model):
 class Bursary(models.Model):
     ng_cdf = models.ForeignKey(NGCDF, on_delete=models.CASCADE)
     bursary_id = models.CharField(max_length=256)
+    application_documents = models.CharField(max_length=256, default='None')
     available = models.BooleanField(default=True)
     bursary_type = models.CharField(max_length=256) # high school, university, form 1 intake
     bursary_name = models.CharField(max_length=256)
@@ -88,7 +89,8 @@ class Bursary(models.Model):
 
 
 class ApplicationDocument(models.Model):
-    bursary = models.ForeignKey(Bursary, on_delete=models.CASCADE)
+    bursary = models.ForeignKey(Bursary, on_delete=models.DO_NOTHING)
+    applicant = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
     record_id = models.CharField(default=uuid.uuid4(), max_length=256)
     national_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False,
                                    validators=[FileExtensionValidator(['pdf','jpg','png','jpeg'])])
@@ -102,6 +104,7 @@ class ApplicationDocument(models.Model):
                                    validators=[FileExtensionValidator(['pdf'])])
     fee_structure  = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False,
                                    validators=[FileExtensionValidator(['pdf',])])
+    other = models.FileField(upload_to='uploads/bursaries/application_documents/', null=True,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
