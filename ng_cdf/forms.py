@@ -69,24 +69,29 @@ class BursaryForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
     
-class ApplicationDocumentForm(forms.ModelForm):
-    """_summary_
-
-    Args:
-        forms (_type_): _description_
-    """
-    class Meta:
-        model = ApplicationDocument
-        fields = ('other', 'applicant', 'bursary', 'record_id', 'national_id', 'fathers_id', 'mothers_id', 'institution_transcript', 'calling_letter', 'fee_structure',)
-        widgets = {
-            'other': forms.FileInput(attrs={'class': 'form-control'}),
-            'national_id': forms.FileInput(attrs={'class': 'form-control'}),
-            'fathers_id': forms.FileInput(attrs={'class': 'form-control'}),
-            'mothers_id': forms.FileInput(attrs={'class': 'form-control'}),
-            'institution_transcript': forms.FileInput(attrs={'class': 'form-control'}),
-            'calling_letter': forms.FileInput(attrs={'class': 'form-control'}),
-            'fee_structure': forms.FileInput(attrs={'class': 'form-control'}),
-        }
+class ApplicationDocumentForm(forms.Form):
+    other = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    application = forms.IntegerField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    national_id = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    fathers_id = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    mothers_id = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    institution_transcript = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    calling_letter = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    fee_structure = forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    
+    def save(self):
+        document = ApplicationDocument()
+        document.other = self.cleaned_data['other']
+        document.national_id = self.cleaned_data['national_id']
+        bursary_application = BursaryApplication.objects.get(id=self.cleaned_data['application'])
+        document.application = bursary_application
+        document.fathers_id = self.cleaned_data['fathers_id']
+        document.mothers_id = self.cleaned_data['mothers_id']
+        document.institution_transcript = self.cleaned_data['institution_transcript']
+        document.calling_letter = self.cleaned_data['calling_letter']
+        document.fee_structure = self.cleaned_data['fee_structure']
+        document.save()
+        return document
     
 class BursaryApplicationForm(forms.ModelForm):
     """_summary_
@@ -96,7 +101,7 @@ class BursaryApplicationForm(forms.ModelForm):
     """
     class Meta:
         model = BursaryApplication
-        fields = ('applicant', 'bursary', 'date_of_birth', 'application_documents', 'institution_name','application_date', 'institution_location')
+        fields = ('applicant', 'bursary', 'date_of_birth', 'institution_name','application_date', 'institution_location')
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'application_documents': forms.Select(attrs={'class': 'form-control'}),
