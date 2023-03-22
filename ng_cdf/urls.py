@@ -11,6 +11,7 @@ from .views import (
     # add_citizen_report_view,
     apply_bursary_view,
     citizen_report_view,
+    upload_bursary_documents_view,
     home_view,
     # add_citizen_report_view,
     delete_report_view,
@@ -42,5 +43,6 @@ urlpatterns = [
     # path('ng_cdf/admin/add/project', add_project_view, name='add-project'),
     # path('ng_cdf/admin/add/bursary', add_bursary_view, name='add-bursary'),
     # path('ng_cdf/admin/add/report', add_citizen_report_view, name='add-report'),
+    path('ng_cdf/apply/bursary/upload/documents/<int:application_id>', upload_bursary_documents_view, name='upload-documents'),
     path('ng_cdf/admin/view/bursaries/<str:status>', admin_bursaries_view, name='bursaries'),
 ]
