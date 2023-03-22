@@ -88,9 +88,34 @@ class Bursary(models.Model):
         db_table = 'bursaries'
 
 
-class ApplicationDocument(models.Model):
-    bursary = models.ForeignKey(Bursary, on_delete=models.DO_NOTHING)
+class BursaryApplication(models.Model):
+    CHOICES_STATUS = (
+        ('', 'Select'),
+        ('shortlisted', 'Shortlisted'),
+        ('interview', 'Interviewed'),
+        ('accepted', 'Accepted'),
+        ('declined', 'Declined')
+    )
     applicant = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
+    bursary = models.ForeignKey(Bursary, on_delete=models.CASCADE)
+    date_of_birth = models.DateField()
+    institution_name = models.CharField(max_length=256)
+    application_date = models.DateField()
+    status = models.CharField(max_length=80, choices=CHOICES_STATUS, default='pending')
+    institution_location = models.ForeignKey(County, on_delete=models.DO_NOTHING)
+    application_uid = models.CharField(max_length=256, default=uuid.uuid4())
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.application_uid
+    
+
+    class Meta:
+        db_table = 'bursary_applications'
+
+class ApplicationDocument(models.Model):
+    application = models.ForeignKey(BursaryApplication, on_delete=models.CASCADE)
     record_id = models.CharField(default=uuid.uuid4(), max_length=256)
     national_id = models.FileField(upload_to='uploads/bursaries/application_documents/', null=False,
                                    validators=[FileExtensionValidator(['pdf','jpg','png','jpeg'])])
@@ -109,38 +134,13 @@ class ApplicationDocument(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self) -> str:
-        self.record_id
+        return self.record_id
     
     class Meta:
         db_table = 'bursary_application_documents'
 
 
-class BursaryApplication(models.Model):
-    CHOICES_STATUS = (
-        ('', 'Select'),
-        ('shortlisted', 'Shortlisted'),
-        ('interview', 'Interviewed'),
-        ('accepted', 'Accepted'),
-        ('declined', 'Declined')
-    )
-    applicant = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
-    bursary = models.ForeignKey(Bursary, on_delete=models.CASCADE)
-    date_of_birth = models.DateField()
-    application_documents = models.ForeignKey(ApplicationDocument, on_delete=models.CASCADE)
-    institution_name = models.CharField(max_length=256)
-    application_date = models.DateField()
-    status = models.CharField(max_length=80, choices=CHOICES_STATUS, default='pending')
-    institution_location = models.ForeignKey(County, on_delete=models.DO_NOTHING)
-    application_uid = models.CharField(max_length=256, default=uuid.uuid4())
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self) -> str:
-        return self.application_uid
-    
-
-    class Meta:
-        db_table = 'bursary_applications'
 
 
 class CitizenReport(models.Model):
