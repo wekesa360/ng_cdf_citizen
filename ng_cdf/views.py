@@ -270,33 +270,51 @@ def bursaries_view(request, status):
     return redirect('ng_cdf:bursaries')
 
 @login_required
+def upload_bursary_documents_view(request, application_id):
+    user = request.user.email
+    user = User.objects.get(email=user)
+    application = BursaryApplication.objects.get(id=application_id)
+    if request.method == 'POST':
+        form = ApplicationDocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.application = application_id
+            form.save()
+            messages.success(request, f'Document uploaded successfully')
+            redirect('ng_cdf:bursaries')
+        else:
+            messages.error(request, f'Error uploading document')
+            redirect(reverse('ng_cdf:upload-documents', args=[application_id]))
+    if request.method == 'GET':
+        form = ApplicationDocumentForm(initial={'application': application_id})
+        context = {
+            'document_form':form,
+            'bursary': application.bursary,
+            'application': application
+        }
+        return render(request, 'ng_cdf/bursary-documents.html', context=context)
+    return redirect(reverse('ng_cdf:upload-documents', args=[application_id]))
+
+@login_required
 def apply_bursary_view(request, bursary_id):
     user = request.user.email
     user = User.objects.get(email=user)
     if request.method == 'POST':
         bursary = Bursary.objects.get(id=bursary_id)
         form = BursaryApplicationForm(request.POST)
-        form.bursary = bursary.id
-        document_form = ApplicationDocumentForm(request.POST, request.FILES)
-        import pdb; pdb.set_trace()
-
-        if form.is_valid() and document_form.is_valid():
+        if form.is_valid():
             form.save()
-            document_form.save()
-            messages.success(request, f'Bursary application submitted successfully')
-            redirect('ng_cdf:bursaries')
+            bursary_application = BursaryApplication.objects.filter(applicant=user.id, bursary=bursary_id).latest('created_at').id
+            return redirect(reverse('ng_cdf:upload-documents', args=[bursary_application]))
         else:
             messages.error(request, f'Error submitting bursary application')
             redirect(reverse('ng_cdf:apply-bursary', args=[bursary_id]))
     if request.method == 'GET':
-        form = BursaryApplicationForm()
-        document_form = ApplicationDocumentForm()
+        form = BursaryApplicationForm(initial={'bursary': bursary_id, 'applicant': user.id})
         bursary = Bursary.objects.get(id=bursary_id)
         context = {
             'form':form,
             'user': user,
             'bursary':bursary,
-            'document_form':document_form
         }
         return render(request, 'ng_cdf/bursary-application.html', context=context)
     return redirect(reverse('ng_cdf:apply-bursary', args=[bursary_id]))
