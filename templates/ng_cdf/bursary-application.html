@@ -44,7 +44,7 @@
                                     <div class="col-lg-6"><label for="name">Email</label> <input class="form-control" name="name" value="{{user.email}}" disabled="true"></div>
                                 </div>
                             </div>
-                            <input class="form-control" hidden = "true" name="applicant" value="{{user.id}}" disabled="true">
+                            <input hidden = "true" name="applicant"  id="applicant" value="{{user.id}}">
                         
                         
                         <div class="form-input">
@@ -58,7 +58,7 @@
                                 <div class="col-lg-6"><label for="name">Bursary ID</label> <input class="form-control" name="b" value="{{bursary.bursary_id}}" disabled="true"></div>
                             <div class="col-lg-6"><label for="name">Organization/ CDF</label> <input class="form-control" name="b" value="{{bursary.ng_cdf.ng_cdf_name}}" disabled="true"></div>
                             </div>
-                            <input class="form-control" hidden = "true" name="bursary" value="{{bursary.id}}" disabled="true">
+                            <input hidden = "true" name="bursary" id="bursary" value="{{bursary.id}}">
                         </div>
                         <div class="form-input">
                             <label for="name">Application</label>
@@ -71,25 +71,7 @@
                         <div class="form-input"><label for="email_address">Insititution Name</label>{{form.institution_name}}</div>
                         <div class="form-input"><label for="preferred_contact_times">Insititution Location</label>{{form.institution_location}}</div>
                         {% comment %} <div class="form-input">{{form.captcha}}</div> {% endcomment %}
-                        <div class="form-input">
-                            <label for="name">Application Documents</label><br>
-                            <label class="text-muted">Upload {{bursary.application_documents}}</label><br>
-                            <!-- Pass the bursary inforamation here-->
-                            <label for="national_id">National ID</label>
-                            <div class="col-lg-6">{{document_form.national_id}}</div>
-                            <label for="name">Mothers ID or female guardian</label>
-                            <div class="col-lg-6">{{document_form.mothers_id}}</div>
-                            <label for="fathers_id">Fathers ID or male guardian</label>
-                            <div class="col-lg-6">{{document_form.fathers_id}}</div>
-                            <label for="institution_transcript">Results transcript</label>
-                            <div class="col-lg-6">{{document_form.institution_transcript}}</div>
-                            <label for="calling_letter">Calling letter</label>
-                            <div class="col-lg-6">{{document_form.calling_letter}}</div>
-                            <label for="fee_structure">Fee structure</label>
-                            <div class="col-lg-6">{{document_form.fee_structure}}</div>
-                            <label for="other">Other</label>
-                            <div class="col-lg-6">{{document_form.other}}</div>
-                        </div>
+                       
                         <div class="form-input"><input class="form-input btn-submit contact-submit" type="submit" formmethod="POST" value="submit"></div>
                     </form>
                 </div>    
