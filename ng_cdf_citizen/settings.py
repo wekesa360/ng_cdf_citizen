@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework.authtoken",
     "ng_cdf_api",
+    "django_crontab",
     "rest_framework",
     "ng_cdf",
     "accounts"
@@ -90,6 +91,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ng_cdf_citizen.wsgi.application"
 
+
+CRONJOBS = [
+     ('0 0 * * *', 'ng_cdf.cron_jobs.check_bursary_deadlines', f'>> {os.path.join(BASE_DIR, "cron.log")}')
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

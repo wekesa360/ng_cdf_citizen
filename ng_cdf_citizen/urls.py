@@ -22,7 +22,7 @@ from accounts import urls as accounts_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include('rest_framework.urls')),
-    path("ng_cdf/", include(ng_cdf_api_urls)),
-    # path("ng_cdf/", include(ng_cdf_urls)),
-    path("accounts/", include(accounts_urls))
+    path("ng_cdf-api/", include((ng_cdf_api_urls, 'ng_cdf_api'), namespace='ng_cdf-apis')),
+    path("", include((ng_cdf_urls, 'ng_cdf'), namespace='ng_cdf')),
+    path("accounts/", include((accounts_urls, 'accounts'), namespace='accounts'))
 ]

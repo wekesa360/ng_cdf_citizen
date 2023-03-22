@@ -29,7 +29,7 @@ def signin_view(request):
                     return redirect('ng_cdf:home')
                 else:
                     messages.info(request, f'You are logged in!')
-                    return redirect('admin:dashboard')
+                    return redirect('ng_cdf:dashboard')
             else:
                 messages.error(request, 'invalid email or password.')
         else:
@@ -96,7 +96,7 @@ def edit_profile_view(request):
         else:
             messages.error(request, 'Unsuccessful. Invalid information.')
     form = PrettyUserCreationForm(instance=request.user)
-    return render(request, 'accounts/edit_profile.html', {'form': form})
+    return render(request, 'accounts/edit-profile.html', {'form': form})
 
 @login_required
 def delete_profile_view(request):
@@ -110,7 +110,7 @@ def delete_profile_view(request):
         user.delete()
         messages.success(request, 'Profile deleted successfully')
         return redirect('nd_cdf:home')
-    return render(request, 'accounts/delete_profile.html')
+    return render(request, 'accounts/delete-profile.html')
 
 @login_required
 def change_image_view(request):
@@ -130,7 +130,7 @@ def change_image_view(request):
         else:
             messages.error(request, 'Unsuccessful. Invalid information.')
     form = ChangeImageForm()
-    return render(request, 'accounts/change_image.html', {'form': form})
+    return render(request, 'accounts/edit-profile.html', {'change-img-form': form})
 
 @login_required
 def change_password_view(request):
