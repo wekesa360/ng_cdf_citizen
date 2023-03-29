@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+import uuid
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import (
@@ -41,8 +42,11 @@ def check_if_admin(user):
     return ng_cdf
 
 def home_view(request):
-    return render(request,'landing-page.html')
-    
+    return render(request,'ng_cdf/index.html')
+
+def about_view(request):
+    return render(request, 'ng_cdf/about.html')
+
 @login_required
 def admin_view(request):
     user_email = request.user.email
@@ -100,7 +104,24 @@ def admin_reports_view(request):
             'reports': citizen_reports
         }
     return render(request, 'admin-account/citizen-reports.html', context=context)
-    
+
+@login_required
+def upload_project_images_view(request, project_id):
+    project = NGCDFProjects.objects.get(id=project_id)
+    if request.method == 'POST':
+        form = ProjectImageForm(request.FILES, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Images saved successfully")
+            return redirect("ng_cdf:projects")
+    form = ProjectImageForm(initial={'project': project})
+    context = {
+        'form': form,
+        'project': project,
+    }
+    return render(request, 'admin-account/project_image_upload.html')
+
+
 @login_required
 def add_project_view(request):
     user_email = request.user.email
@@ -109,7 +130,7 @@ def add_project_view(request):
         if request.method == 'POST':
             form = NGCDFProjectsForm(request.POST)
             image_form = ProjectImageForm(request.POST, request.FILES)
-            if form.is_valid() and image_form.is_valid():
+            if form.is_valid():
                 form.save()
                 project = NGCDFProjects.objects.get(project_name=form.project_name)
                 image_form.project = project.id
@@ -144,6 +165,7 @@ def admin_projects_view(request):
         'projects':projects
     }
     return render(request, 'admin-account/projects.html', context=context)
+
 
 @login_required
 def edit_project_view(request, id):
@@ -238,10 +260,23 @@ def projects_view(request):
             'projects':projects,
             'project_images': project_images
             }
-        return render('ng_cdf/projects.html', context=context)
+        return render(request, 'ng_cdf/projects-view.html', context=context)
     else:
         redirect('nd_cdf:home')
     return redirect ('ng_cdf:projects')
+
+def project_detail_view(request, project_id):
+    if request.method == 'GET':
+        project = NGCDFProjects.objects.get(id=project_id)
+        project_images = ProjectImage.objects.filter(project=project.id)
+        context = {
+            'project':project,
+            'project_images': project_images
+            }
+        return render(request, 'ng_cdf/project-detail.html', context=context)
+    else:
+        redirect('nd_cdf:home')
+    return redirect ('ng_cdf:project-detail')
 
 @login_required
 def admin_bursaries_view(request, status):
@@ -257,7 +292,7 @@ def admin_bursaries_view(request, status):
     return redirect('ng_cdf:bursaries')
 
 
-def bursaries_view(request, status):
+def admin_bursaries_list_view(request, status):
     if request.method == 'GET':
         if status == 'available':
             bursaries = Bursary.objects.filter(available=True)
@@ -266,8 +301,17 @@ def bursaries_view(request, status):
         context = {
             'bursaries':bursaries
         }
-        return render(request, 'bursaries.html', context=context)
-    return redirect('ng_cdf:bursaries')
+        return render(request, 'ng_cdf/bursaries.html', context=context)
+    return redirect('ng_cdf:citizen-bursaries')
+
+def bursaries_view(request):
+    if request.method == 'GET':
+        bursaries = Bursary.objects.filter(available=True)
+        context = {
+            'bursaries':bursaries
+        }
+        return render(request, 'ng_cdf/bursaries.html', context=context)
+    return redirect('ng_cdf:citizen-bursaries')
 
 @login_required
 def upload_bursary_documents_view(request, application_id):
@@ -321,31 +365,37 @@ def apply_bursary_view(request, bursary_id):
 
 @login_required
 def citizen_report_view(request):
-    user = request.user.username
+    user = request.user.email
     user = User.objects.get(email=user)
     if request.method == 'POST':
         form = CitizenReportForm(request.POST)
         image_form = ReportImageForm(request.POST, request.FILES)
-        form.citizen = user 
-        if form.is_valid() and image_form.is_valid():
+        import pdb; pdb.set_trace()
+        if form.is_valid():
             form.save()
             project_name = form.clean_data.get('project_name')
-            report = CitizenReport.objects.get(project_name=project_name)
+            report_cdf = form.clean_data.get('ng_cdf')
+            report = CitizenReport.objects.filter(project_name=project_name, citizen=user.id).filter(ng_cdf=report_cdf).latest('created_at')
             image_form.project = report.id
-            image_form.save()
+            if image_form.is_valid():
+                image_form.save()
+            else:
+                messages.error(request, f'Error uploading images')
+                redirect('ng_cdf:citizen-report')
             messages.success(request, f'Report submitted successfully')
-            redirect('ng_cdf:projects')
+            redirect('ng_cdf:citizen-report')
         else:
             messages.error(request, f'Error submitting report')
             redirect('ng_cdf:citizen-report')
     if request.method == 'GET':
-        form = CitizenReportForm()
+        form = CitizenReportForm(initial={'citizen': user.id})
         image_form = ReportImageForm()
         context = {
             'form':form,
+            'user': user,
             'image_form':image_form
         }
-        return render('ng_cdf/citizen-report.html', context=context)
+        return render(request, 'ng_cdf/project-suggestion.html', context=context)
     return redirect('ng_cdf:citizen-report')
 
 def edit_report_view(request, id):
