@@ -1,0 +1,57 @@
+{% extends 'ng_cdf/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-dark p-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 text-white">Application / Upload Documents</h1>
+                <a href="{% url 'ng_cdf:home' %}">Home</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'ng_cdf:bursary-detail' bursary.id %}">Bursary</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'ng_cdf:apply-bursary' bursary.id %}">Application</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'ng_cdf:upload-documents' application.id %}">Documents</a>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid bg-secondary px-0">
+        <div class="row g-0">
+            <div class="col-lg-6 py-6 px-5">
+                <form method="get|post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-input">
+                        <input hidden = "true" name="application" id="application" value="{{application.id}}">
+                        <label class="my-2 h1" for="name">Application Documents</label><br>
+                        <i class="fa fa-asterisk text-primary px-2"></i>
+                        <label class="my-2 h3">Upload {{bursary.application_documents}}</label><br>
+                        <!-- Pass the bursary inforamation here-->
+                        <label class="my-2" for="national_id">National ID</label>
+                        <div class="col-lg-6">{{document_form.national_id}}</div>
+                        <label class="my-2" for="name">Mothers ID or female guardian</label>
+                        <div class="col-lg-6">{{document_form.mothers_id}}</div>
+                        <label class="my-2" for="fathers_id">Fathers ID or male guardian</label>
+                        <div class="col-lg-6">{{document_form.fathers_id}}</div>
+                        <label class="my-2" for="institution_transcript">Results transcript</label>
+                        <div class="col-lg-6">{{document_form.institution_transcript}}</div>
+                        <label class="my-2" for="calling_letter">Calling letter</label>
+                        <div class="col-lg-6">{{document_form.calling_letter}}</div>
+                        <label class="my-2" for="fee_structure">Fee structure</label>
+                        <div class="col-lg-6">{{document_form.fee_structure}}</div>
+                        <label class="my-2" for="other">Other</label>
+                        <div class="col-lg-6">{{document_form.other}}</div>
+                    </div>
+                    <div class="form-input"><input class="btn btn-primary my-4 py-1" type="submit" formmethod="POST" value="submit"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock content %}

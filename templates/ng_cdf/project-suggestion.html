@@ -1,0 +1,68 @@
+{% extends 'ng_cdf/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-dark p-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 text-white">Project Suggestion & Complains</h1>
+                <a href="{% url 'ng_cdf:home' %}">Home</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'ng_cdf:citizen-report' %}">Project Suggestion & Complains</a>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Project suggestion Form Start -->
+    <div class="bg-secondary p-5">
+        <h2 class="mb-4">Leave a project Suggestion or complain</h2>
+        <form method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <input type="hidden" name="citizen" value="{{user.id}}">
+            <input type="hidden" name="report" value="{{user.id}}">
+            <div class="row g-3">
+                <div class="col-3 col-sm-3">
+                    <label class="my-2">Today's Date</label>
+                    {{form.report_date}}
+                </div>
+                <div class="col-4 col-sm-4">
+                    <label class="my-2">Report Type</label>
+                    {{form.report_type}}
+                </div>
+                <div class="col-4 col-sm-4">
+                </div>
+                <br>
+                <div class="col-7 col-sm-7">
+                    <label class="my-2">Project Name</label>
+                    {{form.project_name}}
+                </div>
+                <div class="col-4 col-sm-4">
+                </div>
+                <div class="col-3 col-sm-3">
+                    <label class="my-2">To CDF</label>
+                    {{form.ng_cdf}}
+                </div>
+                <div class="col-4 col-sm-4">
+                    <label class="my-2">Project Location</label>
+                    {{form.project_location}}
+                </div>
+                <br>
+                <div class="col-7 text">
+                    <label class="my-2">Description</label>
+                    {{form.description}}
+                </div>
+                <div class="col-7 text">
+                    <label class="my-2">Upload Images</label>
+                    {{image_form.image}}
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary py-3" type="submit">Leave Your Suggestion or Complain</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Comment Form End -->
+</div>
+{% endblock content %}

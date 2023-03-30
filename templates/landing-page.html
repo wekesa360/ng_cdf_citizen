@@ -1,22 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <p>homepage</p>
-        <script src="" async defer></script>
-    </body>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NGCDF HOME PAGE</title>
+  <link rel="stylesheet" href="{% static 'css/landing-page.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body style="background-image: url(../../static/img/kk.png);background-size: cover;">
+  <div class="main" >
+  <div class="wrapper">
+    <nav class="ml-5 pl-5">
+      <label for="show-menu" class="menu-icon"><i class="bi bi-list"><p>MENU</p></i></label>
+      <div class="content">
+      <div class="logo"><a class="text-decoration-none" href="#" style="color: #e46870">NG CDF</a></div>
+        <ul class="links pull-right text-decoration-none" >
+          <li ><a class="text-decoration-none" href="#" class="home" >HOME</a></li>
+          <li><a class="text-decoration-none" href="{% url 'accounts:signup' %}">SIGN UP</a></li>
+          <li><a class="text-decoration-none" href="{% url 'accounts:signin' %}">SIGN IN</a></li>
+          <li><a class="text-decoration-none" href="#">ABOUT</a></li>
+          <li><a class="text-decoration-none" href="{% url 'ng_cdf:projects' %}">PROJECTS</a></li>
+          <li><a class="text-decoration-none" href="{% url 'ng_cdf:citizen-bursaries' %}">BURSARIES</a></li>
+          <li><a class="text-decoration-none" href="#">CONTACTS</a></li>
+        </ul>
+      </div></nav></div>
+
+      <br><br><br>
+      <div class="content">
+        <DIV class="TEXT">
+          <br><br><br>
+      <h1>     NG-CDF & <br><span>Bursary</span> <br>Platform</h1><br>
+            <p class="par">The National Government Constituencies Development Fund (NG-CDF)<br>
+                 is established under the NG-CDF Act, 2015 as amended in 2016.<br> The main purpose of the Fund is to address socio-economic<br>
+                  development of the people at the constituency level <br>in order to reduce poverty and enhance regional equity.
+                  </p>
+                </div>
+              </DIV>
+     
+      </form>
+    </nav>
+  </div>
+  </div>
+
+
+</body>
+
 </html>
