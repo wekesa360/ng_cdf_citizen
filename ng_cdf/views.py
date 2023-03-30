@@ -75,11 +75,11 @@ def admin_view(request):
         else:
             bursary_applications = bursaries
         try:
-            ng_cdf_projects = NGCDFProjects.objects.get(ng_cdf=ng_cdf)
+            ng_cdf_projects = NGCDFProjects.objects.filter(ng_cdf=ng_cdf)
         except ObjectDoesNotExist:
             ng_cdf_projects = None
         try:
-            citizen_report = CitizenReport.objects.get(ng_cdf=ng_cdf)
+            citizen_report = CitizenReport.objects.filter(ng_cdf=ng_cdf)
         except ObjectDoesNotExist:
             citizen_report = None
         context = {
@@ -90,7 +90,7 @@ def admin_view(request):
             'citizen_report':citizen_report,
         }
         messages.info(request, f'You are logged in as admin to {ng_cdf.ng_cdf_name}')
-        return render(request, 'admin-account/dashboard.html', context=context)
+        return render(request, 'admin-dashboard/dashboard.html', context=context)
     except ObjectDoesNotExist:
         messages.error(request, f'You are not an admin')
         return redirect('ng_cdf:home')
