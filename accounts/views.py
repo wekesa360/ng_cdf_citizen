@@ -49,7 +49,7 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'Account created successfully')
-            return redirect('nd_cdf:home')
+            return redirect('ng_cdf:home')
         else:
             messages.error(request, 'Unsuccessful registration. Invalid information.')
     form = PrettyUserCreationForm()
@@ -63,7 +63,7 @@ def signout_view(request):
     """
     logout(request)
     messages.info(request, 'Logged out successfully!')
-    return redirect('nd_cdf:home')
+    return redirect('ng_cdf:home')
 
 @login_required
 def profile_view(request, username):
@@ -77,7 +77,7 @@ def profile_view(request, username):
         user = get_user_model().objects.get(username=username)
     except ObjectDoesNotExist:
         messages.error(request, 'User not found')
-        return redirect('nd_cdf:home')
+        return redirect('ng_cdf:home')
     return render(request, 'accounts/profile.html', {'user': user})
 
 @login_required
@@ -109,7 +109,7 @@ def delete_profile_view(request):
         user = request.user
         user.delete()
         messages.success(request, 'Profile deleted successfully')
-        return redirect('nd_cdf:home')
+        return redirect('ng_cdf:home')
     return render(request, 'accounts/delete-profile.html')
 
 @login_required

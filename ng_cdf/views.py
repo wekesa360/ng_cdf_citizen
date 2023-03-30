@@ -41,6 +41,9 @@ def check_if_admin(user):
         ng_cdf = None
     return ng_cdf
 
+def constituencies_view(request):
+    return render(request, 'ng_cdf/constituencies.html')
+
 def home_view(request):
     return render(request,'ng_cdf/index.html')
 
@@ -301,8 +304,8 @@ def admin_bursaries_list_view(request, status):
         context = {
             'bursaries':bursaries
         }
-        return render(request, 'ng_cdf/bursaries.html', context=context)
-    return redirect('ng_cdf:citizen-bursaries')
+        return render(request, 'ng_cdf/bursaries-view.html', context=context)
+    return redirect('ng_cdf:bursaries-list')
 
 def bursaries_view(request):
     if request.method == 'GET':
@@ -310,8 +313,33 @@ def bursaries_view(request):
         context = {
             'bursaries':bursaries
         }
-        return render(request, 'ng_cdf/bursaries.html', context=context)
+        return render(request, 'ng_cdf/bursaries-view.html', context=context)
     return redirect('ng_cdf:citizen-bursaries')
+
+def bursary_detail_view(request, bursary_id):
+    if request.method == 'GET':
+        bursary = Bursary.objects.get(id=bursary_id)
+        context = {
+            'bursary':bursary
+            }
+        return render(request, 'ng_cdf/bursary-detail.html', context=context)
+    else:
+        redirect('nd_cdf:home')
+    return redirect ('ng_cdf:project-detail')
+
+@login_required
+def bursary_applications_view(request):
+    user = request.user.email
+    user = User.objects.get(email=user)
+    applications = BursaryApplication.objects.filter(applicant=user.id)
+    if request.method == 'GET':
+        context = {
+            'applications': applications
+        }
+        return render(request, 'ng_cdf/applications-view.html', context=context)
+    return redirect(reverse('ng_cdf:bursary-applications'))
+
+
 
 @login_required
 def upload_bursary_documents_view(request, application_id):
@@ -324,7 +352,7 @@ def upload_bursary_documents_view(request, application_id):
             form.application = application_id
             form.save()
             messages.success(request, f'Document uploaded successfully')
-            redirect('ng_cdf:bursaries')
+            redirect('ng_cdf:bursaries-list')
         else:
             messages.error(request, f'Error uploading document')
             redirect(reverse('ng_cdf:upload-documents', args=[application_id]))
@@ -335,8 +363,8 @@ def upload_bursary_documents_view(request, application_id):
             'bursary': application.bursary,
             'application': application
         }
-        return render(request, 'ng_cdf/bursary-documents.html', context=context)
-    return redirect(reverse('ng_cdf:upload-documents', args=[application_id]))
+        return render(request, 'ng_cdf/bursary-application-documents.html', context=context)
+    return redirect(reverse('ng_cdf:bursaries-list', args=[application_id]))
 
 @login_required
 def apply_bursary_view(request, bursary_id):
@@ -360,7 +388,7 @@ def apply_bursary_view(request, bursary_id):
             'user': user,
             'bursary':bursary,
         }
-        return render(request, 'ng_cdf/bursary-application.html', context=context)
+        return render(request, 'ng_cdf/bursary-application-form.html', context=context)
     return redirect(reverse('ng_cdf:apply-bursary', args=[bursary_id]))
 
 @login_required
@@ -369,21 +397,21 @@ def citizen_report_view(request):
     user = User.objects.get(email=user)
     if request.method == 'POST':
         form = CitizenReportForm(request.POST)
-        image_form = ReportImageForm(request.POST, request.FILES)
-        import pdb; pdb.set_trace()
         if form.is_valid():
             form.save()
-            project_name = form.clean_data.get('project_name')
-            report_cdf = form.clean_data.get('ng_cdf')
+            project_name = form.cleaned_data.get('project_name')
+            report_cdf = form.cleaned_data.get('ng_cdf')
             report = CitizenReport.objects.filter(project_name=project_name, citizen=user.id).filter(ng_cdf=report_cdf).latest('created_at')
-            image_form.project = report.id
+            image_form = ReportImageForm(request.POST, request.FILES)
+
             if image_form.is_valid():
+                image_form.cleaned_data['report'] = report.id
                 image_form.save()
+                messages.success(request, f'Report submitted successfully')
+                return redirect('ng_cdf:citizen-report')
             else:
                 messages.error(request, f'Error uploading images')
-                redirect('ng_cdf:citizen-report')
-            messages.success(request, f'Report submitted successfully')
-            redirect('ng_cdf:citizen-report')
+                return redirect('ng_cdf:citizen-report')
         else:
             messages.error(request, f'Error submitting report')
             redirect('ng_cdf:citizen-report')
@@ -418,10 +446,10 @@ def edit_report_view(request, id):
     return redirect('ng_cdf:edit_report')
 
 @login_required
-def delete_report_view(request, id):
-    user_email = request.user.username
+def delete_application_view(request, id):
+    user_email = request.user.email
     user = User.objects.get(email=user_email)
-    report = CitizenReport.objects.get(id=id, citizen=user)
-    report.delete()
-    return redirect('ng_cdf:dashboard')
+    application = BursaryApplication.objects.get(id=id, applicant=user)
+    application.delete()
+    return redirect('ng_cdf:bursary-applications')
 

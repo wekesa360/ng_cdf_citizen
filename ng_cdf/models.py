@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 import uuid
 from accounts.models import Location, County
 from django.core.validators import FileExtensionValidator
@@ -12,8 +13,7 @@ class NGCDF(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.ng_cdf_id
-    
+        return self.ng_cdf_name
     class Meta:
         db_table = 'ng_cdfs'
 
@@ -53,6 +53,12 @@ class NGCDFProjects(models.Model):
     def __str__(self) -> str:
         return self.project_name
     
+    def get_absolute_url(self):
+        return reverse("ng_cdf:project-detail", kwargs={"project_id": self.pk})
+    
+    def get_images(self):
+        return ProjectImage.objects.filter(project=self)
+    
     class Meta:
         db_table = 'ng_cdf_projects'
 
@@ -84,6 +90,9 @@ class Bursary(models.Model):
     def __str__(self) -> str:
         return self.bursary_name
     
+    def get_absolute_url(self):
+        return reverse("ng_cdf:bursary-detail", kwargs={"bursary_id": self.pk})
+    
     class Meta:
         db_table = 'bursaries'
 
@@ -110,6 +119,8 @@ class BursaryApplication(models.Model):
     def __str__(self) -> str:
         return self.application_uid
     
+    def delete_url(self):
+        return reverse("ng_cdf:delete-application", kwargs={"id": self.pk})
 
     class Meta:
         db_table = 'bursary_applications'
