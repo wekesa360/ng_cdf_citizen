@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 import uuid
@@ -44,27 +46,30 @@ def check_if_admin(user):
 def constituencies_view(request):
     return render(request, 'ng_cdf/constituencies.html')
 
+def faqs_view(request):
+    return render(request, 'ng_cdf/faqs.html')
+
 def home_view(request):
     return render(request,'ng_cdf/index.html')
 
 def about_view(request):
     return render(request, 'ng_cdf/about.html')
 
+@csrf_exempt
 @login_required
 def admin_view(request):
     user_email = request.user.email
-    print(user_email)
     try:
         ng_cdf = check_if_admin(user_email)
         user = User.objects.get(email=user_email)
         try:
             bursaries = Bursary.objects.filter(ng_cdf=ng_cdf)
+            bursary_applications = []
         except ObjectDoesNotExist:
             bursaries = None
             bursary_applications = []
         if bursaries.count() > 1:
             if bursaries != None:
-                print(bursaries.id)
                 for bursary in bursaries:
                     try:
                         bursary_applications.append(BursaryApplication.objects.get(bursary=bursary))
@@ -95,19 +100,34 @@ def admin_view(request):
         messages.error(request, f'You are not an admin')
         return redirect('ng_cdf:home')
 
+@csrf_exempt
 @login_required
 def admin_reports_view(request):
     user_email = request.user.email
     ng_cdf = check_if_admin(user_email)
     if ng_cdf != None:
-        citizen_reports = CitizenReport.objects.filter(ng_cdf=ng_cdf)
+        reports = CitizenReport.objects.filter(ng_cdf=ng_cdf)
+        
     else:
-        citizen_reports = None 
+        reports = None 
     context = {
-            'reports': citizen_reports
+            'reports': reports
         }
-    return render(request, 'admin-account/citizen-reports.html', context=context)
+    return render(request, 'admin-dashboard/reports.html', context=context)
 
+@csrf_exempt
+@login_required
+def admin_report_details_view(request, report_id):
+    report = CitizenReport.objects.get(id=report_id)
+    images = ReportImage.objects.filter(report=report)
+    context = {
+        'report': report,
+        'images': images,
+    }
+    return render(request, 'admin-dashboard/report-detail.html', context=context)
+
+
+@csrf_exempt
 @login_required
 def upload_project_images_view(request, project_id):
     project = NGCDFProjects.objects.get(id=project_id)
@@ -125,6 +145,7 @@ def upload_project_images_view(request, project_id):
     return render(request, 'admin-account/project_image_upload.html')
 
 
+@csrf_exempt
 @login_required
 def add_project_view(request):
     user_email = request.user.email
@@ -150,12 +171,13 @@ def add_project_view(request):
                 'image_form': image_form,
                 'form':form
             }
-            return render(request, 'admin-account/projects-form.html', context=context)
+            return render(request, 'admin-dashboard/add-projects.html', context=context)
     except ObjectDoesNotExist:
         messages.error(request, 'Not an admin')
         return redirect('ng_cdf:projects')
     return redirect('ng_cdf:projects')
 
+@csrf_exempt
 @login_required
 def admin_projects_view(request):
     user_email = request.user.email
@@ -167,35 +189,39 @@ def admin_projects_view(request):
     context = {
         'projects':projects
     }
-    return render(request, 'admin-account/projects.html', context=context)
+    return render(request, 'admin-dashboard/projects.html', context=context)
 
 
+@csrf_exempt
 @login_required
-def edit_project_view(request, id):
-    project = NGCDFProjects.objects.get(id=id)
+def edit_project_view(request, project_id):
+    project = NGCDFProjects.objects.get(id=project_id)
     if request.method == 'POST':
         form = NGCDFProjectsForm(request.POST, instance=project)
+        import pdb; pdb.set_trace()
         if form.is_valid():
             form.save()
             messages.success(request, f'Project updated successfully')
             redirect('ng_cdf:dashboard')
         else:
             messages.error(request, f'Error updating project')
-            redirect('ng_cdf:edit-project')
+            return redirect('ng_cdf:edit-project', project_id=project_id)
     if request.method == 'GET':
         form = NGCDFProjectsForm(instance=project)
         context = {
             'form':form
         }
-        return render('admin-account/projects-form-edit.html', context=context)
-    return redirect('ng_cdf:edit-project')
+        return render(request,'admin-dashboard/edit-project.html', context=context)
+    return redirect('ng_cdf:edit-project', project_id=project_id)
 
+@csrf_exempt
 @login_required
-def delete_project_view(request, id):
-    project = NGCDFProjects.objects.get(id=id)
+def delete_project_view(request, project_id):
+    project = NGCDFProjects.objects.get(id=project_id)
     project.delete()
     return redirect('ng_cdf:dashboard')
 
+@csrf_exempt
 @login_required
 def add_bursary_view(request):
     user_email = request.user.email
@@ -215,10 +241,11 @@ def add_bursary_view(request):
             'form':form,
             'ng_cdf':ng_cdf
         }
-        return render(request, 'admin-account/bursaries-form.html', context=context)
+        return render(request, 'admin-dashboard/add-bursary.html', context=context)
     return redirect('ng_cdf:add-bursary')
 
 
+@csrf_exempt
 @login_required
 def edit_bursary_view(request, bursary_id):
     bursary = Bursary.objects.get(id=bursary_id)
@@ -237,23 +264,23 @@ def edit_bursary_view(request, bursary_id):
             else:
                 messages.error(request, f'Error updating bursary')
                 redirect(reverse('ng_cdf:edit-bursary', args=[bursary_id]))
-        if request.method == 'GET':
-            form = BursaryForm(instance=bursary, initial={'ng_cdf': ng_cdf})
-            context = {
-                'form':form,
-                'ng_cdf': ng_cdf
-            }
-            return render(request, 'admin-account/bursaries-form-edit.html', context=context)
+        form = BursaryForm(instance=bursary, initial={'ng_cdf': ng_cdf})
+        context = {
+            'form':form,
+            'ng_cdf': ng_cdf
+        }
+        return render(request, 'admin-dashboard/edit-bursary.html', context=context)
     return redirect(reverse('ng_cdf:edit-bursary', args=[bursary_id]))
 
+@csrf_exempt
 @login_required
-def delete_bursary_view(request, id):
-    user = request.user.username
+def delete_bursary_view(request, bursary_id):
+    user = request.user.email
     ng_cdf = check_if_admin(user)
     if ng_cdf is not None:
-        bursary = Bursary.objects.get(id=id, ng_cdf=ng_cdf)
+        bursary = Bursary.objects.get(id=bursary_id, ng_cdf=ng_cdf)
         bursary.delete()
-        return redirect('ng_cdf:dashboard')
+        return redirect('ng_cdf:bursaries')
 
 def projects_view(request):
     if request.method == 'GET':
@@ -281,31 +308,17 @@ def project_detail_view(request, project_id):
         redirect('nd_cdf:home')
     return redirect ('ng_cdf:project-detail')
 
+@csrf_exempt
 @login_required
-def admin_bursaries_view(request, status):
+def admin_bursaries_view(request):
     if request.method == 'GET':
-        if status == 'available':
-            bursaries = Bursary.objects.filter(available=True)
-        elif status == 'closed':
-            bursaries = Bursary.objects.filter(available=False)
+        bursaries = Bursary.objects.filter(ng_cdf=check_if_admin(request.user.email))
         context = {
             'bursaries':bursaries
         }
-        return render(request, 'admin-account/bursaries.html', context=context)
+        return render(request, 'admin-dashboard/bursaries.html', context=context)
     return redirect('ng_cdf:bursaries')
 
-
-def admin_bursaries_list_view(request, status):
-    if request.method == 'GET':
-        if status == 'available':
-            bursaries = Bursary.objects.filter(available=True)
-        elif status == 'closed':
-            bursaries = Bursary.objects.filter(available=False)
-        context = {
-            'bursaries':bursaries
-        }
-        return render(request, 'ng_cdf/bursaries-view.html', context=context)
-    return redirect('ng_cdf:bursaries-list')
 
 def bursaries_view(request):
     if request.method == 'GET':
@@ -316,17 +329,8 @@ def bursaries_view(request):
         return render(request, 'ng_cdf/bursaries-view.html', context=context)
     return redirect('ng_cdf:citizen-bursaries')
 
-def bursary_detail_view(request, bursary_id):
-    if request.method == 'GET':
-        bursary = Bursary.objects.get(id=bursary_id)
-        context = {
-            'bursary':bursary
-            }
-        return render(request, 'ng_cdf/bursary-detail.html', context=context)
-    else:
-        redirect('nd_cdf:home')
-    return redirect ('ng_cdf:project-detail')
 
+@csrf_exempt
 @login_required
 def bursary_applications_view(request):
     user = request.user.email
@@ -339,8 +343,45 @@ def bursary_applications_view(request):
         return render(request, 'ng_cdf/applications-view.html', context=context)
     return redirect(reverse('ng_cdf:bursary-applications'))
 
+def update_application_status(request, id):
+    application = get_object_or_404(BursaryApplication, pk=id)
+    
+    new_status = request.POST.get('status')
+    if new_status not in dict(BursaryApplication.CHOICES_STATUS).keys():
+        raise ValueError('Invalid status')
+    
+    application.update_application_status(new_status)
+    
+    return redirect('ng_cdf:admin-bursary-applications')
+
+@csrf_exempt
+@login_required
+def view_application_view(request, application_id):
+    application = BursaryApplication.objects.get(id=application_id)
+    application_documents = ApplicationDocument.objects.filter(application=application.id)
+    if request.method == 'GET':
+        context = {
+            'application': application,
+            'application_documents': application_documents
+        }
+        return render(request, 'admin-dashboard/view-application.html', context=context)
+    return redirect(reverse('ng_cdf:view-applications', args=[application_id]))
+
+@csrf_exempt
+@login_required
+def admin_bursary_applications_view(request):
+    user = request.user.email
+    user = User.objects.get(email=user)
+    applications = BursaryApplication.objects.filter(applicant=user.id)
+    if request.method == 'GET':
+        context = {
+            'applications': applications
+        }
+        return render(request, 'admin-dashboard/bursary-applications.html', context=context)
+    return redirect(reverse('ng_cdf:bursary-applications'))
 
 
+@csrf_exempt
 @login_required
 def upload_bursary_documents_view(request, application_id):
     user = request.user.email
@@ -364,8 +405,9 @@ def upload_bursary_documents_view(request, application_id):
             'application': application
         }
         return render(request, 'ng_cdf/bursary-application-documents.html', context=context)
-    return redirect(reverse('ng_cdf:bursaries-list', args=[application_id]))
+    return redirect('ng_cdf:bursaries-list')
 
+@csrf_exempt
 @login_required
 def apply_bursary_view(request, bursary_id):
     user = request.user.email
@@ -391,6 +433,7 @@ def apply_bursary_view(request, bursary_id):
         return render(request, 'ng_cdf/bursary-application-form.html', context=context)
     return redirect(reverse('ng_cdf:apply-bursary', args=[bursary_id]))
 
+@csrf_exempt
 @login_required
 def citizen_report_view(request):
     user = request.user.email
@@ -445,6 +488,7 @@ def edit_report_view(request, id):
         return render('ng_cdf/edit_report.html', context=context)
     return redirect('ng_cdf:edit_report')
 
+@csrf_exempt
 @login_required
 def delete_application_view(request, id):
     user_email = request.user.email
@@ -453,3 +497,179 @@ def delete_application_view(request, id):
     application.delete()
     return redirect('ng_cdf:bursary-applications')
 
+
+
+def check_if_admin(user):
+    admin = User.objects.get(email=user)
+    try:
+        check_admin = NGCDFAdmin.objects.get(administrator=admin)
+        ng_cdf = check_admin.ng_cdf
+        print(ng_cdf.id)
+    except ObjectDoesNotExist:
+        ng_cdf = None
+    return ng_cdf
+
+@csrf_exempt
+@login_required
+def upload_project_images_view(request, project_id):
+    project = NGCDFProjects.objects.get(id=project_id)
+    if request.method == 'POST':
+        form = ProjectImageForm(request.FILES, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Images saved successfully")
+            return redirect("ng_cdf:projects")
+    form = ProjectImageForm(initial={'project': project})
+    context = {
+        'form': form,
+        'project': project,
+    }
+    return render(request, 'admin-account/project_image_upload.html')
+
+@csrf_exempt
+@login_required
+def admin_bursary_detail_view(request, bursary_id):
+    """view a single bursary"""
+    bursary = Bursary.objects.get(id=bursary_id)
+    context = {
+        'bursary': bursary
+    }
+    return render(request, 'admin-dashboard/bursary-detail.html', context=context)
+
+@csrf_exempt
+@login_required
+def change_availability_view(request, bursary_id):
+    """change availability of a bursary"""
+    bursary = Bursary.objects.get(id=bursary_id)
+    if bursary.available:
+        bursary.available = False
+        bursary.save()
+        messages.success(request, f'Bursary is now unavailable for application')
+        return redirect(reverse('ng_cdf:admin-bursary-detail', kwargs={'bursary_id': bursary.id}))
+    else:
+        bursary.available = True
+        bursary.save()
+        messages.success(request, f'Bursary is now available for application')
+        return redirect(reverse('ng_cdf:admin-bursary-detail', kwargs={'bursary_id': bursary.id}))
+
+@csrf_exempt
+@login_required
+def add_bursary_view(request):
+    user_email = request.user.email
+    ng_cdf = check_if_admin(user_email)
+    if request.method == 'POST':
+        form = BursaryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Bursary added successfully')
+            redirect('ng_cdf:add-bursary')
+        else:
+            messages.error(request, f'Error adding bursary')
+            redirect('ng_cdf:add-bursary')
+    if request.method == 'GET':
+        form = BursaryForm(initial={'ng_cdf': ng_cdf})
+        context = {
+            'form':form,
+            'ng_cdf':ng_cdf
+        }
+        return render(request, 'admin-dashboard/add-bursary.html', context=context)
+    return redirect('ng_cdf:add-bursary')
+
+@csrf_exempt
+@login_required
+def delete_bursary_view(request, bursary_id):
+    user = request.user.email
+    ng_cdf = check_if_admin(user)
+    if ng_cdf is not None:
+        bursary = Bursary.objects.get(id=bursary_id, ng_cdf=ng_cdf)
+        bursary.delete()
+        return redirect('ng_cdf:bursaries')
+
+def projects_view(request):
+    if request.method == 'GET':
+        projects = NGCDFProjects.objects.all()
+        project_images = ProjectImage.objects.all()
+        context = {
+            'projects':projects,
+            'project_images': project_images
+            }
+        return render(request, 'ng_cdf/projects-view.html', context=context)
+    else:
+        redirect('nd_cdf:home')
+    return redirect ('ng_cdf:projects')
+
+@csrf_exempt
+@login_required
+def admin_project_detail_view(request, project_id):
+    if request.method == 'GET':
+        project = NGCDFProjects.objects.get(id=project_id)
+        project_images = ProjectImage.objects.filter(project=project.id)
+        context = {
+            'project':project,
+            'project_images': project_images
+            }
+        return render(request, 'admin-dashboard/project-detail.html', context=context)
+    else:
+        redirect('nd_cdf:home')
+    return redirect ('ng_cdf:admin-project-detail')
+
+@csrf_exempt
+@login_required
+def admin_bursaries_view(request):
+    if request.method == 'GET':
+        bursaries = Bursary.objects.filter(ng_cdf=check_if_admin(request.user.email))
+        context = {
+            'bursaries':bursaries
+        }
+        return render(request, 'admin-dashboard/bursaries.html', context=context)
+    return redirect('ng_cdf:bursaries')
+
+
+def admin_bursaries_list_view(request, status):
+    if request.method == 'GET':
+        if status == 'available':
+            bursaries = Bursary.objects.filter(available=True)
+        elif status == 'closed':
+            bursaries = Bursary.objects.filter(available=False)
+        context = {
+            'bursaries':bursaries
+        }
+        return render(request, 'ng_cdf/bursaries-view.html', context=context)
+    return redirect('ng_cdf:bursaries-list')
+
+def bursaries_view(request):
+    if request.method == 'GET':
+        bursaries = Bursary.objects.filter(available=True)
+        context = {
+            'bursaries':bursaries
+        }
+        return render(request, 'ng_cdf/bursaries-view.html', context=context)
+    return redirect('ng_cdf:citizen-bursaries')
+
+def bursary_detail_view(request, bursary_id):
+    if request.method == 'GET':
+        bursary = Bursary.objects.get(id=bursary_id)
+        context = {
+            'bursary':bursary
+            }
+        return render(request, 'ng_cdf/bursary-detail.html', context=context)
+    else:
+        redirect('nd_cdf:home')
+    return redirect ('ng_cdf:project-detail')
+
+@csrf_exempt
+@login_required
+def admin_citizen_reports_view(request):
+    """admin reports view"""
+    admin = request.user.email
+    ng_cdf = NGCDF.objects.get(email=admin)
+    if request.method == 'GET':
+        reports = CitizenReport.objects.filter(ng_cdf=ng_cdf.id)
+        context = {
+            'reports': reports
+        }
+        return render(request, 'admin-dashboard/reports.html', context=context)
+    return redirect('ng_cdf:admin-reports')
+
+
+=IFERROR(IF(COUNTIF(MAMANGINA!B:B,A2),"MAMANGINA",IF(COUNTIF(TAIFA!B:B,A2),"TAIFA",IF(COUNTIF(BARRET!B:B,A2),"BARRET",IF(COUNTIF(UGANDA!B:B,A2),"UGANDA",IF(COUNTIF(OLDHALL!B:B,A2),"OLDHALL",IF(COUNTIF(NAIROBI!B:B,A2),"NAIROBI",IF(COUNTIF(ABERDARES!B:B,A2),"ABERDARES",IF(COUNTIF(ARGENTINA!B:B,A2),"ARGENTINA",IF(COUNTIF(MOMBASA!B:B,A2),"MOMBASA",IF(COUNTIF(AMBOSELI!B:B,A2),"AMBOSELI",IF(COUNTIF(MARINGO!B:B,A2),"MARINGO",IF(COUNTIF(RUWENZORI!B:B,A2),"RUWENZORI",IF(COUNTIF(MT ELGON!B:B,A2),"MT ELGON",IF(COUNTIF(HOLLYWOOD!B:B,A2),"HOLLYWOOD",IF(COUNTIF(RIVERVIEW!B:B,A2),"RIVERVIEW",IF(COUNTIF(MT KENYA!B:B,A2),"MT KENYA",IF(COUNTIF(THORNTON!B:B,A2),"THORNTON",IF(COUNTIF(ELDORET!B:B,A2),"ELDORET",IF(COUNTIF(RIVERSIDE!B:B,A2),"RIVERSIDE",IF(COUNTIF(MT KILIMANJARO!B:B,A2),"MT KILIMANJARO",IF(COUNTIF(TSAVO!B:B,A2),"TSAVO",IF(COUNTIF(MAU HILLS!B:B,A2),"MAU HILLS",IF(COUNTIF(LAKE TURKANA!B:B,A2),"LAKE TURKANA",IF(COUNTIF(LAKE NAIVASHA!B:B,A2),"LAKE NAIVASHA",IF(COUNTIF(R. TANA!B:B,A2),"R. TANA",IF(COUNTIF(LAKE VICTORIA!B:B,A2),"LAKE VICTORIA",IF(COUNTIF(LAKE BOGORIA!B:B,A2),"LAKE BOGORIA",IF(COUNTIF(L. ELEMENTAITA!B:B,A2),"L. ELEMENTAITA",IF(COUNTIF(MARA!B:B,A2),"MARA","OTHER")))))))))))))))))))))))))),"OTHER"))))

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+
 from django.contrib import messages
 from .forms import PrettyAuthenticationForm, PrettyUserCreationForm, ChangeImageForm, ChangePasswordForm
 from django.contrib.auth import login, authenticate, logout
@@ -7,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from ng_cdf.views import check_if_admin
 
+@csrf_exempt
 def signin_view(request):
     """_summary_
 
@@ -37,6 +40,7 @@ def signin_view(request):
     form = PrettyAuthenticationForm()
     return render(request, 'accounts/signin.html', {'form': form})
 
+@csrf_exempt
 def signup_view(request):
     """_summary_
 
@@ -55,6 +59,7 @@ def signup_view(request):
     form = PrettyUserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
+@csrf_exempt
 def signout_view(request):
     """_summary_
 
@@ -65,6 +70,7 @@ def signout_view(request):
     messages.info(request, 'Logged out successfully!')
     return redirect('ng_cdf:home')
 
+@csrf_exempt
 @login_required
 def profile_view(request, username):
     """_summary_
@@ -80,6 +86,7 @@ def profile_view(request, username):
         return redirect('ng_cdf:home')
     return render(request, 'accounts/profile.html', {'user': user})
 
+@csrf_exempt
 @login_required
 def edit_profile_view(request):
     """_summary_
@@ -92,12 +99,13 @@ def edit_profile_view(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully')
-            return redirect('accounts:profile', request.user.username)
+            return redirect('accounts:profile_edit', request.user.username)
         else:
             messages.error(request, 'Unsuccessful. Invalid information.')
     form = PrettyUserCreationForm(instance=request.user)
-    return render(request, 'accounts/edit-profile.html', {'form': form})
+    return render(request, 'accounts/edit-profile.html', {'form': form, 'user':request.user})
 
+@csrf_exempt
 @login_required
 def delete_profile_view(request):
     """_summary_
@@ -112,6 +120,7 @@ def delete_profile_view(request):
         return redirect('ng_cdf:home')
     return render(request, 'accounts/delete-profile.html')
 
+@csrf_exempt
 @login_required
 def change_image_view(request):
     """_summary_
@@ -132,6 +141,7 @@ def change_image_view(request):
     form = ChangeImageForm()
     return render(request, 'accounts/edit-profile.html', {'change-img-form': form})
 
+@csrf_exempt
 @login_required
 def change_password_view(request):
     """_summary_

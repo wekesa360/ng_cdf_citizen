@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
+
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from accounts.utils import get_authenticate_user, create_user_account
