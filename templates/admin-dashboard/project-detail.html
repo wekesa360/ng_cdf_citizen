@@ -1,0 +1,55 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+	<div class="report-container">
+		<div class="report-header">
+			<h3 class="mb-4">{{project.project_name}}</h3>
+
+		</div>
+		<!-- Detail Start -->
+		<div class="container">
+			<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-inner">
+				
+				{% for project_image in project_images %}
+					<div class="carousel-item">
+						<img src="{{project_image.image.url}}" class="d-block w-100" alt="{{project_image.project.project_name}}">
+					</div> 
+				{% endfor %}
+					
+				
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			  </button>
+			</div>
+		  </div>
+		<div class="mb-5 mt-5">
+			<div>
+				<ul>
+					<li><b>Project ID:  </b>{{project.project_id}}</li>
+					<li><b>Project Status: </b>{{project.status}}</li>
+					<li><b>CDF: </b>{{project.ng_cdf.ng_cdf_name}}</li>
+					<li><b>Project Location: </b>{{project.location}}</li>
+					<li><b>Writeup Document: </b>{{project.writeup_document}}</li>
+				</ul>
+			</div>
+			<b>Project Description</b><br>
+			<p>{{project.description}}</p>
+		</div>
+		<!--  Detail End -->
+
+		
+	</div>
+</div>
+{% endblock content %}
+	
+		
+	

@@ -1,0 +1,94 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+{% block content%}
+<div class="main">
+	<div class="box-container">
+
+		<div class="box box1">
+			<div class="text">
+				<h2 class="topic-heading"></h2>
+				<h2 class="topic">Citizen Project Suggestions</h2>
+			</div>
+			<span class="text-white"><i class="fa fa-paper-plane fa-3x"></i></span>
+
+		</div>
+
+		<div class="box box2">
+			<div class="text">
+				<h2 class="topic-heading"></h2>
+				<h2 class="topic">Completed Projects</h2>
+			</div>
+
+			<span class="text-white"><i class="fas fa-rocket fa-3x"></i></span>
+		</div>
+
+		<div class="box box3">
+			<div class="text">
+				<h2 class="topic-heading"></h2>
+				<h2 class="topic">Bursary <br> Applications</h2>
+			</div>
+
+			<span class="text-white"><i class="fa fa-file-contract fa-3x"></i></span>
+		</div>
+
+		<div class="box box4">
+			<div class="text">
+				<h2 class="topic-heading">
+				{% if citizen_report.type == 'complain' %}
+					{{citizen_report.complains|length}}
+				{% endif %}
+					</h2>
+				<h2 class="topic">Citizen Project Complains</h2>
+			</div>
+
+			<span class="text-white"><i class="fa fa-exclamation-circle fa-3x"></i></span>
+		</div>
+	</div>
+
+	<div class="report-container">
+		<div class="report-header">
+			<h1 class="recent-Articles">Bursary Applications</h1>
+			<a class="text-decoration-none text-dark" href="{% url 'ng_cdf:bursaries' %}"><button class="view">View All</button></a>
+		</div>
+
+		<div class="container">
+			<div class="row mt-5 pt-xxl-2">
+				<div class="col-md-12">
+					<table class="table table-striped table-borderless table-responsive">
+						<thead>
+							<tr class="font-weight-bold">
+								<th></th>
+								<th><h5>CDF</h5></th>
+								<th><h5>Bursary Name</h5></th>
+								<th><h5>Status</h5></th>
+								{% comment %} <th><h5>Financial Year</h5></th> {% endcomment %}
+								<th><h5>Action</h5></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for bursary in bursaries %}
+							<tr>
+								<td>{{loop.index}}</td>
+								<td><span class="">{{bursary.ng_cdf.ng_cdf_name}}</span></td>
+								<td scope="row">
+									<a class="download-title" href="{{bursary.get_admin_absolute_url}}">{{bursary.bursary_name}}</a>
+									<span class="d-block small">Deadline for applicaiton: {{bursary.deadline_of_application}}</span>
+								</td>
+								{% if bursary.available %}
+								<td><span class="btn text-white btn-success btn-sm">application open</span></td>
+								{% else %}
+								<td><span class="btn text-white btn-primary btn-sm">application closed</span></td>
+								{% endif %}
+								<td><a class="view-prjct" href="{{bursary.get_admin_absolute_url}}">View</a></td>
+							</tr>
+							{% endfor %}  
+						</tbody>
+					</table>
+				</div>  
+			</div>
+		</div>
+		
+	</div>
+{%endblock content%}
+		
+			

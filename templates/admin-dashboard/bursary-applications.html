@@ -1,0 +1,63 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+	<div class="report-container">
+		<div class="report-header">
+			<h1 class="recent-Articles">Bursary Applications</h1>
+		</div>
+		<div class="container">
+			<div class="row mt-5 mb-5 pt-xxl-2">
+				<div class="col-md-12">
+					<table class="table table-striped table-borderless table-responsive">
+						<thead>
+							<tr class="font-weight-bold">
+								<th></th>
+								<th><h5>Bursary Name</h5></th>
+								<th><h5>Status</h5></th>
+								{% comment %} <th><h5>Financial Year</h5></th> {% endcomment %}
+								<th><h5>Action</h5></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for application in applications %}
+							<tr>
+								<td>{{loop.index}}</td>
+								<td scope="row">
+									<a class="download-title" href="{{application.get_absolute_url}}">{{application.bursary.bursary_name}}</a>
+									<span class="d-block small">Date of applicaiton: {{application.application_date}}</span>
+								</td>
+								{% if application.status == "shortlisted" %}
+								<td><span class="btn text-white btn-info btn-sm">shortlisted</span></td>
+								{% elif application.status == "interview" %}
+								<td><span class="btn text-white btn-info btn-sm">shortlisted</span></td>
+								{% elif application.status == "declined" %}
+								<td><span class="btn text-white btn-danger btn-sm">declined</span></td>
+								{% elif application.status == "pending" %}
+								<td><span class="btn text-white btn-warning btn-sm">pending</span></td>
+								{% elif application.status == "accepted" %}
+								<td><span class="btn text-white btn-success btn-sm">accepted</span></td>
+								{% endif %}
+								<td><form method="post" action="{% url 'ng_cdf:update-application-status' id=application.pk %}">
+									{% csrf_token %}
+									<select name="status">
+									  {% for value, label in application.CHOICES_STATUS %}
+										<option value="{{ value }}" {% if value == application.status %}selected{% endif %}>{{ label }}</option>
+									  {% endfor %}
+									</select>
+									<button type="submit" class="btn-success">Update status</button>
+								  </form> | <a class="view-prjct" href="{% url 'ng_cdf:view-application' application.id %}">View</a></td>
+							</tr>
+							{% endfor %}  
+						</tbody>
+					</table>
+				</div>   
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+	
+		
+	

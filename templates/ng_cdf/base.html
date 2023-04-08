@@ -29,14 +29,14 @@
     <!-- Template Stylesheet -->
     <link href=" {% static 'css/style.css' %} " rel="stylesheet">
 </head>
-
+<body>
 <div>
     <!-- Topbar Start -->
     <div class="container-fluid bg-secondary ps-5 pe-0 d-none d-lg-block">
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-body py-2 pe-3 border-end" href=""><small>FAQs</small></a>
+                    <a class="text-body py-2 pe-3 border-end" href="{% url 'ng_cdf:faqs' %}"><small>FAQs</small></a>
                     <a class="text-body py-2 px-3 border-end" href="{% url 'ng_cdf:dashboard' %}"><small>Admin</small></a>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 me-n3">
-                <a href="{% url 'ng_cdf:home' %}" class="nav-item nav-link active">Home</a>
+                <a href="{% url 'ng_cdf:home' %}" class="nav-item nav-link">Home</a>
                 <a href="{% url 'ng_cdf:about' %}" class="nav-item nav-link">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Projects</a>
