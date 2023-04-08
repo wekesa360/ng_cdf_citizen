@@ -65,7 +65,7 @@ class BursaryForm(forms.ModelForm):
             'bursary_id': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_type': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'deadline_of_application': forms.DateInput(attrs={'class': 'form-control'}),
+            'deadline_of_application': forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
     
