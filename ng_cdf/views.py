@@ -501,36 +501,6 @@ def delete_application_view(request, id):
     application.delete()
     return redirect('ng_cdf:bursary-applications')
 
-
-
-def check_if_admin(user):
-    admin = User.objects.get(email=user)
-    try:
-        check_admin = NGCDFAdmin.objects.get(administrator=admin)
-        ng_cdf = check_admin.ng_cdf
-        print(ng_cdf.id)
-    except ObjectDoesNotExist:
-        ng_cdf = None
-    return ng_cdf
-
-
-@login_required
-def upload_project_images_view(request, project_id):
-    project = NGCDFProjects.objects.get(id=project_id)
-    if request.method == 'POST':
-        form = ProjectImageForm(request.FILES, request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Images saved successfully")
-            return redirect("ng_cdf:projects")
-    form = ProjectImageForm(initial={'project': project})
-    context = {
-        'form': form,
-        'project': project,
-    }
-    return render(request, 'admin-account/project_image_upload.html')
-
-
 @login_required
 def admin_bursary_detail_view(request, bursary_id):
     """view a single bursary"""
@@ -556,53 +526,6 @@ def change_availability_view(request, bursary_id):
         messages.success(request, f'Bursary is now available for application')
         return redirect(reverse('ng_cdf:admin-bursary-detail', kwargs={'bursary_id': bursary.id}))
 
-
-@login_required
-def add_bursary_view(request):
-    user_email = request.user.email
-    ng_cdf = check_if_admin(user_email)
-    if request.method == 'POST':
-        form = BursaryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Bursary added successfully')
-            redirect('ng_cdf:add-bursary')
-        else:
-            messages.error(request, f'Error adding bursary')
-            redirect('ng_cdf:add-bursary')
-    if request.method == 'GET':
-        form = BursaryForm(initial={'ng_cdf': ng_cdf})
-        context = {
-            'form':form,
-            'ng_cdf':ng_cdf
-        }
-        return render(request, 'admin-dashboard/add-bursary.html', context=context)
-    return redirect('ng_cdf:add-bursary')
-
-
-@login_required
-def delete_bursary_view(request, bursary_id):
-    user = request.user.email
-    ng_cdf = check_if_admin(user)
-    if ng_cdf is not None:
-        bursary = Bursary.objects.get(id=bursary_id, ng_cdf=ng_cdf)
-        bursary.delete()
-        return redirect('ng_cdf:bursaries')
-
-def projects_view(request):
-    if request.method == 'GET':
-        projects = NGCDFProjects.objects.all()
-        project_images = ProjectImage.objects.all()
-        context = {
-            'projects':projects,
-            'project_images': project_images
-            }
-        return render(request, 'ng_cdf/projects-view.html', context=context)
-    else:
-        redirect('nd_cdf:home')
-    return redirect ('ng_cdf:projects')
-
-
 @login_required
 def admin_project_detail_view(request, project_id):
     if request.method == 'GET':
@@ -617,18 +540,7 @@ def admin_project_detail_view(request, project_id):
         redirect('nd_cdf:home')
     return redirect ('ng_cdf:admin-project-detail')
 
-
 @login_required
-def admin_bursaries_view(request):
-    if request.method == 'GET':
-        bursaries = Bursary.objects.filter(ng_cdf=check_if_admin(request.user.email))
-        context = {
-            'bursaries':bursaries
-        }
-        return render(request, 'admin-dashboard/bursaries.html', context=context)
-    return redirect('ng_cdf:bursaries')
-
-
 def admin_bursaries_list_view(request, status):
     if request.method == 'GET':
         if status == 'available':
@@ -641,15 +553,6 @@ def admin_bursaries_list_view(request, status):
         return render(request, 'ng_cdf/bursaries-view.html', context=context)
     return redirect('ng_cdf:bursaries-list')
 
-def bursaries_view(request):
-    if request.method == 'GET':
-        bursaries = Bursary.objects.filter(available=True)
-        context = {
-            'bursaries':bursaries
-        }
-        return render(request, 'ng_cdf/bursaries-view.html', context=context)
-    return redirect('ng_cdf:citizen-bursaries')
-
 def bursary_detail_view(request, bursary_id):
     if request.method == 'GET':
         bursary = Bursary.objects.get(id=bursary_id)
@@ -660,7 +563,6 @@ def bursary_detail_view(request, bursary_id):
     else:
         redirect('nd_cdf:home')
     return redirect ('ng_cdf:project-detail')
-
 
 @login_required
 def admin_citizen_reports_view(request):
