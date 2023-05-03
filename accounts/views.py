@@ -72,21 +72,52 @@ def signout_view(request):
 
 @csrf_exempt
 @login_required
-def profile_view(request, username):
+# def profile_view(request):
+#     """_summary_
+
+#     Args:
+#         request (_type_): _description_
+#         username (_type_): _description_
+#     """
+#     email = request.user.email
+#     try:
+#         user = get_user_model().objects.get(email=email)
+#     except ObjectDoesNotExist:
+#         messages.error(request, 'User not found')
+#         return redirect('ng_cdf:home')
+#     return render(request, 'accounts/profile.html', {'user': user})
+
+@csrf_exempt
+@login_required
+def admin_edit_profile_view(request):
     """_summary_
 
     Args:
         request (_type_): _description_
-        username (_type_): _description_
     """
-    try:
-        user = get_user_model().objects.get(username=username)
-    except ObjectDoesNotExist:
-        messages.error(request, 'User not found')
-        return redirect('ng_cdf:home')
-    return render(request, 'accounts/profile.html', {'user': user})
+    if request.method == 'POST':
+        form = PrettyUserCreationForm(request.POST, request.FILES, instance=request.user)
+        image_form = ChangeImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            if image_form.is_valid():
+                user = request.user
+                user.avatar = image_form.cleaned_data.get('avatar_image')
+                user.save()
+                messages.success(request, 'Image changed successfully')
+                return redirect('accounts:profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Image not saved.')
+        elif form.is_valid():       
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect('accounts:profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Invalid information.')
+    form = PrettyUserCreationForm(instance=request.user)
+    image_form = ChangeImageForm()
+    return render(request, 'accounts/edit-profile.html', {'form': form,'image_form':image_form, 'user':request.user})
 
-@csrf_exempt
 @login_required
 def edit_profile_view(request):
     """_summary_
@@ -96,14 +127,27 @@ def edit_profile_view(request):
     """
     if request.method == 'POST':
         form = PrettyUserCreationForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile updated successfully')
-            return redirect('accounts:profile_edit', request.user.username)
-        else:
-            messages.error(request, 'Unsuccessful. Invalid information.')
+        image_form = ChangeImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            if image_form.is_valid():
+                user = request.user
+                user.avatar = image_form.cleaned_data.get('avatar_image')
+                user.save()
+                messages.success(request, 'Image changed successfully')
+                return redirect('accounts:user_profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Image not saved.')
+        elif form.is_valid():       
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect('accounts:user_profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Invalid information.')
     form = PrettyUserCreationForm(instance=request.user)
-    return render(request, 'accounts/edit-profile.html', {'form': form, 'user':request.user})
+    image_form = ChangeImageForm()
+    return render(request, 'ng_cdf/edit-profile.html', {'form': form,'image_form':image_form, 'user':request.user})
+
 
 @csrf_exempt
 @login_required
