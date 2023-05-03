@@ -26,7 +26,7 @@
 								<a class="download-title" href="{{report.get_absolute_url}}">{{report.project_name}}</a>
 								<span class="d-block small">Submitted by: {{report.citizen.first_name}}<span>
 							</td>
-							{% if report.typ == 'project-suggestion' %}
+							{% if report.typ == 'project-suggestions' %}
 							<td><span class="btn text-white btn-success btn-sm">project suggstion</span></td>
 							{% else %}
 							<td><span class="btn text-white btn-danger btn-sm">complain</span></td>

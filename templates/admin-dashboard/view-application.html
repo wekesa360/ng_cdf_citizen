@@ -46,51 +46,41 @@
                                 <h3 class="">Application documents</h3>
                                 
                                 {% for doc in application_documents %}
-                                    
-                                <li>
-                                {% if doc.application.url != null %}
-                                    {{doc.application.url}}
-                                {% endif %}
-                                    </li>
-                                <li>
-                                    {% if doc.record_id.url != null %}
-                                        {{doc.record_id.url}}
-                                    {% endif %}
-                                        </li>
-                                <li>
+                               <li>     
+                               
                                     {% if doc.national_id.url != null %}
-                                        {{doc.national_id.url}}
+                                        <a target="blank" href="{{doc.national_id.url}}">National ID</a>
                                     {% endif %}
                                         </li>
                                 <li>
                                     {% if doc.fathers_id.url != null %}
-                                        {{doc.fathers_id.url}}
+                                        <a target="blank" href="{{doc.fathers_id.url}}">Father's ID or Male Guardian</a>
                                     {% endif %}
                                         </li>
                                 <li>
                                     {% if doc.mothers_id.url != null %}
-                                        {{doc.mothers_id.url}}
+                                        <a target="blank" href="{{doc.mothers_id.url}}">Mother's ID or Female Guardian</a>
                                     {% endif %}
                                         </li>
                                 <li>
                                     {% if doc.institution_transcript.url != null %}
-                                        {{doc.institution_transcript.url}}
+                                        <a target="blank" href="{{doc.institution_transcript.url}}">Instition Transcript</a>
                                     {% endif %}
                                         </li>
                                 <li>
                                     {% if doc.calling_letter.url != null %}
-                                        {{doc.calling_letter.url}}
+                                        <a target="blank" href="{{doc.calling_letter.url}}">Calling Letter</a>
                                     {% endif %}
                                         </li>
 
                                 <li>
                                     {% if doc.fee_structure.url != null %}
-                                        {{doc.fee_structure.url}}
+                                        <a target="blank" href="{{doc.fee_structure.url}}">Fee Structure</a>
                                     {% endif %}
                                         </li>
                                 <li>
                                     {% if doc.other.url != null %}
-                                        {{doc.other.url}}
+                                        <a target="blank" href="{{doc.other.url}}">Other</a>
                                     {% endif %}
                                         </li>
                                 {% endfor %}

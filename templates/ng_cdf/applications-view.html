@@ -34,6 +34,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%if applications.count == 0 %}
+                            <tr>
+                                <td colspan="4" class="text-center">No applications found</td>
+                            </tr>
+                        {%endif%}
                         {% for application in applications %}
                         <tr>
                             <td>{{loop.index}}</td>

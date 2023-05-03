@@ -16,12 +16,18 @@
 				<div class="col-lg-8">
 					<!-- Detail Start -->
 					<div class="mb-5">
-						<img class="img-fluid w-100 mb-5" src="{{image.image.url}}" alt="">
+						<div class="d-flex flex-row bd-highlight mb-3">		
+							{% for report_image in report_images %}
+										
+											<img src="http://127.0.0.1:8000{{report_image.image.url}}" width="50%" class="" alt="">
+										
+									{% endfor %}
+								</div>
 						<div>
 							<ul>
 								<li><b>Report ID:  </b>{{report.report_uid}}</li>
 								<li><b>Report type: </b>
-									{% if report.type == 'project-sggestion' %}
+									{% if report.type == 'project-sggestions' %}
 									<span class="btn text-dark btn-outline-success btn-sm">Project Suggestion</span>
 									{% else %}
 									<span class="btn text-dark btn-outline-primary btn-sm">Complain</span>
@@ -33,14 +39,6 @@
 						</div>
 						<b>Description</b><br>
 						<p>{{report.description}}</p>
-					</div>
-					<div>
-						<ul>
-							
-							{% for image in images %}
-							<li><b>{{image.url}}</li>
-							{% endfor %}
-								
 					</div>
 					<!-- Detail End -->
 				   
