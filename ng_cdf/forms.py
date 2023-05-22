@@ -65,7 +65,7 @@ class BursaryForm(forms.ModelForm):
             'bursary_id': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_type': forms.TextInput(attrs={'class': 'form-control'}),
             'bursary_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'deadline_of_application': forms.DateInput(attrs={'class': 'form-control'}),
+            'deadline_of_application': forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
     
@@ -117,16 +117,17 @@ class CitizenReportForm(forms.ModelForm):
     Args:
         forms (_type_): _description_
     """
+
     class Meta:
         model = CitizenReport
-        fields = ('citizen', 'report_type', 'project_name','report_uid','project_location','description',)
+        fields = ('ng_cdf', 'report_date', 'citizen', 'report_type', 'project_name','project_location','description',)
         widgets = {
-            'citizen': forms.Select(attrs={'class': 'form-control'}),
-            'report_type': forms.Select(attrs={'class': 'form-control'}),
-            'project_name': forms.TextInput(attrs={'class': 'form-control'}),   
-            'report_uid': forms.TextInput(attrs={'class': 'form-control'}),
-            'project_location': forms.Select(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'report_date': forms.DateInput(attrs={'class': 'form-control bg-white border-0', 'style':'height: 55px;', 'type': 'date'}),
+            'report_type': forms.Select(attrs={'class': 'form-control bg-white border-0', 'style':'height: 55px;',}),
+            'project_name': forms.TextInput(attrs={'class': 'form-control bg-white border-0', 'style':'height: 55px;', }),   
+            'ng_cdf': forms.Select(attrs={'class': 'form-control bg-white border-0', 'style':'height: 55px;', 'placeholder': 'NG CDF'}),
+            'project_location': forms.Select(attrs={'class': 'form-control bg-white border-0', 'style':'height: 55px;',}),
+            'description': forms.Textarea(attrs={'class': 'form-control bg-white border-0', }),
         }
     
 class ReportImageForm(forms.ModelForm):
@@ -140,7 +141,7 @@ class ReportImageForm(forms.ModelForm):
         fields = ('report', 'image',)
         widgets = {
             'report': forms.Select(attrs={'class': 'form-control'}),
-            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control', 'multiple': True}),
         }
 
 

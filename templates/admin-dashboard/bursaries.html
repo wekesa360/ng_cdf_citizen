@@ -1,0 +1,53 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+	<div class="report-container">
+		<div class="report-header">
+			<h1 class="recent-Articles">Bursaries</h1>
+			<a class class="text-decoration-none text-white" href="{% url 'ng_cdf:add-bursary' %}"><button class="view"><i class="fa fa-plus"></i>  Add</button></a>
+
+		</div>
+		<div class="row mt-5 pt-xxl-2">
+			<div class="col-md-12">
+				<table class="table table-striped table-borderless table-responsive">
+					<thead>
+						<tr class="font-weight-bold">
+							<th></th>
+							<th><h5>Bursary Name</h5></th>
+							<th><h5>Status</h5></th>
+							<th><h5>Action</h5></th>
+						</tr>
+					</thead>
+					<tbody>
+						{%if bursaries.count == 0 %}
+                            <tr>
+                                <td colspan="4" class="text-center">No bursaries found</td>
+                            </tr>
+                        {%endif%}
+						{% for bursary in bursaries %}
+						<tr>
+							<td>{{loop.index}}</td>
+							<td scope="row">
+								<a class="download-title" href="{{bursary.get_admin_absolute_url}}">{{bursary.bursary_name}}</a>
+								<span class="d-block small">Deadline for application: {{bursary.deadline_of_application}}</span>
+							</td>
+							{% if bursary.available %}
+							<td><span class="btn text-white btn-success btn-sm">application open</span></td>
+							{% else %}
+							<td><span class="btn text-white btn-danger btn-sm">application closed</span></td>
+							{% endif %}
+							<td><a class="view-prjct" href="{{bursary.get_admin_absolute_url}}">View</a> | <a class="view-prjct" href="{{bursary.delete_url}}">Delete</a> | <a class="view-prjct" href="{{bursary.update_bursary}}">Edit</a></td>
+						</tr>
+						{% endfor %}  
+					</tbody>
+				</table>
+			</div>  
+		</div>
+	</div>
+</div>
+{% endblock content %}
+	
+		
+	

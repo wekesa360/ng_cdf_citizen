@@ -1,0 +1,56 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+	<div class="report-container">
+		<div class="report-header">
+			<h3 class="mb-4">{{report.project_name}}</h3>
+		</div>
+		<!-- Start -->
+		<div class="container-fluid py-6 px-5">
+			<div class="row g-5">
+				<div class="col-lg-2">
+	
+				</div>
+				<div class="col-lg-8">
+					<!-- Detail Start -->
+					<div class="mb-5">
+						<div class="d-flex flex-row bd-highlight mb-3">		
+							{% for report_image in report_images %}
+										
+											<img src="http://127.0.0.1:8000{{report_image.image.url}}" width="50%" class="" alt="">
+										
+									{% endfor %}
+								</div>
+						<div>
+							<ul>
+								<li><b>Report ID:  </b>{{report.report_uid}}</li>
+								<li><b>Report type: </b>
+									{% if report.type == 'project-sggestions' %}
+									<span class="btn text-dark btn-outline-success btn-sm">Project Suggestion</span>
+									{% else %}
+									<span class="btn text-dark btn-outline-primary btn-sm">Complain</span>
+									{% endif %}</li>
+								<li><b>CDF: </b>{{report.ng_cdf.ng_cdf_name}}</li>
+								<li><b>Project location: </b>{{report.project_location}}</li>
+								<li><b>Report Date: </b>{{report.report_date}}</li>
+							</ul>
+						</div>
+						<b>Description</b><br>
+						<p>{{report.description}}</p>
+					</div>
+					<!-- Detail End -->
+				   
+				</div>
+			</div>
+		</div>
+		<!-- End -->
+
+		
+	</div>
+</div>
+{% endblock content %}
+	
+		
+	

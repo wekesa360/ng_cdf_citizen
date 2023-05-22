@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+
 from django.contrib import messages
 from .forms import PrettyAuthenticationForm, PrettyUserCreationForm, ChangeImageForm, ChangePasswordForm
 from django.contrib.auth import login, authenticate, logout
@@ -7,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from ng_cdf.views import check_if_admin
 
+@csrf_exempt
 def signin_view(request):
     """_summary_
 
@@ -37,6 +40,7 @@ def signin_view(request):
     form = PrettyAuthenticationForm()
     return render(request, 'accounts/signin.html', {'form': form})
 
+@csrf_exempt
 def signup_view(request):
     """_summary_
 
@@ -49,12 +53,13 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'Account created successfully')
-            return redirect('nd_cdf:home')
+            return redirect('ng_cdf:home')
         else:
             messages.error(request, 'Unsuccessful registration. Invalid information.')
     form = PrettyUserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
+@csrf_exempt
 def signout_view(request):
     """_summary_
 
@@ -63,22 +68,55 @@ def signout_view(request):
     """
     logout(request)
     messages.info(request, 'Logged out successfully!')
-    return redirect('nd_cdf:home')
+    return redirect('ng_cdf:home')
 
+@csrf_exempt
 @login_required
-def profile_view(request, username):
+# def profile_view(request):
+#     """_summary_
+
+#     Args:
+#         request (_type_): _description_
+#         username (_type_): _description_
+#     """
+#     email = request.user.email
+#     try:
+#         user = get_user_model().objects.get(email=email)
+#     except ObjectDoesNotExist:
+#         messages.error(request, 'User not found')
+#         return redirect('ng_cdf:home')
+#     return render(request, 'accounts/profile.html', {'user': user})
+
+@csrf_exempt
+@login_required
+def admin_edit_profile_view(request):
     """_summary_
 
     Args:
         request (_type_): _description_
-        username (_type_): _description_
     """
-    try:
-        user = get_user_model().objects.get(username=username)
-    except ObjectDoesNotExist:
-        messages.error(request, 'User not found')
-        return redirect('nd_cdf:home')
-    return render(request, 'accounts/profile.html', {'user': user})
+    if request.method == 'POST':
+        form = PrettyUserCreationForm(request.POST, request.FILES, instance=request.user)
+        image_form = ChangeImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            if image_form.is_valid():
+                user = request.user
+                user.avatar = image_form.cleaned_data.get('avatar_image')
+                user.save()
+                messages.success(request, 'Image changed successfully')
+                return redirect('accounts:profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Image not saved.')
+        elif form.is_valid():       
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect('accounts:profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Invalid information.')
+    form = PrettyUserCreationForm(instance=request.user)
+    image_form = ChangeImageForm()
+    return render(request, 'accounts/edit-profile.html', {'form': form,'image_form':image_form, 'user':request.user})
 
 @login_required
 def edit_profile_view(request):
@@ -89,15 +127,29 @@ def edit_profile_view(request):
     """
     if request.method == 'POST':
         form = PrettyUserCreationForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile updated successfully')
-            return redirect('accounts:profile', request.user.username)
-        else:
-            messages.error(request, 'Unsuccessful. Invalid information.')
+        image_form = ChangeImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            if image_form.is_valid():
+                user = request.user
+                user.avatar = image_form.cleaned_data.get('avatar_image')
+                user.save()
+                messages.success(request, 'Image changed successfully')
+                return redirect('accounts:user_profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Image not saved.')
+        elif form.is_valid():       
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect('accounts:user_profile_edit')
+            else:
+                messages.error(request, 'Unsuccessful. Invalid information.')
     form = PrettyUserCreationForm(instance=request.user)
-    return render(request, 'accounts/edit-profile.html', {'form': form})
+    image_form = ChangeImageForm()
+    return render(request, 'ng_cdf/edit-profile.html', {'form': form,'image_form':image_form, 'user':request.user})
 
+
+@csrf_exempt
 @login_required
 def delete_profile_view(request):
     """_summary_
@@ -109,9 +161,10 @@ def delete_profile_view(request):
         user = request.user
         user.delete()
         messages.success(request, 'Profile deleted successfully')
-        return redirect('nd_cdf:home')
+        return redirect('ng_cdf:home')
     return render(request, 'accounts/delete-profile.html')
 
+@csrf_exempt
 @login_required
 def change_image_view(request):
     """_summary_
@@ -132,6 +185,7 @@ def change_image_view(request):
     form = ChangeImageForm()
     return render(request, 'accounts/edit-profile.html', {'change-img-form': form})
 
+@csrf_exempt
 @login_required
 def change_password_view(request):
     """_summary_

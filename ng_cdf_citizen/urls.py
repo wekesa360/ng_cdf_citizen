@@ -18,6 +18,8 @@ from django.urls import path, include
 from ng_cdf_api import urls as ng_cdf_api_urls
 from ng_cdf import urls as ng_cdf_urls
 from accounts import urls as accounts_urls
+from django.conf.urls.static import static
+from . import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +27,4 @@ urlpatterns = [
     path("ng_cdf-api/", include((ng_cdf_api_urls, 'ng_cdf_api'), namespace='ng_cdf-apis')),
     path("", include((ng_cdf_urls, 'ng_cdf'), namespace='ng_cdf')),
     path("accounts/", include((accounts_urls, 'accounts'), namespace='accounts'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

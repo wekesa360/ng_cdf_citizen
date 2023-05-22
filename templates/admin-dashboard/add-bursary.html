@@ -1,0 +1,37 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main">
+        <div class="report-container">
+            <div class="report-header">
+                <h1 class="recent-Articles">Add Bursary</h1>    
+            </div>
+        <div class="container m mx-4">
+            <div class="row">
+                <div class="col-12" >
+                    <form method="get|post">
+                        {% csrf_token %}
+                        <div class="form-input mb-4">
+                            <div class="form-input mt-4 mb-4"><label for="bursary_type">CDF</label> {{form.ng_cdf}} </div>
+                            <div class="row">
+                                <div class="for-input col-lg-6"><label for="bursary_id">ID</label> {{form.bursary_id}}</div>
+                                <div class="form-input mb-4 col-lg-6"><label for="bursary_name">Title</label> {{form.bursary_name}}</div>
+                            </div>
+                            <input type="hidden" name="ng_cdf" value="{{ng_cdf.id}}">
+                        </div>
+                        <div class="form-input mb-4"><label for="bursary_type">Bursary Type</label> {{form.bursary_type}}</div>
+                        <div class="form-input mb-4"><label for="deadline_of_application">Deadline of Application</label>{{form.deadline_of_application}}</div>
+                        <div class="form-input mb-4"><label for="descritpion">Description</label>{{form.description}}</div>
+                        {% comment %} <div class="form-input mb-4">{{form.captcha}}</div> {% endcomment %}
+                        <div class="form-input mb-4"><input class="form-input my-3 px-3 btn btn-danger" type="submit" formmethod="POST" value="submit"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+{% endblock content %}
+	
+		
+	

@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'ng_cdf/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="container-fluid bg-dark my-5 py-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="display-4 text-white">Constituencies</h1>
+        <a href="{% url 'ng_cdf:home' %}">Home</a>
+        <i class="far fa-square text-primary px-2"></i>
+        <a href="{% url 'ng_cdf:constituencies' %}">Constituencies</a>
+      </div>
+    </div>
+  </div>
+  <!-- Page Header End -->
+  
+  <div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <table
+            class="table table-striped table-borderless constituencies-counties-table table-responsive"
+          >
+            <thead>
+              <tr>
+                <th class="text-center">No</th>
+                <th class="w-25">Counties</th>
+                <th>Constituencies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="text-center">30</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Baringo County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Baringo_County-1-1.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Baringo_County-1-1.png"
+                        alt="Baringo County"
+                    /></noscript>
+                    Baringo County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">159. </span>Baringo-Central<span
+                    >, &nbsp;</span
+                  >
+                  <span class="d-none">158. </span>Baringo-North<span
+                    >, &nbsp;</span
+                  >
+                  <span class="d-none">160. </span>Baringo-South<span
+                    >, &nbsp;</span
+                  >
+                  <span class="d-none">162. </span>Eldama-Ravine<span
+                    >, &nbsp;</span
+                  >
+                  <span class="d-none">161. </span>Mogotio<span>, &nbsp;</span>
+                  <span class="d-none">157. </span>Tiaty<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">36</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Bomet County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Bomet_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Bomet_County.png"
+                        alt="Bomet County"
+                    /></noscript>
+                    Bomet County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">197. </span>Bomet-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">196. </span>Bomet-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">195. </span>Chepalungu<span>, &nbsp;</span>
+  
+                  <span class="d-none">198. </span>Konoin<span>, &nbsp;</span>
+  
+                  <span class="d-none">194. </span>Sotik<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">38</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Bungoma County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Bungoma County"
+                    /></noscript>
+                    Bungoma County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">219. </span>Bumula<span>, &nbsp;</span>
+  
+                  <span class="d-none">218. </span>Kabuchai<span>, &nbsp;</span>
+  
+                  <span class="d-none">220. </span>Kanduyi<span>, &nbsp;</span>
+  
+                  <span class="d-none">223. </span>Kimilili<span>, &nbsp;</span>
+  
+                  <span class="d-none">216. </span>Mt-Elgon<span>, &nbsp;</span>
+  
+                  <span class="d-none">217. </span>Sirisia<span>, &nbsp;</span>
+  
+                  <span class="d-none">224. </span>Tongaren<span>, &nbsp;</span>
+  
+                  <span class="d-none">221. </span>Webuye-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">222. </span>Webuye-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">40</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Busia County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Busia_County-1.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Busia_County-1.png"
+                        alt="Busia County"
+                    /></noscript>
+                    Busia County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">231. </span>Budalangi<span>, &nbsp;</span>
+  
+                  <span class="d-none">229. </span>Butula<span>, &nbsp;</span>
+  
+                  <span class="d-none">230. </span>Funyula<span>, &nbsp;</span>
+  
+                  <span class="d-none">228. </span>Matayos<span>, &nbsp;</span>
+  
+                  <span class="d-none">227. </span>Nambale<span>, &nbsp;</span>
+  
+                  <span class="d-none">225. </span>Teso-North<span>, &nbsp;</span>
+  
+                  <span class="d-none">226. </span>Teso-South<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">28</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Elgeyo Marakwet County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Elgeyo-marakwet.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Elgeyo-marakwet.png"
+                        alt="Elgeyo Marakwet County"
+                    /></noscript>
+                    Elgeyo Marakwet County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">149. </span>Keiyo-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">150. </span>Keiyo-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">147. </span>Marakwet-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">148. </span>Marakwet-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">14</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Embu County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/100px-Embu_County_Government_logo.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/100px-Embu_County_Government_logo.png"
+                        alt="Embu County"
+                    /></noscript>
+                    Embu County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">63. </span>Manyatta<span>, &nbsp;</span>
+  
+                  <span class="d-none">66. </span>Mbeere-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">65. </span>Mbeere-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">64. </span>Runyenjes<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">7</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Garissa County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Garissa County"
+                    /></noscript>
+                    Garissa County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">28. </span>Balambala<span>, &nbsp;</span>
+  
+                  <span class="d-none">30. </span>Dadaab<span>, &nbsp;</span>
+  
+                  <span class="d-none">31. </span>Fafi<span>, &nbsp;</span>
+  
+                  <span class="d-none">27. </span>Garissa-Township<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">32. </span>Ijara<span>, &nbsp;</span>
+  
+                  <span class="d-none">29. </span>Lagdera<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">43</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Homa Bay County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Homa_Bay_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Homa_Bay_County.png"
+                        alt="Homa Bay County"
+                    /></noscript>
+                    Homa Bay County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">249. </span>Homabay-Town<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">246. </span>Kabondo-Kasipul<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">247. </span>Karachuonyo<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">245. </span>Kasipul<span>, &nbsp;</span>
+  
+                  <span class="d-none">250. </span>Ndhiwa<span>, &nbsp;</span>
+  
+                  <span class="d-none">248. </span>Rangwe<span>, &nbsp;</span>
+  
+                  <span class="d-none">251. </span>Suba-North<span>, &nbsp;</span>
+  
+                  <span class="d-none">252. </span>Suba-South<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">11</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Isiolo County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Isiolo.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Isiolo.jpg"
+                        alt="Isiolo County"
+                    /></noscript>
+                    Isiolo County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">49. </span>Isiolo-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">50. </span>Isiolo-South<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">34</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kajiado County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Kajiado.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Kajiado.jpg"
+                        alt="Kajiado County"
+                    /></noscript>
+                    Kajiado County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">184. </span>Kajiado-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">185. </span>Kajiado-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">183. </span>Kajiado-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">187. </span>Kajiado-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">186. </span>Kajiado-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">37</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kakamega County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Kakamega County"
+                    /></noscript>
+                    Kakamega County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">207. </span>Butere<span>, &nbsp;</span>
+  
+                  <span class="d-none">210. </span>Ikolomani<span>, &nbsp;</span>
+  
+                  <span class="d-none">208. </span>Khwisero<span>, &nbsp;</span>
+  
+                  <span class="d-none">200. </span>Likuyani<span>, &nbsp;</span>
+  
+                  <span class="d-none">199. </span>Lugari<span>, &nbsp;</span>
+  
+                  <span class="d-none">202. </span>Lurambi<span>, &nbsp;</span>
+  
+                  <span class="d-none">201. </span>Malava<span>, &nbsp;</span>
+  
+                  <span class="d-none">206. </span>Matungu<span>, &nbsp;</span>
+  
+                  <span class="d-none">205. </span>Mumias-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">204. </span>Mumias-West<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">203. </span>Navakholo<span>, &nbsp;</span>
+  
+                  <span class="d-none">209. </span>Shinyalu<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">35</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kericho County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Kericho_County_Government_logo.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Kericho_County_Government_logo.png"
+                        alt="Kericho County"
+                    /></noscript>
+                    Kericho County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">190. </span>Ainamoi<span>, &nbsp;</span>
+  
+                  <span class="d-none">192. </span>Belgut<span>, &nbsp;</span>
+  
+                  <span class="d-none">191. </span>Bureti<span>, &nbsp;</span>
+  
+                  <span class="d-none">188. </span>Kipkelion-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">189. </span>Kipkelion-West<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">193. </span>Soin<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">22</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kiambu County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Kiambu County"
+                    /></noscript>
+                    Kiambu County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">112. </span>Gatundu-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">111. </span>Gatundu-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">116. </span>Githunguri<span>, &nbsp;</span>
+  
+                  <span class="d-none">113. </span>Juja<span>, &nbsp;</span>
+  
+                  <span class="d-none">119. </span>Kabete<span>, &nbsp;</span>
+  
+                  <span class="d-none">118. </span>Kiambaa<span>, &nbsp;</span>
+  
+                  <span class="d-none">117. </span>Kiambu-Town<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">120. </span>Kikuyu<span>, &nbsp;</span>
+  
+                  <span class="d-none">122. </span>Lari<span>, &nbsp;</span>
+  
+                  <span class="d-none">121. </span>Limuru<span>, &nbsp;</span>
+  
+                  <span class="d-none">115. </span>Ruiru<span>, &nbsp;</span>
+  
+                  <span class="d-none">114. </span>Thika-Town<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">3</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kilifi County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/Coat_of_Arms_of_Kilifi_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/Coat_of_Arms_of_Kilifi_County.png"
+                        alt="Kilifi County"
+                    /></noscript>
+                    Kilifi County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">15. </span>Ganze<span>, &nbsp;</span>
+  
+                  <span class="d-none">13. </span>Kaloleni<span>, &nbsp;</span>
+  
+                  <span class="d-none">11. </span>Kilifi-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">12. </span>Kilifi-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">16. </span>Malindi<span>, &nbsp;</span>
+  
+                  <span class="d-none">14. </span>Rabai<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">20</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kirinyaga County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Kirinyaga_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Kirinyaga_County.png"
+                        alt="Kirinyaga County"
+                    /></noscript>
+                    Kirinyaga County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">101. </span>Gichugu<span>, &nbsp;</span>
+  
+                  <span class="d-none">103. </span>Kirinyaga-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">100. </span>Mwea<span>, &nbsp;</span>
+  
+                  <span class="d-none">102. </span>Ndia<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">45</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kisii County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Kisii.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Kisii.png"
+                        alt="Kisii County"
+                    /></noscript>
+                    Kisii County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">264. </span>Bobasi<span>, &nbsp;</span>
+  
+                  <span class="d-none">263. </span>Bomachoge-Borabu<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">265. </span>Bomachoge-Chache<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">261. </span>Bonchari<span>, &nbsp;</span>
+  
+                  "http<span class="d-none">268. </span>KitutuChache-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  "http<span class="d-none">269. </span>KitutuChache-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">267. </span>Nyaribari-Chache<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">266. </span>Nyaribari-Masaba<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">262. </span>South-Mugirango<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">42</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kisumu County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Kisumu_County_Government_logo.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Kisumu_County_Government_logo.png"
+                        alt="Kisumu County"
+                    /></noscript>
+                    Kisumu County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">240. </span>Kisumu-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">238. </span>Kisumu-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">239. </span>Kisumu-West<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">243. </span>Muhoroni<span>, &nbsp;</span>
+  
+                  <span class="d-none">244. </span>Nyakach<span>, &nbsp;</span>
+  
+                  <span class="d-none">242. </span>Nyando<span>, &nbsp;</span>
+  
+                  <span class="d-none">241. </span>Seme<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">15</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kitui County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Kitui_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Kitui_County.png"
+                        alt="Kitui County"
+                    /></noscript>
+                    Kitui County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">72. </span>Kitui-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">73. </span>Kitui-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">71. </span>Kitui-Rural<span>, &nbsp;</span>
+  
+                  <span class="d-none">74. </span>Kitui-South<span>, &nbsp;</span>
+  
+                  <span class="d-none">70. </span>Kitui-West<span>, &nbsp;</span>
+  
+                  <span class="d-none">69. </span>Mwingi-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">67. </span>Mwingi-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">68. </span>Mwingi-West<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">2</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Kwale county County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ke-kwale.gif"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ke-kwale.gif"
+                        alt="Kwale county County"
+                    /></noscript>
+                    Kwale county County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">10. </span>Kinango<span>, &nbsp;</span>
+  
+                  <span class="d-none">8. </span
+                  >LungaLunga<span>, &nbsp;</span>
+  
+                  <span class="d-none">9. </span>Matuga<span>, &nbsp;</span>
+  
+                  <span class="d-none">7. </span>Msambweni<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">31</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Laikipia county County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Laikipia_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Laikipia_County.png"
+                        alt="Laikipia county County"
+                    /></noscript>
+                    Laikipia county County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">164. </span>Laikipia-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">165. </span>Laikipia-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">163. </span>Laikipia-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">5</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Lamu County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-lamu.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-lamu.png"
+                        alt="Lamu County"
+                    /></noscript>
+                    Lamu County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">21. </span>Lamu-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">22. </span>Lamu-West<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">16</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Machakos County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Machakos_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Machakos_County.png"
+                        alt="Machakos County"
+                    /></noscript>
+                    Machakos County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">77. </span>Kangundo<span>, &nbsp;</span>
+  
+                  <span class="d-none">79. </span>Kathiani<span>, &nbsp;</span>
+  
+                  <span class="d-none">81. </span>Machakos-Town<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">75. </span>Masinga<span>, &nbsp;</span>
+  
+                  <span class="d-none">78. </span>Matungulu<span>, &nbsp;</span>
+  
+                  <span class="d-none">80. </span>Mavoko<span>, &nbsp;</span>
+  
+                  <span class="d-none">82. </span>Mwala<span>, &nbsp;</span>
+  
+                  <span class="d-none">76. </span>Yatta<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">17</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Makueni County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/makuenicounty.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/makuenicounty.png"
+                        alt="Makueni County"
+                    /></noscript>
+                    Makueni County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">85. </span>Kaiti<span>, &nbsp;</span>
+  
+                  <span class="d-none">88. </span>Kibwezi-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">87. </span>Kibwezi-West<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">84. </span>Kilome<span>, &nbsp;</span>
+  
+                  <span class="d-none">86. </span>Makueni<span>, &nbsp;</span>
+  
+                  <span class="d-none">83. </span>Mbooni<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">9</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Mandera County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Mandera_County-1.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Mandera_County-1.png"
+                        alt="Mandera County"
+                    /></noscript>
+                    Mandera County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">40. </span>Banissa<span>, &nbsp;</span>
+  
+                  <span class="d-none">44. </span>Lafey<span>, &nbsp;</span>
+  
+                  <span class="d-none">43. </span>Mandera-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">41. </span>Mandera-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">42. </span>Mandera-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">39. </span>Mandera-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">10</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Marsabit County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/court_arm_marsabit-county.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/court_arm_marsabit-county.jpg"
+                        alt="Marsabit County"
+                    /></noscript>
+                    Marsabit County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">48. </span>Laisamis<span>, &nbsp;</span>
+  
+                  <span class="d-none">45. </span>Moyale<span>, &nbsp;</span>
+  
+                  <span class="d-none">46. </span>North-Horr<span>, &nbsp;</span>
+  
+                  <span class="d-none">47. </span>Saku<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">12</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Meru County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/logo-meru.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/logo-meru.jpg"
+                        alt="Meru County"
+                    /></noscript>
+                    Meru County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">57. </span>Buuri<span>, &nbsp;</span>
+  
+                  <span class="d-none">58. </span>Central-Imenti<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">52. </span>Igembe-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">53. </span>Igembe-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">51. </span>Igembe-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">56. </span>North-Imenti<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">59. </span>South-Imenti<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">55. </span>Tigania-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">54. </span>Tigania-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">44</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Migori County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Migori County"
+                    /></noscript>
+                    Migori County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">254. </span>Awendo<span>, &nbsp;</span>
+  
+                  <span class="d-none">260. </span>Kuria-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">259. </span>Kuria-West<span>, &nbsp;</span>
+  
+                  <span class="d-none">258. </span>Nyatike<span>, &nbsp;</span>
+  
+                  <span class="d-none">253. </span>Rongo<span>, &nbsp;</span>
+  
+                  <span class="d-none">255. </span>Suna-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">256. </span>Suna-West<span>, &nbsp;</span>
+  
+                  <span class="d-none">257. </span>Uriri<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">1</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Mombasa County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/Mombasa_County_Coat_of_Arms.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/Mombasa_County_Coat_of_Arms.png"
+                        alt="Mombasa County"
+                    /></noscript>
+                    Mombasa County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">1. </span>Changamwe<span>, &nbsp;</span>
+  
+                  <span class="d-none">2. </span>Jomvu<span>, &nbsp;</span>
+  
+                  <span class="d-none">3. </span>Kisauni<span>, &nbsp;</span>
+  
+                  <span class="d-none">5. </span>Likoni<span>, &nbsp;</span>
+  
+                  <span class="d-none">6. </span>Mvita<span>, &nbsp;</span>
+  
+                  <span class="d-none">4. </span>Nyali<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">21</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Murang'a County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Muranga_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Muranga_County.png"
+                        alt="Murang'a County"
+                    /></noscript>
+                    Murang'a County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">110. </span>Gatanga<span>, &nbsp;</span>
+  
+                  <span class="d-none">109. </span>Kandara<span>, &nbsp;</span>
+  
+                  <span class="d-none">104. </span>Kangema<span>, &nbsp;</span>
+  
+                  <span class="d-none">107. </span>Kigumo<span>, &nbsp;</span>
+  
+                  <span class="d-none">106. </span>Kiharu<span>, &nbsp;</span>
+  
+                  <span class="d-none">108. </span>Maragua<span>, &nbsp;</span>
+  
+                  <span class="d-none">105. </span>Mathioya<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">47</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Nairobi"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Nairobi_City_Logo.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Nairobi_City_Logo.png"
+                        alt="Nairobi"
+                    /></noscript>
+                    Nairobi
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">275. </span>Dagoretti-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">276. </span>Dagoretti-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">284. </span>Embakasi-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">285. </span>Embakasi-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">283. </span>Embakasi-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">282. </span>Embakasi-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">286. </span>Embakasi-West<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">288. </span>Kamukunji<span>, &nbsp;</span>
+  
+                  <span class="d-none">280. </span>Kasarani<span>, &nbsp;</span>
+  
+                  <span class="d-none">278. </span>Kibra<span>, &nbsp;</span>
+  
+                  <span class="d-none">277. </span>Langata<span>, &nbsp;</span>
+  
+                  <span class="d-none">287. </span>Makadara<span>, &nbsp;</span>
+  
+                  <span class="d-none">290. </span>Mathare<span>, &nbsp;</span>
+  
+                  <span class="d-none">279. </span>Roysambu<span>, &nbsp;</span>
+  
+                  <span class="d-none">281. </span>Ruaraka<span>, &nbsp;</span>
+  
+                  <span class="d-none">289. </span>Starehe<span>, &nbsp;</span>
+  
+                  <span class="d-none">274. </span>Westlands<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">32</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Nakuru County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Nakuru.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Nakuru.jpg"
+                        alt="Nakuru County"
+                    /></noscript>
+                    Nakuru County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">174. </span>Bahati<span>, &nbsp;</span>
+  
+                  <span class="d-none">169. </span>Gilgil<span>, &nbsp;</span>
+  
+                  <span class="d-none">171. </span>Kuresoi-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">170. </span>Kuresoi-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">166. </span>Molo<span>, &nbsp;</span>
+  
+                  <span class="d-none">168. </span>Naivasha<span>, &nbsp;</span>
+  
+                  <span class="d-none">176. </span>NakuruTown-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">175. </span>NakuruTown-West<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">167. </span>Njoro<span>, &nbsp;</span>
+  
+                  <span class="d-none">173. </span>Rongai<span>, &nbsp;</span>
+  
+                  <span class="d-none">172. </span>Subukia<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">29</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Nandi County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Nandi County"
+                    /></noscript>
+                    Nandi County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">152. </span>Aldai<span>, &nbsp;</span>
+  
+                  <span class="d-none">154. </span>Chesumei<span>, &nbsp;</span>
+  
+                  <span class="d-none">155. </span>Emgwen<span>, &nbsp;</span>
+  
+                  <span class="d-none">156. </span>Mosop<span>, &nbsp;</span>
+  
+                  <span class="d-none">153. </span>Nandi-Hills<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">151. </span>Tinderet<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">33</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Narok County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Narok County"
+                    /></noscript>
+                    Narok County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">178. </span>Emuria-Dikirr<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">177. </span>Kilgoris<span>, &nbsp;</span>
+  
+                  <span class="d-none">180. </span>Narok-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">179. </span>Narok-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">181. </span>Narok-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">182. </span>Narok-West<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">46</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Nyamira County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/02/ark-kenya-coat-of-arms-detailed_0.png"
+                        alt="Nyamira County"
+                    /></noscript>
+                    Nyamira County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">273. </span>Borabu<span>, &nbsp;</span>
+  
+                  <span class="d-none">270. </span>Kitutu-Masaba<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">272. </span>North-Mugirango<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">271. </span>West-Mugirango<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">18</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Nyandarau County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Nyandarua_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Nyandarua_County.png"
+                        alt="Nyandarau County"
+                    /></noscript>
+                    Nyandarau County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">89. </span>Kinangop<span>, &nbsp;</span>
+  
+                  <span class="d-none">90. </span>Kipipiri<span>, &nbsp;</span>
+  
+                  <span class="d-none">93. </span>Ndaragwa<span>, &nbsp;</span>
+  
+                  <span class="d-none">92. </span>OlJoro-Orok<span>, &nbsp;</span>
+  
+                  <span class="d-none">91. </span>OlKalou<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">19</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Nyeri Country"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Nyeri.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/coat-of-arm-Nyeri.png"
+                        alt="Nyeri Country"
+                    /></noscript>
+                    Nyeri Country
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">95. </span>Kieni<span>, &nbsp;</span>
+  
+                  <span class="d-none">96. </span>Mathira<span>, &nbsp;</span>
+  
+                  <span class="d-none">98. </span>Mukurweini<span>, &nbsp;</span>
+  
+                  <span class="d-none">99. </span>Nyeri-Town<span>, &nbsp;</span>
+  
+                  <span class="d-none">97. </span>Othaya<span>, &nbsp;</span>
+  
+                  <span class="d-none">94. </span>Tetu<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">25</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Samburu County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Samburu_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Samburu_County.png"
+                        alt="Samburu County"
+                    /></noscript>
+                    Samburu County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">135. </span>Samburu-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">134. </span>Samburu-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">133. </span>Samburu-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">41</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Siaya County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Siaya_County-1.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Siaya_County-1.png"
+                        alt="Siaya County"
+                    /></noscript>
+                    Siaya County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">234. </span>Alego-Usonga<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">236. </span>Bondo<span>, &nbsp;</span>
+  
+                  <span class="d-none">235. </span>Gem<span>, &nbsp;</span>
+  
+                  <span class="d-none">237. </span>Rarieda<span>, &nbsp;</span>
+  
+                  <span class="d-none">232. </span>Ugenya<span>, &nbsp;</span>
+  
+                  <span class="d-none">233. </span>Ugunja<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">6</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Taita Taveta County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Taita_Taveta_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Taita_Taveta_County.png"
+                        alt="Taita Taveta County"
+                    /></noscript>
+                    Taita Taveta County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">25. </span>Mwatate<span>, &nbsp;</span>
+  
+                  <span class="d-none">23. </span>Taveta<span>, &nbsp;</span>
+  
+                  <span class="d-none">26. </span>Voi<span>, &nbsp;</span>
+  
+                  <span class="d-none">24. </span>Wundanyi<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">4</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Tana River County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat-of-armsTana-river.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat-of-armsTana-river.jpg"
+                        alt="Tana River County"
+                    /></noscript>
+                    Tana River County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">20. </span>Bura<span>, &nbsp;</span>
+  
+                  <span class="d-none">19. </span>Galole<span>, &nbsp;</span>
+  
+                  <span class="d-none">18. </span>Garsen<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">13</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Tharaka Nithi County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Tharaka-Nithi_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Tharaka-Nithi_County.png"
+                        alt="Tharaka Nithi County"
+                    /></noscript>
+                    Tharaka Nithi County
+                  </div>
+                </td>
+                <td>
+                  "http<span class="d-none">61. </span>Chuka-Igambangombe<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">60. </span>Maara<span>, &nbsp;</span>
+  
+                  <span class="d-none">62. </span>Tharaka<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">26</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Transnzoia County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Tranz-Nzoia_County_Government_logo.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Tranz-Nzoia_County_Government_logo.png"
+                        alt="Transnzoia County"
+                    /></noscript>
+                    Transnzoia County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">140. </span>Cherangany<span>, &nbsp;</span>
+  
+                  <span class="d-none">137. </span>Endebess<span>, &nbsp;</span>
+  
+                  <span class="d-none">139. </span>Kiminini<span>, &nbsp;</span>
+  
+                  <span class="d-none">136. </span>Kwanza<span>, &nbsp;</span>
+  
+                  <span class="d-none">138. </span>Saboti<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">23</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Turkana County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/turkana.jpg"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/turkana.jpg"
+                        alt="Turkana County"
+                    /></noscript>
+                    Turkana County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">126. </span>Loima<span>, &nbsp;</span>
+  
+                  <span class="d-none">125. </span>Turkana-Central<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">128. </span>Turkana-East<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">123. </span>Turkana-North<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">127. </span>Turkana-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">124. </span>Turkana-West<span
+                    >, &nbsp;</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">27</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Uasin Gishu County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Uasin_Gishu_County_Government_logo.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Uasin_Gishu_County_Government_logo.png"
+                        alt="Uasin Gishu County"
+                    /></noscript>
+                    Uasin Gishu County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">144. </span>Ainabkoi<span>, &nbsp;</span>
+  
+                  <span class="d-none">145. </span>Kapseret<span>, &nbsp;</span>
+  
+                  <span class="d-none">146. </span>Kesses<span>, &nbsp;</span>
+  
+                  <span class="d-none">143. </span>Moiben<span>, &nbsp;</span>
+  
+                  <span class="d-none">141. </span>Soy<span>, &nbsp;</span>
+  
+                  <span class="d-none">142. </span>Turbo<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">39</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Vihiga County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Vihiga_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Vihiga_County.png"
+                        alt="Vihiga County"
+                    /></noscript>
+                    Vihiga County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">215. </span>Emuhaya<span>, &nbsp;</span>
+  
+                  <span class="d-none">213. </span>Hamisi<span>, &nbsp;</span>
+  
+                  <span class="d-none">214. </span>Luanda<span>, &nbsp;</span>
+  
+                  <span class="d-none">212. </span>Sabatia<span>, &nbsp;</span>
+  
+                  <span class="d-none">211. </span>Vihiga<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">8</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="Wajir County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Wajir_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_Wajir_County.png"
+                        alt="Wajir County"
+                    /></noscript>
+                    Wajir County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">37. </span>Eldas<span>, &nbsp;</span>
+  
+                  <span class="d-none">35. </span>Tarbaj<span>, &nbsp;</span>
+  
+                  <span class="d-none">34. </span>Wajir-East<span>, &nbsp;</span>
+  
+                  <span class="d-none">33. </span>Wajir-North<span>, &nbsp;</span>
+  
+                  <span class="d-none">38. </span>Wajir-South<span>, &nbsp;</span>
+  
+                  <span class="d-none">36. </span>Wajir-West<span>, &nbsp;</span>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="text-center">24</td>
+                <td>
+                  <div class="constituency-name d-flex align-items-center">
+                    <img
+                      alt="West Pokot County"
+                      data-src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_West_Pokot_County.png"
+                      class="constituency-thumbnail lazyload"
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    /><noscript
+                      ><img
+                        class="constituency-thumbnail"
+                        src="https://ngcdf.go.ke/wp-content/uploads/2020/03/Coat_of_Arms_of_West_Pokot_County.png"
+                        alt="West Pokot County"
+                    /></noscript>
+                    West Pokot County
+                  </div>
+                </td>
+                <td>
+                  <span class="d-none">131. </span>Kacheliba<span>, &nbsp;</span>
+  
+                  <span class="d-none">129. </span>Kapenguria<span>, &nbsp;</span>
+  
+                  <span class="d-none">132. </span>Pokot-South<span
+                    >, &nbsp;</span
+                  >
+  
+                  <span class="d-none">130. </span>Sigor<span>, &nbsp;</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 my-5">
+      <nav aria-label="Page navigation">
+        <ul class="pagination pagination-lg m-0">
+          <li class="page-item disabled">
+            <a class="page-link rounded-0" href="#" aria-label="Previous">
+              <span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
+            </a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link rounded-0" href="#" aria-label="Next">
+              <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  
+  
+{% endblock content %}
+    

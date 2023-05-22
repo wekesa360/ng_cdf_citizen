@@ -1,0 +1,64 @@
+{% extends 'ng_cdf/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-dark p-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 text-white">Bursary Detail</h1>
+                <a href="{% url 'ng_cdf:home' %}">Home</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'ng_cdf:bursary-detail' bursary.id %}">Bursary Detail</a>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Start -->
+    <div class="container-fluid py-6 px-5">
+        <div class="row g-5">
+            <div class="col-lg-2">
+
+            </div>
+            <div class="col-lg-8 bg-secondary">
+                <!-- Detail Start -->
+                <div class="mb-5">
+                    <img class="img-fluid w-100 mb-5" src="img/blog-1.jpg" alt="">
+                    <h3 class="mb-4">{{bursary.bursary_name}}</h3>
+                    <div>
+                        <ul>
+                            <li><b>Bursary ID:  </b>{{bursary.bursary_id}}</li>
+                            <li><b>Bursary Status: </b>{% if bursary.available %}
+                                <span class="btn text-dark btn-outline-success btn-sm">application open</span>
+                                {% else %}
+                                <span class="btn text-dark btn-outline-primary btn-sm">application closed</span>
+                                {% endif %}</li>
+                            <li><b>CDF: </b>{{bursary.ng_cdf.ng_cdf_name}}</li>
+                            <li><b>Application Documents: </b>{{bursary.application_documents}}</li>
+                            <li><b>Bursary Deadline For Application: </b>{{bursary.deadline_of_application}}</li>
+                        </ul>
+                    </div>
+                    <b>Bursary Description</b><br>
+                    <p>{{bursary.description}}</p>
+                </div>
+                <!-- Detail End -->
+
+                <div>
+                    <div class="bg-secondary " style="padding: 30px;">
+                        <a href="{% url 'ng_cdf:apply-bursary' bursary.id %}" class="btn btn-primary rounded-pill py-2 px-4">Apply</a>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+{% endblock content %}
+    
+    
+
+
+    

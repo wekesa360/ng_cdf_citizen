@@ -33,7 +33,7 @@ ng_cdf_db_host = os.environ.get('DB_HOST') if os.environ.get('DB_HOST') else 'lo
 ng_cdf_db_port = os.environ.get('DB_PORT') if os.environ.get('DB_PORT') else '5432'
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '9f08-105-161-204-77.in.ngrok.io', ]
 
 
 # Application definition
@@ -156,3 +156,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 import uuid
 from accounts.models import Location, County
 from django.core.validators import FileExtensionValidator
@@ -12,8 +13,7 @@ class NGCDF(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.ng_cdf_id
-    
+        return self.ng_cdf_name
     class Meta:
         db_table = 'ng_cdfs'
 
@@ -53,6 +53,21 @@ class NGCDFProjects(models.Model):
     def __str__(self) -> str:
         return self.project_name
     
+    def delete_url(self):
+        return reverse("ng_cdf:delete-project", kwargs={"project_id": self.pk})
+    
+    def admin_absolute_url(self):
+        return reverse("ng_cdf:admin-project-detail", kwargs={"project_id": self.pk})
+
+    def update_project(self):
+        return reverse("ng_cdf:edit-project", kwargs={"project_id": self.pk})
+
+    def get_absolute_url(self):
+        return reverse("ng_cdf:project-detail", kwargs={"project_id": self.pk})
+    
+    def get_images(self):
+        return ProjectImage.objects.filter(project=self)
+    
     class Meta:
         db_table = 'ng_cdf_projects'
 
@@ -84,6 +99,21 @@ class Bursary(models.Model):
     def __str__(self) -> str:
         return self.bursary_name
     
+    def delete_url(self):
+        return reverse("ng_cdf:delete-bursary", kwargs={"bursary_id": self.pk})
+
+    def update_availability_url(self):
+        return reverse("ng_cdf:bursary-availability", kwargs={"bursary_id": self.pk})
+    
+    def update_bursary(self):
+        return reverse("ng_cdf:edit-bursary", kwargs={"bursary_id":self.pk})
+
+    def get_absolute_url(self):
+        return reverse("ng_cdf:bursary-detail", kwargs={"bursary_id": self.pk})
+    
+    def get_admin_absolute_url(self):
+        return reverse("ng_cdf:admin-bursary-detail", kwargs={"bursary_id": self.pk})
+    
     class Meta:
         db_table = 'bursaries'
 
@@ -110,6 +140,18 @@ class BursaryApplication(models.Model):
     def __str__(self) -> str:
         return self.application_uid
     
+    def delete_url(self):
+        return reverse("ng_cdf:delete-application", kwargs={"id": self.pk})
+    
+    def update_application_status(self, new_status):
+        """
+        Update the application status and save the instance to the database.
+        """
+        if new_status not in dict(self.CHOICES_STATUS).keys():
+            raise ValueError('Invalid status')
+        self.status = new_status
+        self.save()
+
 
     class Meta:
         db_table = 'bursary_applications'
@@ -162,6 +204,9 @@ class CitizenReport(models.Model):
 
     def __str__(self) -> str:
         return self.report_uid
+    
+    def get_absolute_url(self):
+        return reverse("ng_cdf:report-detail", kwargs={"report_id": self.pk})
     
     class Meta:
         db_table = 'citizen_reports'

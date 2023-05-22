@@ -1,0 +1,104 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+	<div class="report-container">
+		<div class="report-header">
+			<h3 class="mb-4">{{application.bursary.bursary_name}} Bursary Application</h3>
+			
+
+		</div>
+		<!-- Start -->
+		<div class="container-fluid py-6 px-5">
+			<div class="row g-5">
+				<div class="col-lg-2">
+	
+				</div>
+				<div class="col-lg-8">
+					<!-- Detail Start -->
+					<div class="mb-5">
+						
+						<div>
+                            <ul>
+                                <h3 class="">Applicant Information</h3>
+								<li><b>Applicant First Name:  </b>{{application.applicant.first_name}}</li>
+								<li><b>Applicant Second Name:  </b>{{application.applicant.last_name}}</li>
+								<li><b>Applicant Phone Number </b>{{application.applicant.phone_number}}</li>
+								<li><b>Applicant Location </b>{{application.applicant.location}}</li>
+							</ul>
+
+							<ul>
+                                <h3 class="">Bursary Information</h3>
+                                <li><b>Bursary Name:  </b>{{application.bursary.bursary_name}}</li>
+								<li><b>Bursary ID:  </b>{{application.bursary.bursary_id}}</li>
+								<li><b>Bursary Status: </b>{% if application.bursary.available %}
+									<span class="btn text-dark btn-outline-success btn-sm">application open</span>
+									{% else %}
+									<span class="btn text-dark btn-outline-primary btn-sm">application closed</span>
+									{% endif %}</li>
+								<li><b>CDF: </b>{{application.bursary.ng_cdf.ng_cdf_name}}</li>
+								<li><b>Application Documents: </b>{{application.bursary.application_documents}}</li>
+								<li><b>Bursary Deadline For Application: </b>{{application.bursary.deadline_of_application}}</li>
+							</ul>
+
+                            <ul class="list-unstyled">
+                                <h3 class="">Application documents</h3>
+                                
+                                {% for doc in application_documents %}
+                               <li>     
+                               
+                                    {% if doc.national_id.url != null %}
+                                        <a target="blank" href="{{doc.national_id.url}}">National ID</a>
+                                    {% endif %}
+                                        </li>
+                                <li>
+                                    {% if doc.fathers_id.url != null %}
+                                        <a target="blank" href="{{doc.fathers_id.url}}">Father's ID or Male Guardian</a>
+                                    {% endif %}
+                                        </li>
+                                <li>
+                                    {% if doc.mothers_id.url != null %}
+                                        <a target="blank" href="{{doc.mothers_id.url}}">Mother's ID or Female Guardian</a>
+                                    {% endif %}
+                                        </li>
+                                <li>
+                                    {% if doc.institution_transcript.url != null %}
+                                        <a target="blank" href="{{doc.institution_transcript.url}}">Instition Transcript</a>
+                                    {% endif %}
+                                        </li>
+                                <li>
+                                    {% if doc.calling_letter.url != null %}
+                                        <a target="blank" href="{{doc.calling_letter.url}}">Calling Letter</a>
+                                    {% endif %}
+                                        </li>
+
+                                <li>
+                                    {% if doc.fee_structure.url != null %}
+                                        <a target="blank" href="{{doc.fee_structure.url}}">Fee Structure</a>
+                                    {% endif %}
+                                        </li>
+                                <li>
+                                    {% if doc.other.url != null %}
+                                        <a target="blank" href="{{doc.other.url}}">Other</a>
+                                    {% endif %}
+                                        </li>
+                                {% endfor %}
+                                    
+							</ul>
+						</div>
+					</div>
+					<!-- Detail End -->
+				   
+				</div>
+			</div>
+		</div>
+		<!-- End -->
+
+		
+	</div>
+</div>
+{% endblock content %}
+	
+		
+	

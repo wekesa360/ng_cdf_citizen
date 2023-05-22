@@ -1,0 +1,38 @@
+{% extends 'admin-dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main">
+        <div class="report-container">
+            <div class="report-header">
+                <h1 class="recent-Articles">Project</h1>    
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-8" id="sub-form">
+                        <form method="get|post">
+                            {% csrf_token %}
+                            <div class="form-input mb-4">
+                                <div class="row mt-5">
+                                    <div class="for-input col-lg-6"><label for="Project_id">ID</label> {{form.project_id}}</div>
+                                    <div class="form-input mb-4 col-lg-6"><label for="project_name">Title</label> {{form.project_name}}</div>
+                                </div>
+                            </div>
+                            <div class="form-input mb-4"><label for="status">Status</label> {{form.status}}</div>
+                            <div class="form-input mb-4"><label for="location">Location</label>{{form.location}}</div>
+                            <div class="form-input mb-4"><label for="description">description</label>{{form.description}}</div>
+                            <div class="form-input mb-4"><label for="writeup_document">Writeup Documents</label>{{form.writeup_document}}</div>
+                            {% comment %} <div class="form-input mb-4">{{form.captcha}}</div> {% endcomment %}
+                            <div class="form-input mb-4"><input class="form-input my-3 px-3 btn btn-danger" type="submit" formmethod="POST" value="submit"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+</div>
+</div>
+{% endblock content %}
+	
+		
+	

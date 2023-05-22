@@ -1,0 +1,96 @@
+{% extends 'ng_cdf/base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src=" {% static 'img/contact.png' %}" alt="Image of students">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase">NG CDF & </h5>
+                            <h1 class="display-1 text-white mb-md-4">Bursary platform</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 rounded-pill">Bursaries</a>
+                            <a href="" class="btn btn-secondary py-md-3 px-md-5 rounded-pill">NG-CDF projects</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src=" {% static 'img/bursary.jpg' %} " alt="Bursary image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <div class="p-3" style="max-width: 900px;">
+                                <h5 class="text-white text-uppercase">NG CDF & </h5>
+                                <h1 class="display-1 text-white mb-md-4">Bursary platform</h1>
+                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 rounded-pill">Bursaries</a>
+                                <a href="" class="btn btn-secondary py-md-3 px-md-5 rounded-pill">NG-CDF projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    
+    
+    <!-- Contact Start -->
+
+    <div class="container-fluid bg-secondary px-0">
+        <div class="row g-0">
+            <div class="col-lg-6" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="position-relative w-100 h-100"
+                        src=" {% static 'img/contact.png' %} " alt="image of students"
+                     style="border:0; filter: brightness(60%);" >
+                </div>
+            </div>
+            <!-- About Start -->
+            <div class="col-lg-6 py-6 px-5 ">
+                <div class="container-fluid bg-secondary p-0">
+                <h1 class="display-5 mb-4">Welcome To <span class="text-primary">NG CDF Platform</span></h1>
+                <h4 class="text-primary mb-4">The National Government Constituencies Development Fund (NG-CDF)
+                    is established under the NG-CDF Act, 2015 as amended in 2016.</h4>
+                <p class="mb-4">
+                    The main purpose of the Fund is to address socio-economic
+                        development of the people at the constituency level
+                        in order to reduce poverty and enhance regional equity.</p>
+                    <h5 class=" mb-4"><span class="text-primary">Vision</span></h5>
+                    Equitable socio-economic development coutrywide.
+                    
+                    <h5 class=" mb-4"><span class="text-primary">Mission</span></h5>
+                    To Provide Leadership and Policy direction for effective and efficient management of the Fund.
+                    
+                    <h5 class=" mb-4"><span class="text-primary">Core Values </span></h5>
+                    <ul class="">
+                        <li class="list-item">Transparency and Accountability</li>
+                        <li class="list-item">Professionalism and Integrity</li>
+                        <li class="list-item">Commitment and Teamwork</li>
+                        <li class="list-item">Neutrality and Objectivity</li>
+                        <li class="list-item">Timeliness and Excellence</li>
+                        <li class="list-item">Advocacy For Citizen Participation</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+    <!-- About End -->
+        </div>
+    </div>
+    <!-- Contact End --> 
+{% endblock content %}

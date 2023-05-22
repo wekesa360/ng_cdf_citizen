@@ -1,0 +1,52 @@
+{% extends 'ng_cdf/base.html' %}
+{% load static %}
+
+{% block content %}
+     <!-- Page Header Start -->
+     <div class="container-fluid bg-dark p-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 text-white">About Us</h1>
+                <a href="{% url 'ng_cdf:home' %}">Home</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'ng_cdf:about' %}">About</a>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+     <!-- About Start -->
+     <div class="container-fluid bg-secondary p-0">
+        <div class="row g-0">
+            <div class="col-lg-12 py-6 px-5 text-center">
+                <h1 class="display-5 mb-4">Welcome To <span class="text-primary">NG CDF Platform</span></h1>
+                <h4 class="text-primary mb-4">The National Government Constituencies Development Fund (NG-CDF)
+                    is established under the NG-CDF Act, 2015 as amended in 2016.</h4>
+                <p class="mb-4">The main purpose of the Fund is to address socio-economic development of the people at the constituency
+                     level in order to reduce poverty and enhance regional equity.
+                      The NG-CDF Act 2015 aligned the operations of the Fund to the new constitutional dispensation especially
+                       in terms of ensuring that the law strongly embraces the principles of participation of the people,
+                        separation of powers, and delineation of functions between National and County governments.
+
+                    The Fund is domiciled within the ministry in charge of National Economic Policy & Planning,
+                     currently The National Treasury and Planning & Managed by The National Government CDF Board at the National level,
+                     the NG-CDF committees at the constituency level and the project Management Committees(PMC) at the constituency level.</p>
+                     <p class="mb-5">
+                        Implementation Structure
+                        The Fund is managed by the National Government CDF Board at the National level, the NG-CDF committees at the constituency level and the Project Management Committees (PMC) at the community level
+                        The NG-CDF Board is a body corporate falling under the National Treasury and Planning. The Ministry ensures budgetary provisions and offers policy direction to the Fund
+                        The National Treasury finances the NG-CDF budgets and provides financial guidelines for effective and efficient management of the Fund
+                        The National Government CDF committees develops project proposals in consultation with wananchi through periodic ward level open forums, submits them to the NG-CDF Board for approval and facilitates the PMCs in the planning, implementation, and sustenance of the projects once completed
+                        The project Management committees and the NG-CDF committees collaborates for efficient project management through technical support of relevant government department within the sub-county
+                    </p>
+            </div>
+
+            
+            
+        </div>
+    </div>
+    <!-- About End -->
+<br>
+<br>
+{% endblock content %}
